@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class State extends Model
 {
-    protected $fillable = ['country'];
+    protected $fillable = ['state'];
 
     public function property()
     {

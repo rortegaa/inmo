@@ -21,4 +21,9 @@ Route::get('/admin', function () {
 
 Auth::routes();
 
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('states', 'StatesController');
+});
+
+
 Route::get('/home', 'HomeController@index')->name('home');
