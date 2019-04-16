@@ -26,9 +26,9 @@ class Property extends Model
         return $this->hasMany(PropertyPhoto::class);
     }
 
-    public function propertyCountry()
+    public function propertyState()
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(State::class);
     }
 
     public function propertyStatus()

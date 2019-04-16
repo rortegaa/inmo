@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin', function () {
+    return view('layouts.administrator.app');
+});
+
 Auth::routes();
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('states', 'StatesController');
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
