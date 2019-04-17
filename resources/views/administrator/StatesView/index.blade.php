@@ -30,40 +30,36 @@
 
 
 @if ($states->count() > 0)
+<div id="root">
+  
+    @foreach ($states as $key => $state)
+        @if ($key % 4 == 0)
+        <div class="card-group">            
+        @endif
 
-    @php
-    $iterations = 1;
-    foreach ($states as $key => $state) {         
-        
-       $modTrue = $key % 4 == 0 ? true : false;
-       
-       echo $modTrue ? '<div class="card-group">':'';
-
-       
-
-       echo 
-        '<div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">'.$iterations. ')  '. $state->state .'</h5>
+                <h5 class="card-title"> {{ ($key+1) .')  '. $state->state }}</h5>
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <a href="#" class="btn btn-outline-primary btn-sm"><i class="fas fa-pen"></i></a>
-                    <form>
-                    <a href="#" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                    <form id=" {{ $state->state }}" method="POST" action=" {{ route('states.destroy',['state'=>$state->state]) }}"  >
+                        @method('DELETE')
+                        @csrf
+                    <button type="submit" class="btn btn-outline-danger btn-sm" @click="onDeleteRecord"><i class="fas fa-trash-alt"></i></button>
                     </form>
                 </div>
             </div>
-        </div>';
-       
-        if($iterations % 4 == 0)
-        {
-            echo '</div>';
-        }
+        </div>
 
-        $iterations ++;
-
-    }
-
-    @endphp
+        @php
+          
+        @endphp
+        @if (($key+1) % 4 == 0)
+            </div>
+        @endif
+    @endforeach
+  
+</div>
 
 @else
 
@@ -78,4 +74,41 @@
 </div>
 
 @endif
+@endsection
+
+@section('scripts_footer')
+    <script>
+    
+        
+window.onload = function()
+{
+     const state  = new Vue({
+        el: '#root',
+        data: {
+            formId: ''
+        },
+        methods: {
+            onDeleteRecord(event){
+                event.preventDefault();
+                this.formId = event.currentTarget.form.id;
+                
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                    if (result.value) {
+                      document.getElementById(this.formId).submit();
+                    }
+                });
+            }
+        },
+    }) 
+}
+    
+    </script>
 @endsection

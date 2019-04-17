@@ -86,8 +86,12 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($state)
     {
-        //
+        State::where('state','=',$state)->delete();
+
+        Session::flash('success','State ' . $state . ' deleted successfully');
+
+        return redirect()->back();
     }
 }
