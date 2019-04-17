@@ -14,24 +14,17 @@
 </div>
     
 @endif
-<p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapseState" role="button" aria-expanded="false" aria-controls="collapseState">
-        Add new state
-    </a>
-</p>
-<div class="collapse" id="collapseState">
-    <div class="shadow-sm p-3 mb-5 bg-white rounded">
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
 
-            <form class="form-inline" method="POST" action=" {{ route('states.store') }} ">
-                @csrf
-                <div class="form-group">
-                    <label for="state">Add State</label>
-                    <input type="text" id="state" name="state" class="form-control mx-sm-3" aria-describedby="state" value="{{ old('state') }}" required autofocus>
-                    <button type="submit" class="btn btn-primary my-1">Submit</button>
-                </div>            
-            </form>
-    
-    </div>
+        <form class="form-inline" method="POST" action=" {{ route('states.store') }} ">
+            @csrf
+            <div class="form-group">
+                <label for="state">Add State</label>
+                <input type="text" id="state" name="state" class="form-control mx-sm-3" aria-describedby="state" value="{{ old('state') }}" required autofocus>
+                <button type="submit" class="btn btn-primary my-1">Submit</button>
+            </div>            
+        </form>
+ 
 </div>
 
 
@@ -40,7 +33,7 @@
 <div id="root">
   
     @foreach ($states as $key => $state)
-        @if ($key % 4 == 0)
+        @if ($key % 2 == 0)
         <div class="card-group">            
         @endif
 
@@ -56,12 +49,15 @@
                     </form>
                 </div>
             </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
 
         @php
           
         @endphp
-        @if (($key+1) % 4 == 0)
+        @if (($key+1) % 2 == 0)
             </div>
         @endif
     @endforeach
