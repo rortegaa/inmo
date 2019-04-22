@@ -1,6 +1,6 @@
 <ul class="list-group">
-  <li class="list-group-item active">States</li>
-  <li class="list-group-item">Property legal status</li>
-  <li class="list-group-item">Property status</li>
-  <li class="list-group-item">Property types</li>
+  <li class="list-group-item active">Administrator Section</li>
+  <a href=" {{ route('property_status.index') }}" class="list-group-item list-group-item-action">Property legal status</a>
+  <a href="#" class="list-group-item list-group-item-action">Property status</a>
+  <a href=" {{ route('states.index') }}" class="list-group-item list-group-item-action">state</a>
 </ul>

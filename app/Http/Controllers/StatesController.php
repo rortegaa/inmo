@@ -39,6 +39,8 @@ class StatesController extends Controller
             'state' => 'required'
         ]);
 
+        $attributes['inserted_by'] = 'David Ortega';
+
         State::create($attributes);
 
         Session::flash('success','State ' . $attributes['state'] . ' added successfully');

@@ -2,90 +2,88 @@
 
 @section('content')
 
-@include('errors')
+@include('shares.errors')
 
-@if (Session::has('success'))
+@include('shares.SuccessBootstrapAlert')
 
-<div class="alert alert-primary alert-dismissible fade show" role="alert">
-   {{ Session::get('success') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-    
-@endif
-<div class="shadow-sm p-3 mb-5 bg-white rounded">
 
-        <form class="form-inline" method="POST" action=" {{ route('states.store') }} ">
+<p>
+    <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseState" role="button" aria-expanded="false" aria-controls="collapseState">
+        <i class="fas fa-plus-square"></i> Add New
+    </a>
+</p>
+<div class="collapse" id="collapseState">
+    <div class="shadow-sm p-3 mb-5 bg-white rounded">
+
+        <form class="form-inline" method="POST" action=" {{ route('property_status.store') }} ">
             @csrf
             <div class="form-group">
-                <label for="state">Add State</label>
-                <input type="text" id="state" name="state" class="form-control mx-sm-3" aria-describedby="state" value="{{ old('state') }}" required autofocus>
+                <label for="property_status">Add property status</label>
+                <input type="text" id="property_status" name="property_status" class="form-control mx-sm-3" aria-describedby="property_status" value="{{ old('property_status') }}" required autofocus>
                 <button type="submit" class="btn btn-primary my-1">Submit</button>
             </div>            
         </form>
  
+    </div>
 </div>
 
 
+@if ($property_status->count() > 0)
 
-@if ($states->count() > 0)
-<div id="root">
+<div class="shadow-sm p-3 mb-5 bg-white rounded" id="root">
   
-    @foreach ($states as $key => $state)
-        @if ($key % 2 == 0)
-        <div class="card-group">            
-        @endif
+   
+     <table class="table table-bordered text-center">
+         <thead>
+             <tr>
+                 <th scope="col">#</th>
+                 <th scope="col">Property Status</th>
+                 <th scope="col">Inserted By</th>
+                 <th scope="col">Actions</th>
+             </tr>
+         </thead>
+         <tbody>
+                @foreach ($property_status as $key => $property_status)
+                <tr>
+                    <th scope="row">{{ $key + 1 }}</th>
+                    <td> {{ $property_status->property_status }} </td>
+                    <td> {{ $property_status->inserted_by }} </td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center bd-highlight">
+                            <a href="#"  class="btn btn-outline-primary btn-sm" @click="updateState"><i class="fas fa-pen"></i></a>
+                            <form  method="POST" >
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-outline-danger btn-sm" @click="onDeleteRecord"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+         </tbody>
+     </table>
 
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title"> {{ ($key+1) .')  '. $state->state }}</h5>
-                <div class="d-flex flex-row-reverse bd-highlight">
-                    <a href="#" class="btn btn-outline-primary btn-sm"><i class="fas fa-pen"></i></a>
-                    <form id=" {{ $state->state }}" method="POST" action=" {{ route('states.destroy',['state'=>$state->state]) }}"  >
-                        @method('DELETE')
-                        @csrf
-                    <button type="submit" class="btn btn-outline-danger btn-sm" @click="onDeleteRecord"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                </div>
-            </div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        @php
-          
-        @endphp
-        @if (($key+1) % 2 == 0)
-            </div>
-        @endif
-    @endforeach
+  
   
 </div>
 
 @else
 
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <h4 class="alert-heading">No existen registros </h4>
-    <p>No hay estados registrados para mostrar, favor de agregar</p>
-    <hr>
-    <p class="mb-0">Cualquier duda o aclaracion , contactar al administrador </p>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+@include('shares.emptyView')
+
 
 @endif
+
 @endsection
 
 @section('scripts_footer')
-    <script>
+
+<script>
     
         
 window.onload = function()
 {
-     const state  = new Vue({
+     const property_status  = new Vue({
         el: '#root',
         data: {
             formId: ''

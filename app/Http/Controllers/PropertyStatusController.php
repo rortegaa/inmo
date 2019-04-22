@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PropertyStatus;
+use Session;
 
 class PropertyStatusController extends Controller
 {
@@ -14,7 +15,7 @@ class PropertyStatusController extends Controller
      */
     public function index()
     {
-        return view('administrator.StatesView.index')->with('states',State::orderBy('id','desc')->get());
+        return view('administrator.PropertyStatusView.index')->with('property_status',PropertyStatus::orderBy('id','desc')->get());
     }
 
     /**
@@ -33,9 +34,19 @@ class PropertyStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $attribute = request()->validate([
+            'property_status'=>'required'
+        ]);
+
+       $attribute['inserted_by'] = 'David Ortega';
+
+        PropertyStatus::create($attribute);
+
+        Session::flash('success', "Status $attribute[property_status] added successfully!");
+
+        return redirect()->back();
     }
 
     /**
@@ -78,8 +89,17 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($property_status)
     {
-        //
+        PropertyStatus::where('property_status','=', $property_status);
+
+        Session::flash('success', "Status $property_status deleted successfully");
+
+        return redirect()->back();
+    }
+
+    public function successMessage($data)
+    {
+
     }
 }
