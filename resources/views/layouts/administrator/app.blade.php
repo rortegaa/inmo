@@ -21,10 +21,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- CDN Tables --}}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/sc-2.0.0/datatables.css"/> 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/sc-2.0.0/datatables.js" defer></script>
+
 </head>
 
 <body>
-    <div id="app">
+    <div id="root">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -92,6 +98,45 @@
     </div>
 
     @yield('scripts_footer')
+
+    <script>
+    
+    window.onload = function()
+{
+     const property_legal_status  = new Vue({
+        el: '#root',
+        data: {
+            formId: ''
+        },
+        methods: {
+            onDeleteRecord(){
+                event.preventDefault();
+                this.formId = event.currentTarget.form.id;
+                
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                    if (result.value) {
+                      document.getElementById(this.formId).submit();
+                    }
+                });
+            }
+        },
+        mounted() {
+            $('#collapsePropertyLegalStatus').collapse({
+                    toggle: true
+            })        
+        },
+    }) 
+}
+
+    </script>
 </body>
 
 </html>

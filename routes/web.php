@@ -24,6 +24,7 @@ Auth::routes();
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('states', 'StatesController');
     Route::resource('property_status', 'PropertyStatusController');
+    Route::resource('legal_status', 'PropertyLegalStatusController');
 });
 
 

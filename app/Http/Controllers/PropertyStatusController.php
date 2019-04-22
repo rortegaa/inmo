@@ -44,7 +44,7 @@ class PropertyStatusController extends Controller
 
         PropertyStatus::create($attribute);
 
-        Session::flash('success', "Status $attribute[property_status] added successfully!");
+        Session::flash('success', "Status: $attribute[property_status] added successfully!");
 
         return redirect()->back();
     }
@@ -91,9 +91,9 @@ class PropertyStatusController extends Controller
      */
     public function destroy($property_status)
     {
-        PropertyStatus::where('property_status','=', $property_status);
+        PropertyStatus::where('property_status','=', $property_status)->delete();
 
-        Session::flash('success', "Status $property_status deleted successfully");
+        Session::flash('success', "Status: $property_status deleted successfully");
 
         return redirect()->back();
     }

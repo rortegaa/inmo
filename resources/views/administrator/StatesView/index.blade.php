@@ -39,7 +39,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Property Status</th>
+                    <th scope="col">State</th>
                     <th scope="col">Inserted By</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -136,8 +136,7 @@
                 mounted() {
                     $('#collapseState').collapse({
                     toggle: true
-                    })
-                    
+                    })                    
                 },  
             }) 
         }

@@ -8,11 +8,11 @@
 
 
 <p>
-    <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseState" role="button" aria-expanded="false" aria-controls="collapseState">
+    <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapsePropertyStatus" role="button" aria-expanded="false" aria-controls="collapsePropertyStatus">
         <i class="fas fa-plus-square"></i> Add New
     </a>
 </p>
-<div class="collapse" id="collapseState">
+<div class="collapse" id="collapsePropertyStatus">
     <div class="shadow-sm p-3 mb-5 bg-white rounded">
 
         <form class="form-inline" method="POST" action=" {{ route('property_status.store') }} ">
@@ -33,7 +33,7 @@
 <div class="shadow-sm p-3 mb-5 bg-white rounded" id="root">
   
    
-     <table class="table table-bordered text-center">
+     <table class="table table-hover text-center">
          <thead>
              <tr>
                  <th scope="col">#</th>
@@ -107,6 +107,11 @@ window.onload = function()
                     }
                 });
             }
+        },
+        mounted() {
+            $('#collapsePropertyStatus').collapse({
+                    toggle: true
+            })        
         },
     }) 
 }
