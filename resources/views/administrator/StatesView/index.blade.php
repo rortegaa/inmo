@@ -13,7 +13,7 @@
         </a>
     </p>
     <div class="collapse" id="collapseState">
-        <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="shadow p-3 mb-5 bg-white rounded">
 
                 <form class="form-inline" method="POST" action=" {{ route('states.store') }} ">
                 
@@ -24,18 +24,14 @@
                         <button type="submit" class="btn btn-primary my-1">Submit</button>
                     </div>            
                 </form>
-        
         </div>
     </div>
 
     @if ($states->count() > 0)
 
+    <div class="shadow p-3 mb-5 bg-white rounded" id="root">
 
-    <div class="shadow-sm p-3 mb-5 bg-white rounded" id="root">
-  
-   
-
-        <table class="table table-hover text-center">
+        <table id="records" class="table table-striped table-bordered table-hover text-center">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -51,9 +47,9 @@
                        <td> {{ $state->state }} </td>
                        <td> {{ $state->inserted_by }} </td>
                        <td class="text-center">
-                           <div class="d-flex justify-content-center bd-highlight">
-                                <a href="#" id="{{ $state->state }}" class="btn btn-outline-primary btn-sm" @click="updateState"><i class="fas fa-pen"></i></a>
-                                <form id=" {{ $state->state }}" method="POST" action=" {{ route('states.destroy',['state'=>$state->state]) }}"  >
+                           <div class="d-flex justify-content-center bd-highlight">                                
+                                    <button id="{{ $state->state }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>                       
+                                <form id="delete {{ $state->state }}" method="POST" action=" {{ route('states.destroy',['state'=>$state->state]) }}">
                                     @method('DELETE')
                                     @csrf
                                 <button class="btn btn-outline-danger btn-sm" @click="onDeleteRecord"><i class="fas fa-trash-alt"></i></button>
@@ -79,13 +75,12 @@
 
 @section('scripts_footer')
     <script>
-       
+     
         window.onload = function()
         {
             const app  = new Vue({
                 el: '#root',
-                data: {
-                  
+                data: {                  
                     clickedState:'',
                     formId: ''
                 },
@@ -108,38 +103,38 @@
                             }
                         });
                     },
-                    updateState(event){
-                      event.preventDefault();
-                      this.clickedState = event.currentTarget.id;
-                                                     
+                    updateAlert(event){
+                        event.preventDefault();
+                       this.clickedState = event.currentTarget.id;
+                       let state = this.clickedState;      
+                       let url = '{{ url('') }}'; 
+                       let updateForm;
+                        console.log(url);
 
-                    Swal.fire({
-                    title: 'Update state',
-                    html: `
-                    <form id="update${this.clickedState}"  method="POST" action=" {{ route('states.store') }} ">
-                        @method('PATCH')
-                        @csrf  
-                        <input type="text" id="state" name="state" class="swal2-input" value="${this.clickedState}" required autofocus>         
-                    </form>
-                    `,
-                    showCancelButton: true,
-                    confirmButtonText: 'Update',
-                    showLoaderOnConfirm: true
-                    }).then((result) => {
-                        if (result.value) {
-                            let updateForm = document.getElementById('update'+this.clickedState);
-                            updateForm.submit();
-                        }
-                    });
+                        Swal.fire({
+                        title: 'Update state',
+                        html: `
+                        <form id="update${this.clickedState}"  method="POST" action="${url}/admin/states/${state}">
+                            @method('PUT')
+                            @csrf  
+                            <input type="text" id="state" name="state" class="swal2-input" value="${this.clickedState}" required autofocus>   
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" >submit</button>
+                            <input type="button" class="btn btn-secondary btn-lg btn-block" onclick="Javascript:Swal.close()" value="cancel" > </input>
+                        </form>
+                        `,
+                        
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        })
                 }
                 },
                 mounted() {
                     $('#collapseState').collapse({
                     toggle: true
-                    })                    
+                    })      
+                    $('#records').DataTable();              
                 },  
             }) 
         }
-    
     </script>
 @endsection

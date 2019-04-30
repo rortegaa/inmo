@@ -77,9 +77,19 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($state)
     {
-        //
+        $attributes = request()->validate([
+            'state'=>'required'
+        ]);
+
+        $attributes['updated_by'] = 'David Ortega';
+        
+        State::where('state','=', $state)->update($attributes);
+        
+        Session::flash('success',"State: $attributes[state] updated successfully");
+
+        return redirect()->back();
     }
 
     /**

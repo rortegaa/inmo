@@ -19,7 +19,7 @@ class CreatePropertiesTable extends Migration
             $table->unsignedInteger('property_status_id');
             $table->unsignedInteger('property_legal_status_id');
             $table->unsignedInteger('country_id');
-            $table->morphs('areables');
+            $table->morphs('userable');
             $table->string('slug')->nullable();
             $table->timestamps();
         });

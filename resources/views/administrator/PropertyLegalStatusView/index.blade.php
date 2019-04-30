@@ -13,7 +13,7 @@
     </a>
 </p>
 <div class="collapse" id="collapsePropertyLegalStatus">
-    <div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="shadow p-3 mb-5 bg-white rounded">
 
         <form class="form-inline" method="POST" action=" {{ route('legal_status.store') }} ">
             @csrf
@@ -30,7 +30,7 @@
 
 @if ($property_legal_status->count() > 0)
 
-<div class="shadow-sm p-3 mb-5 bg-white rounded" id="root">
+<div class="shadow p-3 mb-5 bg-white rounded" id="root">
   
    
      <table class="table table-hover text-center">
