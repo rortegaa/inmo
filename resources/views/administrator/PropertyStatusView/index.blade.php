@@ -116,9 +116,9 @@
                     <form id="update${propertyStatus}"  method="POST" action="${url}/admin/property_status/${propertyStatus}" >
                         @method('PUT')
                         @csrf  
-                        <input type="text" id="state" name="state" class="swal2-input" value="${propertyStatus}" required autofocus>   
+                        <input type="text" id="state" name="property_status" class="swal2-input" value="${propertyStatus}" required autofocus>   
                         <button type="submit" class="btn btn-primary btn-lg btn-block" >submit</button>
-                        <input type="button" class="btn btn-secondary btn-lg btn-block" onclick="Javascript:Swal.close()" value="cancel" > </input>
+                        <input type="button" class="btn btn-secondary btn-lg btn-block" onclick="Javascript:Swal.close()" value="cancel" required autofocus > </input>
                     </form>
                     `,
                     

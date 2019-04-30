@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\State;
 use Session;
+
 class StatesController extends Controller
 {
     /**

@@ -78,9 +78,21 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($propertyStatus)
     {
-        //
+        $attribute = request()->validate([
+            'property_status'=>'required'
+        ]);
+
+        $attribute['updated_by'] = 'David Ortega';
+
+        dd($attribute);
+
+        PropertyStatus::where('property_status','=', $propertyStatus)->update($attribute);
+
+        Session::flash('success', "Status: $attribute[property_status] updated successfully!");
+
+        return redirect()->back();
     }
 
     /**
