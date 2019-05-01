@@ -98,45 +98,6 @@
     </div>
 
     @yield('scripts_footer')
-
-    <script>
-    
-    window.onload = function()
-{
-     const property_legal_status  = new Vue({
-        el: '#root',
-        data: {
-            formId: ''
-        },
-        methods: {
-            onDeleteRecord(){
-                event.preventDefault();
-                this.formId = event.currentTarget.form.id;
-                
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                    if (result.value) {
-                      document.getElementById(this.formId).submit();
-                    }
-                });
-            }
-        },
-        mounted() {
-            $('#collapsePropertyLegalStatus').collapse({
-                    toggle: true
-            })        
-        },
-    }) 
-}
-
-    </script>
 </body>
 
 </html>

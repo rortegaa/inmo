@@ -8,7 +8,7 @@ class Property extends Model
 {
     protected $fillable = [
         'property_type_id','property_status_id',
-        'property_legal_status_id','country_id'
+        'property_legal_status_id','state_id','userable_type','userable_id'
     ];
 
     public function propertyInformation()
