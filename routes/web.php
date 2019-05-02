@@ -24,8 +24,13 @@ Auth::routes();
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('states', 'StatesController');
     Route::resource('property_status', 'PropertyStatusController');
+    Route::resource('property_types', 'PropertyTypesController');
     Route::resource('legal_status', 'PropertyLegalStatusController');
     Route::resource('property', 'PropertyController');
+    Route::resource('services', 'ServicesController');
+    
+    route::get('security_social_area', 'AreasController@securityAndSocialIndex')->name('security_social.area');
+    route::post('security_social_area', 'AreasController@securityAndSocialStore')->name('security_social.area');
 });
 
 

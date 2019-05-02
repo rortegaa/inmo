@@ -8,26 +8,26 @@
 
 <div id="root">
     <p>
-        <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#collapseState" role="button" aria-expanded="false" aria-controls="collapseState">
+        <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#collapsePropertyType" role="button" aria-expanded="false" aria-controls="collapsePropertyType">
             <i class="fas fa-plus-square"></i> Add New
         </a>
     </p>
-    <div class="collapse" id="collapseState">
+    <div class="collapse" id="collapsePropertyType">
         <div class="shadow p-3 mb-5 bg-white rounded">
 
-                <form class="form-inline" method="POST" action=" {{ route('states.store') }} ">
+                <form class="form-inline" method="POST" action=" {{ route('property_types.store') }} ">
                 
                     @csrf
                     <div class="form-group">
-                        <label for="state">Add State</label>
-                        <input type="text" id="state" name="state" class="form-control mx-sm-3" aria-describedby="state" value="{{old('state')}}" v-model="clickedState" required autofocus>
+                        <label for="state">Add Property Type</label>
+                        <input type="text" id="property_type" name="property_type" class="form-control mx-sm-3" aria-describedby="types" value="{{old('property_type')}}" v-model="clickedTypes" required autofocus>
                         <button type="submit" class="btn btn-primary my-1">Submit</button>
                     </div>            
                 </form>
         </div>
     </div>
 
-    @if ($states->count() > 0)
+    @if ($types->count() > 0)
 
     <div class="shadow p-3 mb-5 bg-white rounded" id="root">
 
@@ -35,21 +35,21 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">State</th>
+                    <th scope="col">Property Types</th>
                     <th scope="col">Inserted By</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                   @foreach ($states as $key => $state)
+                   @foreach ($types as $key => $type)
                    <tr>
                        <th scope="row">{{ $key + 1 }}</th>
-                       <td> {{ $state->state }} </td>
-                       <td> {{ $state->inserted_by }} </td>
+                       <td> {{ $type->property_type }} </td>
+                       <td> {{ $type->inserted_by }} </td>
                        <td class="text-center">
                            <div class="d-flex justify-content-center bd-highlight">                                
-                                    <button id="{{ $state->state }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>                       
-                                <form id="delete {{ $state->state }}" method="POST" action=" {{ route('states.destroy',['state'=>$state->state]) }}">
+                                    <button id="{{ $type->property_type }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>                       
+                                <form id="delete {{ $type->property_type }}" method="POST" action=" {{ route('property_types.destroy',['state'=>$type->property_type]) }}">
                                     @method('DELETE')
                                     @csrf
                                 <button class="btn btn-outline-danger btn-sm" @click="onDeleteRecord"><i class="fas fa-trash-alt"></i></button>
@@ -81,7 +81,7 @@
             const app  = new Vue({
                 el: '#root',
                 data: {                  
-                    clickedState:'',
+                    clickedTypes:'',
                     formId: ''
                 },
                 methods: {
@@ -105,16 +105,16 @@
                     },
                     updateAlert(event){
                         event.preventDefault();
-                       let state = event.currentTarget.id;      
+                       let type = event.currentTarget.id;      
                        let url = '{{ url('') }}'; 
 
                         Swal.fire({
                         title: 'Update state',
                         html: `
-                        <form id="update${state}"  method="POST" action="${url}/admin/states/${state}">
+                        <form id="update${type}"  method="POST" action="${url}/admin/property_types/${type}">
                             @method('PUT')
                             @csrf  
-                            <input type="text" id="state" name="state" class="swal2-input" value="${state}" required autofocus>   
+                            <input type="text" id="property_type" name="property_type" class="swal2-input" value="${type}" required autofocus>   
                             <button type="submit" class="btn btn-primary btn-lg btn-block" >submit</button>
                             <input type="button" class="btn btn-secondary btn-lg btn-block" onclick="Javascript:Swal.close()" value="cancel" > </input>
                         </form>
@@ -126,7 +126,7 @@
                 }
                 },
                 mounted() {
-                    $('#collapseState').collapse({
+                    $('#collapsePropertyType').collapse({
                     toggle: true
                     })      
                     $('#records').DataTable();              

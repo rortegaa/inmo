@@ -15,7 +15,7 @@ class PropertyLegalStatusController extends Controller
      */
     public function index()
     {
-        return view('administrator.PropertyLegalStatusView.index')->with('property_legal_status', PropertyLegalStatus::all());      
+        return view('administrator.PropertyLegalStatusView.index')->with('legalStatus', PropertyLegalStatus::all());      
     }
 
     /**
@@ -78,9 +78,19 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($status)
     {
-        //
+        $attribute = request()->validate([
+            'property_legal_status'=>'required'
+        ]);
+
+        $attribute['updated_by'] = 'David Ortega';
+
+        PropertyLegalStatus::where('property_legal_status','=',$status)->update($attribute);
+
+        Session::flash('success',"Legal status: $attribute[property_legal_status] updated successfuly!");
+
+        return redirect()->back();
     }
 
     /**

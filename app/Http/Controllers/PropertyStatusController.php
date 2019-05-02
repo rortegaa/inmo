@@ -40,10 +40,8 @@ class PropertyStatusController extends Controller
             'property_status'=>'required'
         ]);
 
-       $attribute['inserted_by'] = 'David Ortega';
-
+        $attribute['inserted_by'] = 'David Ortega';          
         PropertyStatus::create($attribute);
-
         Session::flash('success', "Status: $attribute[property_status] added successfully!");
 
         return redirect()->back();
@@ -78,9 +76,17 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($status)
     {
-        //
+        $attribute = request()->validate([
+            'property_status'=>'required'
+        ]);
+
+        $attribute['updated_by'] = 'David Ortega';
+        PropertyStatus::where('property_status','=', $status)->update($attribute);        
+        Session::flash('success', "Status: $attribute[property_status] updated successfully!");
+
+        return redirect()->back();
     }
 
     /**
@@ -92,14 +98,8 @@ class PropertyStatusController extends Controller
     public function destroy($property_status)
     {
         PropertyStatus::where('property_status','=', $property_status)->delete();
-
         Session::flash('success', "Status: $property_status deleted successfully");
 
         return redirect()->back();
-    }
-
-    public function successMessage($data)
-    {
-
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\State;
+use App\GeneralService;
 use Session;
 
-class StatesController extends Controller
+class ServicesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class StatesController extends Controller
      */
     public function index()
     {
-        return view('administrator.StatesView.index')->with('states',State::orderBy('id','desc')->get());
+        return view('administrator.ServicesView.index')->with('services', GeneralService::orderBy('id','desc')->get());
     }
 
     /**
@@ -25,7 +25,7 @@ class StatesController extends Controller
      */
     public function create()
     {
-        
+      //
     }
 
     /**
@@ -36,13 +36,13 @@ class StatesController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
-            'state' => 'required'
+        $attribute = request()->validate([
+            'service'=>'required'
         ]);
 
-        $attributes['inserted_by'] = 'David Ortega';
-        State::create($attributes);
-        Session::flash('success',"State: $attributes[state] added successfully");
+        $attribute['inserted_by'] = 'David Ortega';          
+        GeneralService::create($attribute);
+        Session::flash('success', "Service: $attribute[service] added successfully!");
 
         return redirect()->back();
     }
@@ -76,15 +76,15 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($state)
+    public function update($service)
     {
-        $attributes = request()->validate([
-            'state'=>'required'
+        $attribute = request()->validate([
+            'service'=>'required'
         ]);
 
-        $attributes['updated_by'] = 'David Ortega';        
-        State::where('state','=', $state)->update($attributes);        
-        Session::flash('success',"State: $attributes[state] updated successfully");
+        $attribute['updated_by'] = 'David Ortega';
+        GeneralService::where('service','=', $service)->update($attribute);        
+        Session::flash('success', "Service: $attribute[service] updated successfully!");
 
         return redirect()->back();
     }
@@ -95,11 +95,11 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($state)
+    public function destroy($service)
     {
-        State::where('state','=',$state)->delete();
-        Session::flash('success',"State: $state deleted successfully");
-        
+        GeneralService::where('service','=', $service)->delete();
+        Session::flash('success', "Service: $service deleted successfully");
+
         return redirect()->back();
     }
 }
