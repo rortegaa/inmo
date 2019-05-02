@@ -13,6 +13,10 @@
 
 @section('content')
 
+@include('shares.errors')
+
+@include('shares.SuccessBootstrapAlert')
+
     <div id="root" class="row shadow p-3 mb-5 bg-white rounded">
             <div class="col-lg-4">
                 
@@ -155,6 +159,7 @@
                     reset.onclick = () =>{
                         deleteAllShape();
                         drawingManager.setMap(map);   
+                        $('#container_hidden').empty();
                     };   
              }
     

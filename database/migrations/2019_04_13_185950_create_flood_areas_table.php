@@ -16,6 +16,8 @@ class CreateFloodAreasTable extends Migration
         Schema::create('flood_areas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('flood_area');
+            $table->string('inserted_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }
