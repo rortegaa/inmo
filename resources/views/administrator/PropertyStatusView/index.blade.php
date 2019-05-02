@@ -15,11 +15,11 @@
     <div class="collapse" id="collapsePropertyStatus">
         <div class="shadow p-3 mb-5 bg-white rounded">
 
-            <form class="form-inline" method="POST" action=" {{ route('property_status.store') }} ">
+            <form class="form-inline" method="POST" action="{{ route('property_status.store') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="property_status">Add property status</label>
-                    <input type="text" id="property_status" name="property_status" class="form-control mx-sm-3" aria-describedby="property_status" value="{{ old('property_status') }}" required autofocus>
+                    <label for="property_status">Add Property Status</label>
+                    <input type="text" id="property_status" name="property_status" class="form-control mx-sm-3" aria-describedby="property_status" value="{{old('property_status')}}" required autofocus>
                     <button type="submit" class="btn btn-primary my-1">Submit</button>
                 </div>            
             </form>
@@ -49,7 +49,7 @@
                         <td> {{ $property_status->inserted_by }} </td>
                         <td class="text-center">
                             <div class="d-flex justify-content-center bd-highlight">
-                                <button id=" {{$property_status->property_status }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>
+                                <button id="{{$property_status->property_status }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>
                                 <form id="update {{ $property_status->property_status }}"  method="POST" action=" {{ route('property_status.destroy', ['propertyStatus'=>$property_status->property_status]) }}" >
                                     @method('DELETE')
                                     @csrf
@@ -107,16 +107,13 @@
                     event.preventDefault();
                    let propertyStatus = event.currentTarget.id;     
                    let url = '{{ url('') }}'; 
-                   let updateForm;
-                    console.log(url);
-
                     Swal.fire({
                     title: 'Update Property Status',
                     html: `
-                    <form id="update${propertyStatus}"  method="POST" action="${url}/admin/property_status/${propertyStatus}" >
+                    <form id="update${propertyStatus}"  method="POST" action="${url}/admin/property_status/${propertyStatus}">
                         @method('PUT')
                         @csrf  
-                        <input type="text" id="state" name="property_status" class="swal2-input" value="${propertyStatus}" required autofocus>   
+                        <input type="text" id="property_status" name="property_status" class="swal2-input" value="${propertyStatus}" required autofocus>   
                         <button type="submit" class="btn btn-primary btn-lg btn-block" >submit</button>
                         <input type="button" class="btn btn-secondary btn-lg btn-block" onclick="Javascript:Swal.close()" value="cancel" required autofocus > </input>
                     </form>

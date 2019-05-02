@@ -16,6 +16,8 @@ class CreateGeneralServicesTable extends Migration
         Schema::create('general_services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('service');
+            $table->string('inserted_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

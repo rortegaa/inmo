@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\State;
+use App\PropertyType;
 use Session;
 
-class StatesController extends Controller
+class PropertyTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class StatesController extends Controller
      */
     public function index()
     {
-        return view('administrator.StatesView.index')->with('states',State::orderBy('id','desc')->get());
+        return view('administrator.PropertyTypesView.index')->with('types',PropertyType::orderBy('id','desc')->get());
     }
 
     /**
@@ -25,7 +25,7 @@ class StatesController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -37,12 +37,12 @@ class StatesController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'state' => 'required'
+            'property_type' => 'required'
         ]);
 
         $attributes['inserted_by'] = 'David Ortega';
-        State::create($attributes);
-        Session::flash('success',"State: $attributes[state] added successfully");
+        PropertyType::create($attributes);
+        Session::flash('success',"Property type: $attributes[property_type] added successfully");
 
         return redirect()->back();
     }
@@ -76,15 +76,15 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($state)
+    public function update($type)
     {
-        $attributes = request()->validate([
-            'state'=>'required'
+        $attribute = request()->validate([
+            'property_type'=>'required'
         ]);
 
-        $attributes['updated_by'] = 'David Ortega';        
-        State::where('state','=', $state)->update($attributes);        
-        Session::flash('success',"State: $attributes[state] updated successfully");
+        $attribute['updated_by'] = 'David Ortega';
+        PropertyType::where('property_type','=', $type)->update($attribute);        
+        Session::flash('success', "Property type: $attribute[property_type] updated successfully!");
 
         return redirect()->back();
     }
@@ -95,11 +95,11 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($state)
+    public function destroy($type)
     {
-        State::where('state','=',$state)->delete();
-        Session::flash('success',"State: $state deleted successfully");
-        
+        PropertyType::where('property_type','=', $type)->delete();
+        Session::flash('success', "Property type: $type deleted successfully");
+
         return redirect()->back();
     }
 }

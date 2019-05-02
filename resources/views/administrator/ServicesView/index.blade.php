@@ -8,26 +8,26 @@
 
 <div id="root">
     <p>
-        <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#collapseState" role="button" aria-expanded="false" aria-controls="collapseState">
+        <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#collapseService" role="button" aria-expanded="false" aria-controls="collapseService">
             <i class="fas fa-plus-square"></i> Add New
         </a>
     </p>
-    <div class="collapse" id="collapseState">
+    <div class="collapse" id="collapseService">
         <div class="shadow p-3 mb-5 bg-white rounded">
 
-                <form class="form-inline" method="POST" action=" {{ route('states.store') }} ">
+                <form class="form-inline" method="POST" action=" {{ route('services.store') }} ">
                 
                     @csrf
                     <div class="form-group">
-                        <label for="state">Add State</label>
-                        <input type="text" id="state" name="state" class="form-control mx-sm-3" aria-describedby="state" value="{{old('state')}}" v-model="clickedState" required autofocus>
+                        <label for="state">Add Service</label>
+                        <input type="text" id="service" name="service" class="form-control mx-sm-3" aria-describedby="service" value="{{old('service')}}" v-model="clickedService" required autofocus>
                         <button type="submit" class="btn btn-primary my-1">Submit</button>
                     </div>            
                 </form>
         </div>
     </div>
 
-    @if ($states->count() > 0)
+    @if ($services->count() > 0)
 
     <div class="shadow p-3 mb-5 bg-white rounded" id="root">
 
@@ -35,21 +35,21 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">State</th>
+                    <th scope="col">Service</th>
                     <th scope="col">Inserted By</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                   @foreach ($states as $key => $state)
+                   @foreach ($services as $key => $service)
                    <tr>
                        <th scope="row">{{ $key + 1 }}</th>
-                       <td> {{ $state->state }} </td>
-                       <td> {{ $state->inserted_by }} </td>
+                       <td> {{ $service->service }} </td>
+                       <td> {{ $service->inserted_by }} </td>
                        <td class="text-center">
                            <div class="d-flex justify-content-center bd-highlight">                                
-                                    <button id="{{ $state->state }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>                       
-                                <form id="delete {{ $state->state }}" method="POST" action=" {{ route('states.destroy',['state'=>$state->state]) }}">
+                                    <button id="{{ $service->service }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>                       
+                                <form id="delete {{ $service->service }}" method="POST" action=" {{ route('services.destroy',['service'=>$service->service]) }}">
                                     @method('DELETE')
                                     @csrf
                                 <button class="btn btn-outline-danger btn-sm" @click="onDeleteRecord"><i class="fas fa-trash-alt"></i></button>
@@ -81,7 +81,7 @@
             const app  = new Vue({
                 el: '#root',
                 data: {                  
-                    clickedState:'',
+                    clickedService:'',
                     formId: ''
                 },
                 methods: {
@@ -105,16 +105,16 @@
                     },
                     updateAlert(event){
                         event.preventDefault();
-                       let state = event.currentTarget.id;      
+                       let service = event.currentTarget.id;      
                        let url = '{{ url('') }}'; 
 
                         Swal.fire({
-                        title: 'Update state',
+                        title: 'Update service',
                         html: `
-                        <form id="update${state}"  method="POST" action="${url}/admin/states/${state}">
+                        <form id="update${service}"  method="POST" action="${url}/admin/services/${service}">
                             @method('PUT')
                             @csrf  
-                            <input type="text" id="state" name="state" class="swal2-input" value="${state}" required autofocus>   
+                            <input type="text" id="service" name="service" class="swal2-input" value="${service}" required autofocus>   
                             <button type="submit" class="btn btn-primary btn-lg btn-block" >submit</button>
                             <input type="button" class="btn btn-secondary btn-lg btn-block" onclick="Javascript:Swal.close()" value="cancel" > </input>
                         </form>
@@ -126,7 +126,7 @@
                 }
                 },
                 mounted() {
-                    $('#collapseState').collapse({
+                    $('#collapseService').collapse({
                     toggle: true
                     })      
                     $('#records').DataTable();              

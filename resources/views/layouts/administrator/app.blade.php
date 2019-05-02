@@ -13,6 +13,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -26,6 +27,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js" defer></script>
+
+    @yield('custom_styles')
 
 </head>
 
@@ -98,6 +101,10 @@
     </div>
 
     @yield('scripts_footer')
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQfZXUMkqhAZPYFpgIxw09MOrkXJzL3k&libraries=drawing&callback=initMap"
+    async defer>
+    </script>
 
 </body>
 
