@@ -9,9 +9,13 @@ use Session;
 
 class AreasController extends Controller
 {
+
     public function securityAndSocialIndex()
     {
-      
+        return view('administrator.areas.security_socialIndex')->with('localization', SecurityAndSocialFactorArea::with('localization')->get());
+    }
+    public function securityAndSocialCreate()
+    {      
         return view('administrator.areas.security_social');
     }
 

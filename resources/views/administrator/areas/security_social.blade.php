@@ -21,7 +21,7 @@
             <div class="col-lg-4">
                 
                     <div class="card">
-                    <form  action="{{ route('security_social.area') }}" method="POST">
+                    <form  action="{{ route('security_social.store') }}" method="POST">
                         <div class="card-header  text-center ">
                                 Create Area
                         </div>
