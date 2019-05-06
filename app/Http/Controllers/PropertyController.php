@@ -24,7 +24,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-         //
+        $property = Property::with(['propertyInformation','propertyLocalization','propertyPhotos'])->get();
+        return View('administrator.PropertyView.index')->with('property', $property);
     }
 
     /**
@@ -60,7 +61,8 @@ class PropertyController extends Controller
             'price' => 'required',
             'maintenance' => 'required',
             'area' => 'required',
-            'total_lot_area' => 'required',
+            'total_area_lot' => 'required',
+            'sale_message' => 'required',
             'images' => 'required',
             'address' => 'required',
             'latitude' => 'required',
@@ -87,7 +89,8 @@ class PropertyController extends Controller
         'price' => $attributes['price'],
         'maintenance' => $attributes['maintenance'],
         'area' => $attributes['area'],
-        'total_area_lot' => $attributes['total_lot_area'],
+        'total_area_lot' => $attributes['total_area_lot'],
+        'sale_message' => $attributes['sale_message'],
         'inserted_by' => 'Mario'
         ];
 
@@ -130,10 +133,10 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        $property = Property::where('id',$id)->with(['PropertyInformation','PropertyInformation'])->first()->get();
+        $property = Property::where('id',$id)->with(['propertyInformation','propertyLocalization'])->first();
+        //dd($property);
                                              //->with('PropertyLocalization')->first();
-        dd($property);
-        return view('administrator.PropertyView.create')->with('propertyLegalSatuses',PropertyLegalStatus::All())
+        return view('administrator.PropertyView.edit')->with('propertyLegalSatuses',PropertyLegalStatus::All())
                                                         ->with('propertySatuses',PropertyStatus::All())
                                                         ->with('propertyTypes',PropertyType::All())
                                                         ->with('states',State::All())
@@ -161,7 +164,8 @@ class PropertyController extends Controller
             'price' => 'required',
             'maintenance' => 'required',
             'area' => 'required',
-            'total_lot_area' => 'required',
+            'total_area_lot' => 'required',
+            'sale_message' => 'required',
             'images' => 'required',
             'address' => 'required',
             'latitude' => 'required',
@@ -176,11 +180,11 @@ class PropertyController extends Controller
             'userable_type' => 'User',
             'userable_id' => 1
             ];
-    
-            $Property = Property::create($propertyMainlAttributes);
+            //PropertyType::where('property_type','=', $type)->update($attribute); 
+            $Property = Property::find($id)->update($propertyMainlAttributes);
     
             $propertyInformationAttributes =  [ 
-            'property_id' => $Property->id,
+            'property_id' => $id,
             'bedrooms' => $attributes['bedrooms'], 
             'bathrooms' => $attributes['bathrooms'], 
             'parking_lots' => $attributes['parking_lots'], 
@@ -188,24 +192,28 @@ class PropertyController extends Controller
             'price' => $attributes['price'],
             'maintenance' => $attributes['maintenance'],
             'area' => $attributes['area'],
-            'total_area_lot' => $attributes['total_lot_area'],
-            'inserted_by' => 'Mario'
+            'total_area_lot' => $attributes['total_area_lot'],
+            'sale_message' => $attributes['sale_message'],
             ];
     
             $PropertyPhotosAttributes = [
-            'property_id' => $Property->id,
+            'property_id' => $id,
             'images[]' => $attributes['images']
             ];
     
             $PropertyLocalizationAttributes = [
-            'property_id' => $Property->id,
+            'property_id' => $id,
             'latitude' => $attributes['latitude'],
             'length' => $attributes['length'],
             'address' => $attributes['address']
             ];
 
 
-
+            Session::flash('success',"Record added successfully");
+            $this->update_property_information($attributes,$id );
+            $this->update_property_photos($PropertyPhotosAttributes);
+            $this->update_property_localization($PropertyLocalizationAttributes);
+            return redirect()->back();
     }
 
     /**
@@ -234,7 +242,7 @@ class PropertyController extends Controller
                 $file->move('images/houseImagesUploads', $name . '.' . $guessExtension);
                 $finalAtributtes = [
                     'property_id' => $PropertyPhotosAttributes['property_id'],
-                    'url' =>  'images/houseImagesUploads', $name . '.' . $guessExtension
+                    'url' =>  '/images/houseImagesUploads/'. $name . '.' . $guessExtension
                 ];
                 PropertyPhoto::create($finalAtributtes);
                 $count++;
@@ -248,9 +256,22 @@ class PropertyController extends Controller
         return true;
     }
 
-    function uptade_property_information($propertyInformationAttributes)
+    function update_property_information($attributes,$id)
     {
-        PropertyInformation::create($propertyInformationAttributes);
+
+        $propertyInformationAttributes =  [ 
+            'bedrooms' => $attributes['bedrooms'], 
+            'bathrooms' => $attributes['bathrooms'], 
+            'parking_lots' => $attributes['parking_lots'], 
+            'antiquity' => $attributes['antiquity'],
+            'price' => $attributes['price'],
+            'maintenance' => $attributes['maintenance'],
+            'area' => $attributes['area'],
+            'total_area_lot' => $attributes['total_area_lot'],
+            'sale_message' => $attributes['sale_message'],
+        ];
+
+        PropertyInformation::where('property_id', '=', '' . $id)->update($propertyInformationAttributes);
         return true;
     }
 
@@ -258,7 +279,7 @@ class PropertyController extends Controller
         $count = 1;
         if($files=$PropertyPhotosAttributes['images[]']){
             PropertyPhoto::where('property_id' , '=' ,$PropertyPhotosAttributes['property_id'])->delete();
-            foreach(glob("images/houseImagesUploads/[" . $id ."]*.*") as $file_to_delete) {
+            foreach(glob("images/houseImagesUploads/[" . $PropertyPhotosAttributes['property_id']."]*.*") as $file_to_delete) {
                 unlink($file_to_delete);
             }
             foreach($files as $file){
@@ -269,7 +290,7 @@ class PropertyController extends Controller
                     'property_id' => $PropertyPhotosAttributes['property_id'],
                     'url' =>  'images/houseImagesUploads', $name . '.' . $guessExtension
                 ];
-                PropertyPhoto::create($finalAtributtes);
+                PropertyPhoto::where('property_id' , '=' ,$PropertyPhotosAttributes['property_id'])->update($finalAtributtes);
                 $count++;
             }
         }
@@ -277,7 +298,7 @@ class PropertyController extends Controller
     }
 
     function update_property_localization($PropertyLocalizationAttributes){
-        PropertyLocalization::create($PropertyLocalizationAttributes);
+        PropertyLocalization::where('property_id', '=', $PropertyLocalizationAttributes['property_id'])->update($PropertyLocalizationAttributes);
         return true;
     }
 }

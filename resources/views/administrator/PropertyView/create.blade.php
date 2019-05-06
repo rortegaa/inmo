@@ -78,14 +78,14 @@
                 <input name="area" type="number" class="form-control" id="area" min="0" step=0.01>
             </div>
             <div class="col-3 form-group">
-                <label for="total_lot_area">Terrain:</label>
-                <input name="total_lot_area" type="number" class="form-control" id="total_lot_area" min="0" step=0.01>
+                <label for="total_area_lot">Terrain:</label>
+                <input name="total_area_lot" type="number" class="form-control" id="total_area_lot" min="0" step=0.01>
             </div>
         </div>
         <div class="row my-2">
             <div class="col-12 form-group">
-                <label for="message_sale">Sale Message:</label>
-                <textarea class="form-control" rows="4" cols="50" name="message_sale" id="message_sale"></textarea>
+                <label for="sale_message">Sale Message:</label>
+                <textarea class="form-control" rows="4" cols="50" name="sale_message" id="sale_message"></textarea>
             </div>
         </div>
         <!-- Property Localization -->
@@ -113,8 +113,9 @@
             </div>
         </div>
     </form>
-
 @endsection
+
+
 
 <script
   src="https://code.jquery.com/jquery-3.4.0.js"
@@ -147,4 +148,3 @@
         });
         }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQfZXUMkqhAZPYFpgIxw09MOrkXJzL3k&callback=initMap"></script>

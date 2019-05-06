@@ -7,4 +7,5 @@
   <a href="{{ route('property_types.index') }}" class="list-group-item list-group-item-action">Property Types</a>
   <a href="{{ route('states.index') }}" class="list-group-item list-group-item-action">States</a>
   <a href="{{ route('services.index') }}" class="list-group-item list-group-item-action">Services</a>
+  <a href="{{ route('property.index') }}" class="list-group-item list-group-item-action">Real State</a>
 </ul>
