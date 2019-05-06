@@ -9,7 +9,7 @@ class PropertyInformation extends Model
     protected $fillable = [
         'property_id','bedrooms','bathrooms','parking_lots',
         'antiquity','price','price_per_area','maintenance',
-        'area','total_lot_area','sale_message'
+        'area','total_area_lot','sale_message'
     ];
 
     public function property()

@@ -15,7 +15,7 @@ class CreatePropertyInformationsTable extends Migration
     {
         Schema::create('property_informations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('property_id');
+            $table->integer('property_id');
             $table->smallInteger('bedrooms')->nullable();
             $table->smallInteger('bathrooms')->nullable();
             $table->smallInteger('parking_lots')->nullable();
