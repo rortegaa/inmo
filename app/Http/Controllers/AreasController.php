@@ -16,7 +16,7 @@ class AreasController extends Controller
     }
     public function securityAndSocialCreate()
     {      
-        return view('administrator.areas.security_social');
+        return view('administrator.areas.security_social')->with('localization', SecurityAndSocialFactorArea::with('localization')->get());
     }
 
     public function securityAndSocialStore(Request $request)

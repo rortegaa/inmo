@@ -96,7 +96,7 @@
                     });
                     infowincontent.appendChild(deletebutton);           
                     
-                    var bermudaTriangle = new google.maps.Polygon({
+                    var area = new google.maps.Polygon({
                         paths: coordinates,
                         id: element.id,
                         strokeColor: setColorBorder(element.security),
@@ -107,32 +107,29 @@
                         clickable:true
                     });
         
-                    bermudaTriangle.setMap(map);  
+                    area.setMap(map);  
         
-                    bermudaTriangle.addListener('mouseover', function(event){
+                    area.addListener('mouseover', function(event){
                         this.setOptions({
                             fillColor: setColorHover(element.security)
                         });
                     });
         
-                    bermudaTriangle.addListener('mouseout', function(event){
+                    area.addListener('mouseout', function(event){
                         this.setOptions({
                             fillColor: setColor(element.security)
                         });
                     });
                 
         
-                    google.maps.event.addListener(bermudaTriangle, 'click', function (event) {                               
+                    google.maps.event.addListener(area, 'click', function (event) {                               
                         infoWindow.setPosition(event.latLng)
                         infoWindow.setContent(div); 
-                        infoWindow.open(map, bermudaTriangle);
+                        infoWindow.open(map, area);
                     });  
                     
                     
-            });
-          
-                 
-                   
+            });          
     
             }
     
@@ -170,37 +167,8 @@
                     return areas_color.high;
                 }
                 
-            }
-    
-            function markerAreaSelected(event){
-                console.log(event.id);
-    
-            }
-    
-            function showArrays(event) {
-                console.log(event);
-            
-            var vertices = this.getPath();
-    
-            var contentString = '<b>Bermuda Triangle polygon</b><br>' +
-                'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
-                '<br>'
-          
-            for (var i =0; i < vertices.getLength(); i++) {
-              var xy = vertices.getAt(i);
-              contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
-                  xy.lng();
-            }
-    
-            infoWindow.setContent(contentString);
-            infoWindow.setPosition(event.latLng);
-    
-            infoWindow.open(map); 
-          }
-    
-        
-        
-    
+            } 
+         
             function confirmation_delete(area, id){
                 Swal.fire({
                     title: 'Quieres Eliminar el area: '+area+' ?',
