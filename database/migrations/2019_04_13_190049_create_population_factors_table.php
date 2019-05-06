@@ -16,6 +16,8 @@ class CreatePopulationFactorsTable extends Migration
         Schema::create('population_factors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('population');
+            $table->string('inserted_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

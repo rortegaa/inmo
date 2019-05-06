@@ -29,8 +29,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('property', 'PropertyController');
     Route::resource('services', 'ServicesController');
     
-    route::get('security_social_area', 'AreasController@securityAndSocialIndex')->name('security_social.area');
-    route::post('security_social_area', 'AreasController@securityAndSocialStore')->name('security_social.area');
+    route::get('security_social_area', 'AreasController@securityAndSocialIndex')->name('security_social.index');
+    route::get('security_social_area/create', 'AreasController@securityAndSocialCreate')->name('security_social.create');
+    route::post('security_social_area', 'AreasController@securityAndSocialStore')->name('security_social.store');
 });
 
 

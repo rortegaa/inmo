@@ -13,11 +13,15 @@
 
 @section('content')
 
+@include('shares.errors')
+
+@include('shares.SuccessBootstrapAlert')
+
     <div id="root" class="row shadow p-3 mb-5 bg-white rounded">
             <div class="col-lg-4">
                 
                     <div class="card">
-                    <form  action="{{ route('security_social.area') }}" method="POST">
+                    <form  action="{{ route('security_social.store') }}" method="POST">
                         <div class="card-header  text-center ">
                                 Create Area
                         </div>
@@ -155,6 +159,7 @@
                     reset.onclick = () =>{
                         deleteAllShape();
                         drawingManager.setMap(map);   
+                        $('#container_hidden').empty();
                     };   
              }
     
