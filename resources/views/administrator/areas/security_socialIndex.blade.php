@@ -68,7 +68,7 @@
                                 <li><strong>Social Status:</strong> ${element.social_status}</li>
                             </ul><br>
                         <div class="d-flex justify-content-center bd-highlight">        
-                            <a href="#" class="btn btn-outline-primary">Update</a> 
+                            <a href="${url}/admin/security_social_area/edit/${element.id}" class="btn btn-outline-primary">Update</a> 
                             <form id="${element.id}" action="${url}/admin/security_social_area/delete/${element.id}" onsubmit="javascript:deleteLocalization(event)"> 
                             <button type="submit" class="btn btn-outline-danger"> Delete </button>
                             </form>
