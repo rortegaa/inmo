@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin'], function () {
     
     route::get('security_social_area', 'AreasController@securityAndSocialIndex')->name('security_social.index');
     route::get('security_social_area/create', 'AreasController@securityAndSocialCreate')->name('security_social.create');
+    route::get('security_social_area/delete/{id}', 'AreasController@securityAndSocialDelete')->name('security_social.delete');
     route::post('security_social_area', 'AreasController@securityAndSocialStore')->name('security_social.store');
 });
 

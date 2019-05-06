@@ -108,7 +108,54 @@
                         lng: 150.644
                         },
                         zoom: 8
-                    })     
+                    })   
+                    
+                    
+                var infoWindow = new google.maps.InfoWindow; 
+                
+                var data = @json($localization);
+                            
+                data.forEach((element,index) => {
+                    let coordinates = [];                   
+                    element.localization.forEach(element => {                        
+                        coordinates.push({'lat': element.latitude, 'lng': element.length});
+                       
+                    });
+                    
+                    console.log(element);
+                    let div = `
+                    <div class="card text-left">
+                    <div class="card-body">
+                        <h5 class="card-title">Area: ${element.area_name}</h5>
+                            <ul class="list-group list-group-flush ">
+                                <li><strong>Security Level:</strong> ${element.security}</li>
+                                <li><strong>Social Status:</strong> ${element.social_status}</li>
+                            </ul>
+                    </div>
+                    </div>                
+                    `;          
+                    
+                    var area = new google.maps.Polygon({
+                        paths: coordinates,
+                        id: element.id,
+                        strokeColor: '#DC026C',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 3,
+                        fillColor:  '#9B0070',
+                        fillOpacity: 0.35,
+                        clickable:true
+                    });
+        
+                    area.setMap(map);                  
+        
+                    google.maps.event.addListener(area, 'click', function (event) {                               
+                        infoWindow.setPosition(event.latLng)
+                        infoWindow.setContent(div); 
+                        infoWindow.open(map, area);
+                    });  
+                    
+                    
+                  });      
 
                     let drawingManager = new google.maps.drawing.DrawingManager({
                         drawingMode: google.maps.drawing.OverlayType.POLYGON,

@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
 
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     {{-- CDN Tables --}}
 
@@ -104,6 +104,7 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQfZXUMkqhAZPYFpgIxw09MOrkXJzL3k&libraries=drawing&callback=initMap"
     async defer>
+    
     </script>
 
 </body>

@@ -53,4 +53,13 @@ class AreasController extends Controller
 
         return redirect()->back();
     }
+
+    public function securityAndSocialDelete($id)
+    {
+        SecurityAndSocialFactorArea::find($id)->delete();
+        
+        Session::flash('success','Area deleted successfully' );
+
+        return redirect()->back();
+    }
 }

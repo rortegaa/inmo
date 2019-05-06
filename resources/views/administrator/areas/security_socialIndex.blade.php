@@ -34,10 +34,11 @@
 
 @section('scripts_footer')
 <script>
-        var map;
-        var areas_color = {'high':'#34bf56','medium':'#e8b630', 'low':'#ff3030'};
-        var areas_colorHover = {'high':'#33c475','medium':'#dca40e', 'low':'#dc2d0e'};
-        /*   var infoWindow; */
+        let url = '{{ url('') }}'; 
+        let map;
+        let areas_color = {'high':'#34bf56','medium':'#e8b630', 'low':'#ff3030'};
+        let areas_colorHover = {'high':'#33c475','medium':'#dca40e', 'low':'#dc2d0e'};
+        /*   let infoWindow; */
     
             function initMap() {
     
@@ -46,9 +47,9 @@
                     zoom: 7
                 });         
     
-                var infoWindow = new google.maps.InfoWindow; 
+                let infoWindow = new google.maps.InfoWindow; 
                 
-                var data = @json($localization);
+                let data = @json($localization);
                             
                 data.forEach((element,index) => {
                     let coordinates = [];                   
@@ -66,37 +67,17 @@
                                 <li><strong>Security Level:</strong> ${element.security}</li>
                                 <li><strong>Social Status:</strong> ${element.social_status}</li>
                             </ul><br>
-                        <a href="#" class="btn btn-outline-primary">Update</a>   <a href="#" class="btn btn-outline-danger">Delete</a>
-                    </div>
+                        <div class="d-flex justify-content-center bd-highlight">        
+                            <a href="#" class="btn btn-outline-primary">Update</a> 
+                            <form id="${element.id}" action="${url}/admin/security_social_area/delete/${element.id}" onsubmit="javascript:deleteLocalization(event)"> 
+                            <button type="submit" class="btn btn-outline-danger"> Delete </button>
+                            </form>
+                        </div>
+                     </div>
                     </div>                
-                    `;
-
-                    var infowincontent = document.createElement('div');
-                    var strong = document.createElement('strong');
-                    strong.textContent = 'Area';
-                    infowincontent.appendChild(strong);
-                    infowincontent.appendChild(document.createElement('br'));
-                    var area_name = document.createElement('p');
-                    area_name.textContent = element.area_name; 
-                    infowincontent.appendChild(area_name);
-                    var updatebutton = document.createElement('a');
-                    updatebutton.textContent = 'Actualizar';
-                    updatebutton.setAttribute('class','btn btn-sm btn-primary');
-                    updatebutton.setAttribute('style','color: white');
-                    infowincontent.appendChild(updatebutton);
-                    updatebutton.addEventListener('click', function(){
-                    location.href = '{{ url('') }}/'+element.id+'/edit';
-                    });
-                    var deletebutton = document.createElement('a');
-                    deletebutton.textContent = 'Eliminar';
-                    deletebutton.setAttribute('class','btn btn-sm btn-danger');
-                    deletebutton.setAttribute('style','color: white');
-                    deletebutton.addEventListener('click', function(){
-                        confirmation_delete(element.area_name, element.id);
-                    });
-                    infowincontent.appendChild(deletebutton);           
+                    `;        
                     
-                    var area = new google.maps.Polygon({
+                    let area = new google.maps.Polygon({
                         paths: coordinates,
                         id: element.id,
                         strokeColor: setColorBorder(element.security),
@@ -168,54 +149,25 @@
                 }
                 
             } 
-         
-            function confirmation_delete(area, id){
+
+            function deleteLocalization(event)
+            {
+                event.preventDefault();
+
+                let form = event.target.id; 
                 Swal.fire({
-                    title: 'Quieres Eliminar el area: '+area+' ?',
-                    text: "Una vez eliminado, no podra ser recuperado!",
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Borrar!'
+                    confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                     if (result.value) {
-                        delete_area(id);
+                        document.getElementById(form).submit();
                     }
-                })
-            }
-    
-            function delete_area(area){
-                console.log('entro al delete');
-                console.log(area);
-                var route = '{{ url('areas') }}/'+area;
-                
-                console.log(route);
-                 try {       
-                    $.ajax({
-                        headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: 'DELETE',
-                    url: '{{ url('areas') }}/'+area,
-                    data: { id: area },  
-                    }).done(function(item){
-                      if (item.data == true) {
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Registro eliminado correctamente',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        initMap();
-                      };
-                    }).fail(function(data) {
-                       console.log(data.responseJSON);
-                    });
-    
-                }catch (error) {
-                    console.log(error);
-                } 
+                });
             }
     
     </script>
