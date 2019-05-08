@@ -12,6 +12,7 @@ use App\PropertyType;
 use App\State;
 use App\PropertyPhoto;
 use App\PropertyLocalization;
+use App\GeneralService;
 
 
 
@@ -38,7 +39,8 @@ class PropertyController extends Controller
         return view('administrator.PropertyView.create')->with('propertyLegalSatuses',PropertyLegalStatus::All())
                                                     ->with('propertySatuses',PropertyStatus::All())
                                                     ->with('propertyTypes',PropertyType::All())
-                                                    ->with('states',State::All());
+                                                    ->with('states',State::All())
+                                                    ->with('services',GeneralService::All());
     }
 
     /**
@@ -67,8 +69,11 @@ class PropertyController extends Controller
             'address' => 'required',
             'latitude' => 'required',
             'length' => 'required',
+            'services' => 'required'
         ]);
 
+        dd($attributes['services']);
+        
         $propertyMainlAttributes =  [ 
         'property_type_id' => $attributes['property_type_id'], 
         'property_status_id' => $attributes['property_status_id'], 
@@ -79,7 +84,7 @@ class PropertyController extends Controller
         ];
 
         $Property = Property::create($propertyMainlAttributes);
-
+        
         $propertyInformationAttributes =  [ 
         'property_id' => $Property->id,
         'bedrooms' => $attributes['bedrooms'], 
