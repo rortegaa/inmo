@@ -7,7 +7,7 @@
     <form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}
         
-    <div class="bs-stepper">
+    <div class="bs-stepper shadow p-3 mb-5 bg-white rounded">
             <div class="bs-stepper-header" role="tablist">
               <!-- your steps here -->
               <div class="step" data-target="#general-part">
@@ -49,35 +49,35 @@
               <!-- your steps content here -->
               <div id="general-part" class="content" role="tabpanel" aria-labelledby="general-part-trigger">
                 <!--Property Gral -->
-                <div class="row my-2">
-                    <div class="col-3 from-group">
+                <div class="row">
+                    <div class="col-md-6 from-group">
                         <label for="property_type_id">House Type:</label>
                         <select class="form-control" id="property_type_id" name="property_type_id">
                             <option value="">Seleccione opcion</option>
-                            @foreach ($propertyTypes as $propertyType)
-                                <option value="{{$propertyType->id}}">{{$propertyType->property_type}}</option>
+                            @foreach ($types as $type)
+                                <option value="{{$type->id}}">{{$type->property_type}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-3 from-group">
+                    <div class="col-md-6 from-group ">
                         <label for="property_status_id">House Status:</label>
                         <select class="form-control" id="property_status_id" name="property_status_id">
                             <option value="">Seleccione opcion</option>
-                            @foreach ($propertySatuses as $propertyStatus)
-                                <option value="{{$propertyStatus->id}}">{{$propertyStatus->property_status}}</option>
+                            @foreach ($satuses as $status)
+                                <option value="{{$status->id}}">{{$status->property_status}}</option>
                              @endforeach
-                        </select>
+                        </select> 
                     </div>
-                    <div class="col-3 from-group">
+                    <div class="col-md-6 from-group">
                         <label for="property_legal_status_id">House Legal Status:</label>
                         <select class="form-control" id="property_legal_status_id" name="property_legal_status_id">
                         <option value="">Seleccione opcion</option>
-                        @foreach ($propertyLegalSatuses as $propertyLegalSatus)
-                            <option value="{{$propertyLegalSatus->id}}">{{$propertyLegalSatus->property_legal_status}}</option>
+                        @foreach ($legalSatuses as $legalSatus)
+                            <option value="{{$legalSatus->id}}">{{$legalSatus->property_legal_status}}</option>
                         @endforeach
                         </select>
                     </div>
-                    <div class="col-3 from-group">
+                    <div class="col-md-6 from-group">
                         <label for="country">State:</label>
                         <select class="form-control" id="state_id" name="state_id">
                         <option value="">Seleccione opcion</option>
@@ -96,37 +96,37 @@
               <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                 <!--Information Property -->
                 <div class="row my-2">
-                    <div class="col-3 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="bedrooms">Rooms:</label>
                         <input name="bedrooms" type="number" class="form-control" id="bedrooms ">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="bathrooms">Bathrooms:</label>
                         <input name="bathrooms" type="number" class="form-control" id="bathrooms">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="parking_lots">Parking Spots:</label>
                         <input name="parking_lots" type="text" class="form-control" id="parking_lots">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="antiquity">House antiquity:</label>
                         <input name="antiquity" type="number" class="form-control" id="antiquity">
                     </div>
                 </div>
-                <div class="row my-2">
-                    <div class="col-3 form-group">
+                <div class="row">
+                    <div class="col-md-3 form-group">
                         <label for="price">Price:</label>
                         <input name="price" type="number" class="form-control" id="price">
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="maintenance">Reparation Cost:</label>
                         <input name="maintenance" type="number" class="form-control" id="maintenance" min="0" step=0.01>
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="area">House Construction m2:</label>
                         <input name="area" type="number" class="form-control" id="area" min="0" step=0.01>
                     </div>
-                    <div class="col-3 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="total_area_lot">Terrain:</label>
                         <input name="total_area_lot" type="number" class="form-control" id="total_area_lot" min="0" step=0.01>
                     </div>
@@ -176,7 +176,7 @@
                 <!--property_services -->
                 <div class="row">
                     @foreach ($services as $service)
-                    <div class="col-1">
+                    <div class="col">
                         <label class="font-weight-bold"><input type="checkbox" name="services[]" class="mx-1" value="{{$service->id}}"/>{{$service->service}}</span>
                     </div>
                     @endforeach
@@ -199,10 +199,14 @@
                     </div>
                 </div>
                 <div class="row justify-content-end my-2">
-                        <div class="from-group mx-3">
-                            <input type="submit" class="btn btn btn-primary" value="Guardar">
-                        </div>
+                    <div class="from-group col-auto mr-auto">
+                        <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
                     </div>
+                    <div class="from-group col-auto">
+                        <input class="btn btn btn-primary" type="submit" style="color:white" value="Guardar"/>
+                    </div>
+                </div>
+            </div>
               </div>
             </div>
     </form>

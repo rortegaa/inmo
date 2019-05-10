@@ -60,4 +60,9 @@ class Property extends Model
     {
         return $this->morphedByMany(PopulationFactor::class,'areables');
     }
+
+    public function propertyServices()
+    {
+        return $this->belongsToMany(GeneralServices::class);
+    }
 }

@@ -10,11 +10,11 @@
                 <label for="property_type_id">Type:</label>
                 <select class="form-control" id="property_type_id" name="property_type_id">
                     <option value="">Seleccione opcion</option>
-                    @foreach ($propertyTypes as $propertyType)
-                    @if ($propertyType->id == $property->property_type_id)
-                    <option selected value="{{$propertyType->id}}">{{$propertyType->property_type}}</option>
+                    @foreach ($types as $type)
+                    @if ($type->id == $property->property_type_id)
+                    <option selected value="{{$type->id}}">{{$type->property_type}}</option>
                     @else
-                    <option value="{{$propertyType->id}}">{{$propertyType->property_type}}</option>
+                    <option value="{{$type->id}}">{{$type->property_type}}</option>
                     @endif
                     @endforeach
                 </select>
@@ -23,11 +23,11 @@
                 <label for="property_status_id">House Status:</label>
                 <select class="form-control" id="property_status_id" name="property_status_id">
                     <option value="">Seleccione opcion</option>
-                    @foreach ($propertySatuses as $propertyStatus)
-                    @if ($propertyStatus->id == $property->property_status_id)
-                    <option selected value="{{$propertyStatus->id}}">{{$propertyStatus->property_status}}</option>
+                    @foreach ($satuses as $status)
+                    @if ($status->id == $property->property_status_id)
+                    <option selected value="{{$status->id}}">{{$status->property_status}}</option>
                     @else
-                    <option value="{{$propertyStatus->id}}">{{$propertyStatus->property_status}}</option>
+                    <option value="{{$status->id}}">{{$status->property_status}}</option>
                     @endif
                     @endforeach
                 </select>
@@ -36,11 +36,11 @@
                 <label for="property_legal_status_id">House Legal Status:</label>
                 <select class="form-control" id="property_legal_status_id" name="property_legal_status_id">
                 <option value="">Seleccione opcion</option>
-                @foreach ($propertyLegalSatuses as $propertyLegalSatus)
-                @if ($propertyLegalSatus->id == $property->property_legal_status_id )
-                <option selected value="{{$propertyLegalSatus->id}}">{{$propertyLegalSatus->property_legal_status}}</option>
+                @foreach ($legalSatuses as $legalSatus)
+                @if ($legalSatus->id == $property->property_legal_status_id )
+                <option selected value="{{$legalSatus->id}}">{{$legalSatus->property_legal_status}}</option>
                 @else
-                <option value="{{$propertyLegalSatus->id}}">{{$propertyLegalSatus->property_legal_status}}</option>
+                <option value="{{$legalSatus->id}}">{{$legalSatus->property_legal_status}}</option>
                 @endif
                 @endforeach
                 </select>
