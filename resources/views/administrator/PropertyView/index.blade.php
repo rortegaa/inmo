@@ -51,7 +51,7 @@
                         <i class="fas fa-dollar-sign"></i> <label>${parseInt((""+value.property_information.price).substring(0,3))}</label>
                         <i class="fas fa-vector-square"></i> <label>${parseInt((""+value.property_information.area).substring(0,3))}</label>
                         <i class="fas fa-bed"></i> <label>${value.property_information.bedrooms}</label>
-                        </div>
+                        </div>   
                       </div>
                       </br>
                       <div class="row">

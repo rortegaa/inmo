@@ -52,7 +52,7 @@
                 <div id="general-part" class="content" role="tabpanel" aria-labelledby="general-part-trigger">
                     <!--Property Gral -->
                     <div class="row my-2">
-                        <div class="col-3 from-group">
+                        <div class="col-md-6  from-group">
                             <label for="property_type_id">Type:</label>
                             <select class="form-control" id="property_type_id" name="property_type_id">
                                 <option value="">Seleccione opcion</option>
@@ -65,7 +65,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-3 from-group">
+                        <div class="col-md-6  from-group">
                             <label for="property_status_id">House Status:</label>
                             <select class="form-control" id="property_status_id" name="property_status_id">
                                 <option value="">Seleccione opcion</option>
@@ -78,7 +78,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-3 from-group">
+                        <div class="col-md-6  from-group">
                             <label for="property_legal_status_id">House Legal Status:</label>
                             <select class="form-control" id="property_legal_status_id" name="property_legal_status_id">
                             <option value="">Seleccione opcion</option>
@@ -91,7 +91,7 @@
                             @endforeach
                             </select>
                         </div>
-                        <div class="col-3 from-group">
+                        <div class="col-md-6 from-group">
                             <label for="country">State:</label>
                             <select class="form-control" id="state_id" name="state_id">
                             <option value="">Seleccione opcion</option>
@@ -114,37 +114,37 @@
                 <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                     <!--Information Property -->
                     <div class="row my-2">
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="bedrooms">Rooms:</label>
                             <input name="bedrooms" type="number" class="form-control" id="bedrooms" value="{{$property->propertyInformation->bedrooms}}">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="bathrooms">Bathrooms:</label>
                         <input name="bathrooms" type="number" class="form-control" id="bathrooms" value="{{$property->propertyInformation->bathrooms}}">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="parking_lots">Parking Spots:</label>
-                            <input name="parking_lots" type="text" class="form-control" id="parking_lots" value="{{$property->propertyInformation->parking_lots}}">
+                            <input name="parking_lots" type="number" class="form-control" id="parking_lots" value="{{$property->propertyInformation->parking_lots}}">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="antiquity">House antiquity:</label>
                             <input name="antiquity" type="number" class="form-control" id="antiquity" value="{{$property->propertyInformation->antiquity}}">
                         </div>
                     </div>
                     <div class="row my-2">
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="price">Price:</label>
                             <input name="price" type="number" class="form-control" id="price" value="{{$property->propertyInformation->price}}">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="maintenance">Reparation Cost:</label>
                             <input name="maintenance" type="number" class="form-control" id="maintenance" min="0" step=0.01 value="{{$property->propertyInformation->maintenance}}">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="area">House Construction m2:</label>
                             <input name="area" type="number" class="form-control" id="area" min="0" step=0.01 value="{{$property->propertyInformation->area}}">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-md-3 form-group">
                             <label for="total_area_lot">Terrain:</label>
                             <input name="total_area_lot" type="number" class="form-control" id="total_area_lot" min="0" step=0.01 value="{{$property->propertyInformation->total_area_lot}}">
                         </div>
@@ -153,8 +153,9 @@
                         <div class="col-12 form-group">
                             <label for="sale_message">Sale Message:</label>
                             <textarea class="form-control" rows="4" cols="50" name="sale_message" id="sale_message">{{$property->propertyInformation->sale_message}}</textarea>
+                        </div>
                     </div>
-                    <div class="row my-2">
+                    <div class="row justify-content-end my-2">
                         <div class="from-group col-auto mr-auto">
                             <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
                         </div>
@@ -188,14 +189,20 @@
                     <input type="text" name="length" id="Lng" style="display:none" value="{{$property->propertyLocalization->length}}">
                 </div>
                 <div id="services-part" class="content" role="tabpanel" aria-labelledby="services-part-trigger">
-                <!--property_services -->
+                    <div class="row">
+                        @foreach ($services as $service)
+                            <div class="col">
+                                <label class="font-weight-bold"><input type="checkbox" name="services[]" class="mx-1"
+                                    value="{{$service->id}}" @if($property->propertyServices->contains($service->id)) checked=checked @endif/>{{$service->service}}</span>
+                             </div>
+                        @endforeach
+                    </div>
                     <div class="row justify-content-end my-2">
-                            <div class="from-group col-auto mr-auto">
-                                <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
-                            </div>
-                            <div class="from-group col-auto">
-                                <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
-                            </div>
+                        <div class="from-group col-auto mr-auto">
+                            <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
+                        </div>
+                        <div class="from-group col-auto">
+                            <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
                         </div>
                     </div>
                 </div>

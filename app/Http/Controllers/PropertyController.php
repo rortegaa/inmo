@@ -138,16 +138,14 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        $property = Property::where('id', $id)->with(['propertyInformation','propertyLocalization'])->first();
-        //dd($property);
-        //->with('PropertyLocalization')->first();
+        $property = Property::where('id', $id)->with(['propertyInformation','propertyLocalization','propertyServices'])->first();
         return view('administrator.PropertyView.edit')->with('legalSatuses', PropertyLegalStatus::All())
                                                       ->with('satuses', PropertyStatus::All())
                                                       ->with('types', PropertyType::All())
                                                       ->with('states', State::All())
+                                                      ->with('services', GeneralService::All())
                                                       ->with('property', $property);
     }
-
     /**
      * Update the specified resource in storage.
      *
