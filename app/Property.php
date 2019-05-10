@@ -63,6 +63,6 @@ class Property extends Model
 
     public function propertyServices()
     {
-        return $this->belongsToMany(GeneralServices::class);
+        return $this->belongsToMany(GeneralService::class);
     }
 }

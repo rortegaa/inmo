@@ -1,53 +1,58 @@
-@extends('layouts.administrator.app') 
+@extends('layouts.administrator.app')
 @section('content')
-    @include('shares.errors')
-    @include('shares.SuccessBootstrapAlert')
+@include('shares.errors')
+@include('shares.SuccessBootstrapAlert')
 
 
-    <form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data">
-        {{ csrf_field() }}
-        
+<form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data">
+    {{ csrf_field() }}
+
     <div class="bs-stepper shadow p-3 mb-5 bg-white rounded">
-            <div class="bs-stepper-header" role="tablist">
-              <!-- your steps here -->
-              <div class="step" data-target="#general-part">
-                <button type="button" class="step-trigger" role="tab" aria-controls="general-part" id="general-part-trigger">
-                  <span class="bs-stepper-circle">1</span>
-                  <span class="bs-stepper-label">General</span>
+        <div class="bs-stepper-header" role="tablist">
+            <!-- your steps here -->
+            <div class="step" data-target="#general-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="general-part"
+                    id="general-part-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">General</span>
                 </button>
-              </div>
-              <div class="line"></div>
-              <div class="step" data-target="#information-part">
-                <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-                  <span class="bs-stepper-circle">2</span>
-                  <span class="bs-stepper-label">Information</span>
-                </button>
-              </div>
-              <div class="line"></div>
-              <div class="step" data-target="#localization-part">
-                <button type="button" class="step-trigger" role="tab" aria-controls="localization-part" id="localization-part-trigger">
-                  <span class="bs-stepper-circle">3</span>
-                  <span class="bs-stepper-label">Localization</span>
-                </button>
-              </div>
-              <div class="line"></div>
-              <div class="step" data-target="#services-part">
-                <button type="button" class="step-trigger" role="tab" aria-controls="services-part" id="services-part-trigger">
-                  <span class="bs-stepper-circle">4</span>
-                  <span class="bs-stepper-label">Services</span>
-                </button>
-              </div>
-              <div class="line"></div>
-              <div class="step" data-target="#photos-part">
-                <button type="button" class="step-trigger" role="tab" aria-controls="photos-part" id="photos-part-trigger">
-                  <span class="bs-stepper-circle">5</span>
-                  <span class="bs-stepper-label">Photos</span>
-                </button>
-              </div>
             </div>
-            <div class="bs-stepper-content">
-              <!-- your steps content here -->
-              <div id="general-part" class="content" role="tabpanel" aria-labelledby="general-part-trigger">
+            <div class="line"></div>
+            <div class="step" data-target="#information-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="information-part"
+                    id="information-part-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label">Information</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#localization-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="localization-part"
+                    id="localization-part-trigger">
+                    <span class="bs-stepper-circle">3</span>
+                    <span class="bs-stepper-label">Localization</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#services-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="services-part"
+                    id="services-part-trigger">
+                    <span class="bs-stepper-circle">4</span>
+                    <span class="bs-stepper-label">Services</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#photos-part">
+                <button type="button" class="step-trigger" role="tab" aria-controls="photos-part"
+                    id="photos-part-trigger">
+                    <span class="bs-stepper-circle">5</span>
+                    <span class="bs-stepper-label">Photos</span>
+                </button>
+            </div>
+        </div>
+        <div class="bs-stepper-content">
+            <!-- your steps content here -->
+            <div id="general-part" class="content" role="tabpanel" aria-labelledby="general-part-trigger">
                 <!--Property Gral -->
                 <div class="row">
                     <div class="col-md-6 from-group">
@@ -55,7 +60,7 @@
                         <select class="form-control" id="property_type_id" name="property_type_id">
                             <option value="">Seleccione opcion</option>
                             @foreach ($types as $type)
-                                <option value="{{$type->id}}">{{$type->property_type}}</option>
+                            <option value="{{$type->id}}">{{$type->property_type}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -64,26 +69,26 @@
                         <select class="form-control" id="property_status_id" name="property_status_id">
                             <option value="">Seleccione opcion</option>
                             @foreach ($satuses as $status)
-                                <option value="{{$status->id}}">{{$status->property_status}}</option>
-                             @endforeach
-                        </select> 
+                            <option value="{{$status->id}}">{{$status->property_status}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6 from-group">
                         <label for="property_legal_status_id">House Legal Status:</label>
                         <select class="form-control" id="property_legal_status_id" name="property_legal_status_id">
-                        <option value="">Seleccione opcion</option>
-                        @foreach ($legalSatuses as $legalSatus)
+                            <option value="">Seleccione opcion</option>
+                            @foreach ($legalSatuses as $legalSatus)
                             <option value="{{$legalSatus->id}}">{{$legalSatus->property_legal_status}}</option>
-                        @endforeach
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-6 from-group">
                         <label for="country">State:</label>
                         <select class="form-control" id="state_id" name="state_id">
-                        <option value="">Seleccione opcion</option>
-                        @foreach ($states as $state)
+                            <option value="">Seleccione opcion</option>
+                            @foreach ($states as $state)
                             <option value="{{$state->id}}">{{$state->state}}</option>
-                        @endforeach
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -92,8 +97,8 @@
                         <a class="btn btn btn-success" style="color:white" onclick="nextWey()">Siguiente</a>
                     </div>
                 </div>
-              </div>
-              <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+            </div>
+            <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                 <!--Information Property -->
                 <div class="row my-2">
                     <div class="col-md-3 form-group">
@@ -128,25 +133,27 @@
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="total_area_lot">Terrain:</label>
-                        <input name="total_area_lot" type="number" class="form-control" id="total_area_lot" min="0" step=0.01>
+                        <input name="total_area_lot" type="number" class="form-control" id="total_area_lot" min="0"
+                            step=0.01>
                     </div>
                 </div>
                 <div class="row my-2">
                     <div class="col-12 form-group">
                         <label for="sale_message">Sale Message:</label>
-                        <textarea class="form-control" rows="4" cols="50" name="sale_message" id="sale_message"></textarea>
+                        <textarea class="form-control" rows="4" cols="50" name="sale_message"
+                            id="sale_message"></textarea>
                     </div>
                 </div>
                 <div class="row justify-content-end my-2">
-                        <div class="from-group col-auto mr-auto">
-                            <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
-                        </div>
-                        <div class="from-group col-auto">
-                            <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
-                        </div>
+                    <div class="from-group col-auto mr-auto">
+                        <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
                     </div>
-              </div>
-              <div id="localization-part" class="content" role="tabpanel" aria-labelledby="localization-part-trigger">
+                    <div class="from-group col-auto">
+                        <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+            <div id="localization-part" class="content" role="tabpanel" aria-labelledby="localization-part-trigger">
                 <!-- Property Localization -->
                 <div class="row my-2">
                     <div class="col-12 ">
@@ -170,46 +177,46 @@
 
                 <input type="text" name="latitude" id="Lat" style="display:none">
                 <input type="text" name="length" id="Lng" style="display:none">
-               </div>
-              </div>
-              <div id="services-part" class="content" role="tabpanel" aria-labelledby="services-part-trigger">
-                <!--property_services -->
-                <div class="row">
-                    @foreach ($services as $service)
-                    <div class="col">
-                        <label class="font-weight-bold"><input type="checkbox" name="services[]" class="mx-1" value="{{$service->id}}"/>{{$service->service}}</span>
-                    </div>
-                    @endforeach
+            </div>
+        </div>
+        <div id="services-part" class="content" role="tabpanel" aria-labelledby="services-part-trigger">
+            <!--property_services -->
+            <div class="row">
+                @foreach ($services as $service)
+                <div class="col">
+                    <label class="font-weight-bold"><input type="checkbox" name="services[]" class="mx-1"
+                            value="{{$service->id}}" />{{$service->service}}</span>
                 </div>
-                <div class="row justify-content-end my-2">
-                        <div class="from-group col-auto mr-auto">
-                            <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
-                        </div>
-                        <div class="from-group col-auto">
-                            <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
-                        </div>
-                    </div>
+                @endforeach
+            </div>
+            <div class="row justify-content-end my-2">
+                <div class="from-group col-auto mr-auto">
+                    <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
                 </div>
-              <div id="photos-part" class="content" role="tabpanel" aria-labelledby="photos-part-trigger">
-                <!--Property_photos -->
-                <div class="row my-2">
-                    <div class="col-12 form-group">
-                        <label for="images">House Images:</label>
-                        <input type="file" class="form-control-file" id="images" name="images[]" multiple>
-                    </div>
-                </div>
-                <div class="row justify-content-end my-2">
-                    <div class="from-group col-auto mr-auto">
-                        <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
-                    </div>
-                    <div class="from-group col-auto">
-                        <input class="btn btn btn-primary" type="submit" style="color:white" value="Guardar"/>
-                    </div>
+                <div class="from-group col-auto">
+                    <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
                 </div>
             </div>
-              </div>
+        </div>
+        <div id="photos-part" class="content" role="tabpanel" aria-labelledby="photos-part-trigger">
+            <!--Property_photos -->
+            <div class="row my-2">
+                <div class="col-12 form-group">
+                    <label for="images">House Images:</label>
+                    <input type="file" class="form-control-file" id="images" name="images[]" multiple>
+                </div>
             </div>
-    </form>
+            <div class="row justify-content-end my-2">
+                <div class="from-group col-auto mr-auto">
+                    <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
+                </div>
+                <div class="from-group col-auto">
+                    <input class="btn btn btn-primary" type="submit" style="color:white" value="Guardar" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 @endsection
 

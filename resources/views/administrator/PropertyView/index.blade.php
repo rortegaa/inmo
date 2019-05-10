@@ -17,6 +17,10 @@
     @endsection
 
 
+<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>   
 <script>
   var map;
     var timeout;
@@ -35,14 +39,13 @@
                 var cords = {lat: value.property_localization.latitude, lng: value.property_localization.length };
                 //creacion del marker por cordenada
                 var marcador = new google.maps.Marker({position: cords ,map: map});
-                var test = value.property_photos[0].url
-                console.log(test)
+                var img = value.property_photos[0].url
                 //creacion de la informacion  
                 var informacion = new google.maps.InfoWindow({
                   content: 
                   `
                   <div class="">
-                    <img src="${test}" class="card-img-top" style="width:100px;heigth:125px;">
+                    <img src="${img}" class="card-img-top" style="width:100px;heigth:125px;">
                     <div class="">
                     </br>
                         <i class="fas fa-dollar-sign"></i> <label>${parseInt((""+value.property_information.price).substring(0,3))}</label>
