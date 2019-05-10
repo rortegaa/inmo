@@ -2,7 +2,7 @@
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
-    <form method="POST" action="{{ route('property.update' ,['id'=>$property->id]) }})" role="form" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('property.update',['id'=>$property->id]) }}" role="form" enctype="multipart/form-data">
         {{ csrf_field() }} @method('PATCH')
         <div class="bs-stepper shadow p-3 mb-5 bg-white rounded">
             <div class="bs-stepper-header" role="tablist">
@@ -107,7 +107,7 @@
                     </div>
                     <div class="row justify-content-end my-2">
                         <div class="from-group mx-3">
-                            <a class="btn btn btn-success" style="color:white" onclick="nextWey()">Siguiente</a>
+                            <a class="btn btn btn-success" style="color:white" onclick="next()">Siguiente</a>
                         </div>
                     </div>
                 </div>
@@ -157,10 +157,10 @@
                     </div>
                     <div class="row justify-content-end my-2">
                         <div class="from-group col-auto mr-auto">
-                            <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
+                            <a class="btn btn btn-danger" onclick="previus()" style="color:white">Atras</a>
                         </div>
                         <div class="from-group col-auto">
-                            <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
+                            <a class="btn btn btn-success" onclick="next()" style="color:white">Siguiente</a>
                         </div>
                     </div>
                 </div>
@@ -179,10 +179,10 @@
                     </div>
                     <div class="row justify-content-end my-2">
                         <div class="from-group col-auto mr-auto">
-                            <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
+                            <a class="btn btn btn-danger" onclick="previus()" style="color:white">Atras</a>
                         </div>
                         <div class="from-group col-auto">
-                            <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
+                            <a class="btn btn btn-success" onclick="next()" style="color:white">Siguiente</a>
                         </div>
                     </div>
                     <input type="text" name="latitude" id="Lat" style="display:none" value="{{$property->propertyLocalization->latitude}}" > 
@@ -199,10 +199,10 @@
                     </div>
                     <div class="row justify-content-end my-2">
                         <div class="from-group col-auto mr-auto">
-                            <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
+                            <a class="btn btn btn-danger" onclick="previus()" style="color:white">Atras</a>
                         </div>
                         <div class="from-group col-auto">
-                            <a class="btn btn btn-success" onclick="nextWey()" style="color:white">Siguiente</a>
+                            <a class="btn btn btn-success" onclick="next()" style="color:white">Siguiente</a>
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@
                     </div>
                     <div class="row justify-content-end my-2">
                         <div class="from-group col-auto mr-auto">
-                            <a class="btn btn btn-danger" onclick="previusWey()" style="color:white">Atras</a>
+                            <a class="btn btn btn-danger" onclick="previus()" style="color:white">Atras</a>
                         </div>
                         <div class="from-group col-auto">
                             <input class="btn btn btn-primary" type="submit" style="color:white" value="Guardar" />
@@ -235,10 +235,10 @@
         stepper = new Stepper(document.querySelector('.bs-stepper'))
     })
 
-    function nextWey(){
+    function next(){
         stepper.next()
     }
-    function previusWey(){
+    function previus(){
         stepper.previous()
     }
 
