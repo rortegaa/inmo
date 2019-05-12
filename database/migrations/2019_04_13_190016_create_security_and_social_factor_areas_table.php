@@ -17,7 +17,9 @@ class CreateSecurityAndSocialFactorAreasTable extends Migration
             $table->increments('id');
             $table->string('area_name');
             $table->smallInteger('security');
-            $table->smallInteger('social_factor');
+            $table->string('social_status');
+            $table->string('inserted_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

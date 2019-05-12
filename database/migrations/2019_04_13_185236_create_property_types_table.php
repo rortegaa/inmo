@@ -16,6 +16,8 @@ class CreatePropertyTypesTable extends Migration
         Schema::create('property_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('property_type');
+            $table->string('inserted_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

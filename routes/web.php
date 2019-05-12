@@ -23,6 +23,18 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('states', 'StatesController');
+    Route::resource('property_status', 'PropertyStatusController');
+    Route::resource('property_types', 'PropertyTypesController');
+    Route::resource('legal_status', 'PropertyLegalStatusController');
+    Route::resource('property', 'PropertyController');
+    Route::resource('services', 'ServicesController');
+    
+    route::get('security_social_area', 'AreasController@securityAndSocialIndex')->name('security_social.index');
+    route::get('security_social_area/create', 'AreasController@securityAndSocialCreate')->name('security_social.create');
+    route::get('security_social_area/edit/{id}', 'AreasController@securityAndSocialEdit')->name('security_social.edit');
+    route::post('security_social_area/edit/{id}', 'AreasController@securityAndSocialUpdate')->name('security_social.update');
+    route::get('security_social_area/delete/{id}', 'AreasController@securityAndSocialDelete')->name('security_social.delete');
+    route::post('security_social_area', 'AreasController@securityAndSocialStore')->name('security_social.store');
 });
 
 

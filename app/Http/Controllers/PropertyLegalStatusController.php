@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\State;
+use App\PropertyLegalStatus;
 use Session;
 
-class StatesController extends Controller
+class PropertyLegalStatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class StatesController extends Controller
      */
     public function index()
     {
-        return view('administrator.StatesView.index')->with('states',State::orderBy('id','desc')->get());
+        return view('administrator.PropertyLegalStatusView.index')->with('legalStatus', PropertyLegalStatus::all());      
     }
 
     /**
@@ -25,7 +25,7 @@ class StatesController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -36,13 +36,15 @@ class StatesController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
-            'state' => 'required'
+        $attribute = request()->validate([
+            'property_legal_status'=>'required'
         ]);
 
-        $attributes['inserted_by'] = 'David Ortega';
-        State::create($attributes);
-        Session::flash('success',"State: $attributes[state] added successfully");
+        $attribute['inserted_by'] = 'David Ortega';
+
+        PropertyLegalStatus::create($attribute);
+
+        Session::flash('success',"Legal status: $attribute[property_legal_status] added successfuly!");
 
         return redirect()->back();
     }
@@ -76,15 +78,17 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($state)
+    public function update($status)
     {
-        $attributes = request()->validate([
-            'state'=>'required'
+        $attribute = request()->validate([
+            'property_legal_status'=>'required'
         ]);
 
-        $attributes['updated_by'] = 'David Ortega';        
-        State::where('state','=', $state)->update($attributes);        
-        Session::flash('success',"State: $attributes[state] updated successfully");
+        $attribute['updated_by'] = 'David Ortega';
+
+        PropertyLegalStatus::where('property_legal_status','=',$status)->update($attribute);
+
+        Session::flash('success',"Legal status: $attribute[property_legal_status] updated successfuly!");
 
         return redirect()->back();
     }
@@ -95,11 +99,13 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($state)
+    public function destroy($legal_status)
     {
-        State::where('state','=',$state)->delete();
-        Session::flash('success',"State: $state deleted successfully");
+        PropertyLegalStatus::where('property_legal_status','=', $legal_status)->delete();
         
+        Session::flash('success', "Legal status: $legal_status deleted successfully");
+
         return redirect()->back();
+
     }
 }
