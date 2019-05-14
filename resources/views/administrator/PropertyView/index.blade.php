@@ -2,19 +2,44 @@
     @section('content')
         @include('shares.errors')
         @include('shares.SuccessBootstrapAlert')
-        <div class="row">
-            <div class="col-md-9">
-              <div class="card w-100">
-                <div class="card-body">
-                  <h5 class="card-title">Inmobiliarios</h5>
-                <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Add</a>
-                  <div id="map" style="height:500px;">
-                    </div>
-                </div>
-              </div>
+        <h5>Inmobiliarios</h5>
+        <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Add</a>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Map</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Table</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div id="map" style="height:500px;"></div>
             </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              @foreach ($property as $item )
+              <div class="container py-3">
+                  <div class="card">
+                    <div class="row ">
+                      <div class="col-md-4">
+                          <img src="{{$item->propertyPhotos[0]->url}}" class="w-100">
+                        </div>
+                        <div class="col-md-8 px-3">
+                          <div class="card-block px-3">
+                            <h4 class="card-title">Tipo/Direccion</h4>
+                            <p class="card-text">Precio, Cuartos, Terreno</p>
+                            <p class="card-text">Estado</p>
+                            <a href="#" class="btn btn-primary">Editar/Borrar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+              
           </div>
-    @endsection
+          @endsection
 
 
 <script

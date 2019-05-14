@@ -24,6 +24,7 @@ class PropertyController extends Controller
     public function index()
     {
         $property = Property::with(['propertyInformation','propertyLocalization','propertyPhotos'])->get();
+        //dd($property);
         return View('administrator.PropertyView.index')->with('property', $property);
     }
 
@@ -188,9 +189,6 @@ class PropertyController extends Controller
         $Property->update($propertyMainlAttributes);
         $Property->propertyServices()->sync($attributes['services']);
 
-
-        //$Property->propertyServices()->sync($attributes['services']);
-    
         $propertyInformationAttributes =  [
             'property_id' => $id,
             'bedrooms' => $attributes['bedrooms'],
@@ -230,7 +228,16 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Property = Property::find($id);
+        PropertyInformation::where('property_id' , '=', $id)->delete();
+        PropertyPhoto::where('property_id' , '=', $id)->delete();
+        foreach (glob("images/houseImagesUploads/[" . $id ."]*.*") as $file_to_delete) {
+            unlink($file_to_delete);
+        }
+        PropertyLocalization::where('property_id' , '=', $id)->delete();
+        $Property->propertyServices()->detach();
+        $Property->delete();
+        return redirect()->back();
     }
 
     public function createPropertyInformation($propertyInformationAttributes)
