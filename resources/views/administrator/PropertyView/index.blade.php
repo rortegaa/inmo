@@ -20,24 +20,23 @@
               @foreach ($property as $item )
               <div class="container py-3">
                   <div class="card">
-                    <div class="row ">
+                    <div class="row">
                       <div class="col-md-4">
                           <img src="{{$item->propertyPhotos[0]->url}}" class="w-100">
-                        </div>
-                        <div class="col-md-8 px-3">
-                          <div class="card-block px-3">
-                            <h4 class="card-title">Tipo/Direccion</h4>
-                            <p class="card-text">Precio, Cuartos, Terreno</p>
-                            <p class="card-text">Estado</p>
-                            <a href="#" class="btn btn-primary">Editar/Borrar</a>
-                          </div>
-                        </div>
                       </div>
+                        <div class="col-md-8 px-3 py-3">
+                          <div class="card-block px-3">
+                            <h4 class="card-title">{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}</h4>
+                            <p class="card-text">Price: {{$item->propertyInformation->price}}, Rooms: {{$item->propertyInformation->bedrooms}}, Terreain {{$item->propertyInformation->total_area_lot}} m2</p>
+                            <p class="card-text">Estatus: {{$item->propertyLegalStatus->property_legal_status}} </p>
+                            <a class="btn btn-sm btn-primary"  href='{{url('admin/property')}}/${value.id}/edit'>Edit</a>
+                            <input type="button" value="Delete" class="btn btn-sm btn-danger"  onclick="confirmation_delete(${value.id})">
+                        </div>
                     </div>
                   </div>
                 </div>
+              </div>
               @endforeach
-              
           </div>
           @endsection
 

@@ -23,8 +23,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $property = Property::with(['propertyInformation','propertyLocalization','propertyPhotos'])->get();
-        //dd($property);
+        $property = Property::with(['propertyInformation','propertyLocalization','propertyPhotos','propertyType','propertyLegalStatus'])->get();
         return View('administrator.PropertyView.index')->with('property', $property);
     }
 
