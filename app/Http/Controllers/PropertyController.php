@@ -9,6 +9,7 @@ use App\PropertyInformation;
 use App\PropertyLegalStatus;
 use App\PropertyStatus;
 use App\PropertyType;
+use App\SecurityAndSocialFactorArea;
 use App\State;
 use App\PropertyPhoto;
 use App\PropertyLocalization;
@@ -24,7 +25,8 @@ class PropertyController extends Controller
     public function index()
     {
         $property = Property::with(['propertyInformation','propertyLocalization','propertyPhotos','propertyType','propertyLegalStatus'])->get();
-        return View('administrator.PropertyView.index')->with('property', $property);
+        $localization = SecurityAndSocialFactorArea::with('localization')->get();
+        return View('administrator.PropertyView.index')->with('property',$property)->with('localization',$localization);
     }
 
     /**

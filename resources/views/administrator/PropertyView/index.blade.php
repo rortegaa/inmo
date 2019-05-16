@@ -49,7 +49,10 @@
   var map;
     var timeout;
     var mouseOverInfoWindow = false;
-    var property = @json($property)
+    var property = @json($property);
+    var data = @json($localization);
+    var areas_color = {'high':'#34bf56','medium':'#e8b630', 'low':'#ff3030'};
+    var areas_colorHover = {'high':'#33c475','medium':'#dca40e', 'low':'#dc2d0e'};
 
     function initMap() {
         //ingreso de cordenadas de cd juarez
@@ -59,6 +62,26 @@
                 center: cdjuarez,
                 zoom: 16
               });
+
+              data.forEach((element,index) => {
+                    var coordinates = [];                   
+                    element.localization.forEach(element => {                        
+                        coordinates.push({'lat': element.latitude, 'lng': element.length});
+                    });
+                    let area = new google.maps.Polygon({
+                        paths: coordinates,
+                        id: element.id,
+                        strokeColor: setColorBorder(element.security),
+                        strokeOpacity: 0.8,
+                        strokeWeight: 3,
+                        fillColor: setColor(element.security) ,
+                        fillOpacity: 0.35,
+                        clickable:true
+                    });
+        
+                    area.setMap(map);  
+              });
+
               $.each(property, function(key,value) {
                 var cords = {lat: value.property_localization.latitude, lng: value.property_localization.length };
                 //creacion del marker por cordenada
@@ -159,4 +182,40 @@
                 console.log(error);
             } 
         }
+        function setColorBorder(level){
+                
+                if(level <= 5 ){
+                    return areas_color.low;
+                }else if(level > 5 && level < 8){
+                    return areas_color.medium;
+                }else if(level >8){
+                    return areas_color.high;
+                }
+                
+            }
+    
+            function setColorHover(level){
+                
+                if(level <= 5 ){
+                    return areas_color.low;
+                }else if(level > 5 && level < 8){
+                    return areas_color.medium;
+                }else if(level >8){
+                    return areas_color.high;
+                }
+                
+            }
+    
+            function setColor(level){
+    
+                if(level <= 5 ){
+                    return areas_color.low;
+                }else if(level > 5 && level < 8){
+                    return areas_color.medium;
+                }else if(level >8){
+                    return areas_color.high;
+                }
+                
+            } 
+
 </script>
