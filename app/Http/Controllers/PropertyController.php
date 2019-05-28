@@ -117,7 +117,7 @@ class PropertyController extends Controller
         $this->createPropertyPhotos($PropertyPhotosAttributes);
         $this->createPropertyLocalization($PropertyLocalizationAttributes);
         Session::flash('success', "Record added successfully");
-
+    
         return redirect()->back();
     }
 
