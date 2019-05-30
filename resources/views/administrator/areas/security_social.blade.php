@@ -91,8 +91,8 @@
                     let map = new google.maps.Map(document.getElementById('map'), {
                         disableDefaultUI: true,
                         center: {
-                        lat: 31.7000,
-                        lng: -106.4410
+                        lat: -34.397,
+                        lng: 150.644
                         },
                         zoom: 8
                     })   
