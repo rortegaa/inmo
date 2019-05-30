@@ -19,5 +19,3 @@ public/vendor/telescope/favicon.ico
 public/vendor/telescope/mix-manifest.json
 composer.lock
 composer.json
-config/app.php
-composer.lock
