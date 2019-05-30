@@ -2,19 +2,43 @@
     @section('content')
         @include('shares.errors')
         @include('shares.SuccessBootstrapAlert')
-        <div class="row">
-            <div class="col-md-9">
-              <div class="card w-100">
-                <div class="card-body">
-                  <h5 class="card-title">Inmobiliarios</h5>
-                <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Add</a>
-                  <div id="map" style="height:500px;">
+        <h5>Inmobiliarios</h5>
+        <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Add</a>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mapa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Lista</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div id="map" style="height:500px;"></div>
+            </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              @foreach ($property as $item )
+              <div class="container py-3">
+                  <div class="card">
+                    <div class="row">
+                      <div class="col-md-4">
+                          <img src="{{$item->propertyPhotos[0]->url}}" class="w-100">
+                      </div>
+                        <div class="col-md-8 px-3 py-3">
+                          <div class="card-block px-3">
+                            <h4 class="card-title">{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}</h4>
+                            <p class="card-text">Price: {{$item->propertyInformation->price}}, Rooms: {{$item->propertyInformation->bedrooms}}, Terreain {{$item->propertyInformation->total_area_lot}} m2</p>
+                            <p class="card-text">Estatus: {{$item->propertyLegalStatus->property_legal_status}} </p>
+                            <a class="btn btn-sm btn-primary"  href='{{url('admin/property')}}/${value.id}/edit'>Edit</a>
+                            <input type="button" value="Delete" class="btn btn-sm btn-danger"  onclick="confirmation_delete(${value.id})">
+                        </div>
                     </div>
+                  </div>
                 </div>
               </div>
-            </div>
+              @endforeach
           </div>
-    @endsection
+          @endsection
 
 
 <script
@@ -25,7 +49,10 @@
   var map;
     var timeout;
     var mouseOverInfoWindow = false;
-    var property = @json($property)
+    var property = @json($property);
+    var data = @json($localization);
+    var areas_color = {'high':'#34bf56','medium':'#e8b630', 'low':'#ff3030'};
+    var areas_colorHover = {'high':'#33c475','medium':'#dca40e', 'low':'#dc2d0e'};
 
     function initMap() {
         //ingreso de cordenadas de cd juarez
@@ -35,6 +62,26 @@
                 center: cdjuarez,
                 zoom: 16
               });
+
+              data.forEach((element,index) => {
+                    var coordinates = [];                   
+                    element.localization.forEach(element => {                        
+                        coordinates.push({'lat': element.latitude, 'lng': element.length});
+                    });
+                    let area = new google.maps.Polygon({
+                        paths: coordinates,
+                        id: element.id,
+                        strokeColor: setColorBorder(element.security),
+                        strokeOpacity: 0.8,
+                        strokeWeight: 3,
+                        fillColor: setColor(element.security) ,
+                        fillOpacity: 0.35,
+                        clickable:true
+                    });
+        
+                    area.setMap(map);  
+              });
+
               $.each(property, function(key,value) {
                 var cords = {lat: value.property_localization.latitude, lng: value.property_localization.length };
                 //creacion del marker por cordenada
@@ -135,4 +182,40 @@
                 console.log(error);
             } 
         }
+        function setColorBorder(level){
+                
+                if(level <= 5 ){
+                    return areas_color.low;
+                }else if(level > 5 && level < 8){
+                    return areas_color.medium;
+                }else if(level >8){
+                    return areas_color.high;
+                }
+                
+            }
+    
+            function setColorHover(level){
+                
+                if(level <= 5 ){
+                    return areas_color.low;
+                }else if(level > 5 && level < 8){
+                    return areas_color.medium;
+                }else if(level >8){
+                    return areas_color.high;
+                }
+                
+            }
+    
+            function setColor(level){
+    
+                if(level <= 5 ){
+                    return areas_color.low;
+                }else if(level > 5 && level < 8){
+                    return areas_color.medium;
+                }else if(level >8){
+                    return areas_color.high;
+                }
+                
+            } 
+
 </script>
