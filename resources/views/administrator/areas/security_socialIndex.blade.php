@@ -43,7 +43,7 @@
             function initMap() {
     
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: new google.maps.LatLng(-34.397, 150.644),
+                    center: new google.maps.LatLng(31.7000, -106.4410),
                     zoom: 7
                 });         
     
@@ -55,7 +55,6 @@
                     let coordinates = [];                   
                     element.localization.forEach(element => {                        
                         coordinates.push({'lat': element.latitude, 'lng': element.length});
-                       
                     });
                     
                     console.log(element);
