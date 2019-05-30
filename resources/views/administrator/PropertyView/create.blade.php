@@ -2,7 +2,8 @@
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
-<form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data">
+<form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data" class="shadow p-3 bg-white rounded">
+    <h3>Crear</h3>
     {{ csrf_field() }}
     <!--Property Gral -->
     <div class="row">
@@ -126,17 +127,6 @@
 
 
 <script>
-    var stepper
-    document.addEventListener('DOMContentLoaded', function () {
-        stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
-
-    function next(){
-        stepper.next()
-    }
-    function previus(){
-        stepper.previous()
-    }
     var marker;
         function initMap() {
             //ingreso de cordenadas de cd juarez

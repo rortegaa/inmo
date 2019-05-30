@@ -3,7 +3,8 @@
         @include('shares.errors')
         @include('shares.SuccessBootstrapAlert')
         <h5>Inmobiliarios</h5>
-        <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Add</a>
+        <div class="shadow p-3 bg-white rounded">
+        <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Agregar</a>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mapa</a>
@@ -38,6 +39,7 @@
               </div>
               @endforeach
           </div>
+        </div>
           @endsection
 
 

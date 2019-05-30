@@ -3,7 +3,8 @@
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
 <form method="POST" action="{{ route('property.update',['id'=>$property->id]) }}" role="form"
-    enctype="multipart/form-data">
+    enctype="multipart/form-data" class="shadow p-3 bg-white rounded">
+    <h3>Editar</h3>
     {{ csrf_field() }} @method('PATCH')
     <!--Property Gral -->
     <div class="row my-2">
@@ -158,19 +159,6 @@
 <script src="https://code.jquery.com/jquery-3.4.0.js" integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
     crossorigin="anonymous"></script>
 <script>
-    var stepper
-    document.addEventListener('DOMContentLoaded', function () {
-        stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
-
-    function next(){
-        stepper.next()
-    }
-    function previus(){
-        stepper.previous()
-    }
-
-
     var marker;
         function initMap() {
             //ingreso de cordenadas de cd juarez
