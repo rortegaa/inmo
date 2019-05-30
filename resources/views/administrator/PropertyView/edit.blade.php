@@ -3,8 +3,9 @@
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
 <form method="POST" action="{{ route('property.update',['id'=>$property->id]) }}" role="form"
-    enctype="multipart/form-data">
+    enctype="multipart/form-data" class="p-3 shadow bg-white rounded">
     {{ csrf_field() }} @method('PATCH')
+    <h3>Editar</h3>
     <!--Property Gral -->
     <div class="row my-2">
         <div class="col-md-6  from-group">

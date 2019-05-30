@@ -2,8 +2,9 @@
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
-<form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data">
+<form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data" class="p-3 shadow bg-white rounded">
     {{ csrf_field() }}
+    <h3>Crear</h3>
     <!--Property Gral -->
     <div class="row">
         <div class="col-md-6 from-group">
@@ -86,6 +87,16 @@
             <textarea class="form-control" rows="4" cols="50" name="sale_message" id="sale_message" required autofocus> {{old("sale_message")}}</textarea>
         </div>
     </div>
+    <!--property_services -->
+    <h4 class="text-center">Servicios:</h4>
+    <div class="row">
+        @foreach ($services as $service)
+        <div class="col">
+            <label class="font-weight-bold"><input type="checkbox" name="services[]" class="mx-1"
+                    value="{{$service->id}}" />{{$service->service}}</span>
+        </div>
+        @endforeach
+    </div>
     <!-- Property Localization -->
     <div class="row my-2">
         <div class="col-12 ">
@@ -101,16 +112,6 @@
 
     <input type="text" name="latitude" id="Lat" style="display:none">
     <input type="text" name="length" id="Lng" style="display:none">
-    <!--property_services -->
-    <h4>Servicios:</h4>
-    <div class="row">
-        @foreach ($services as $service)
-        <div class="col">
-            <label class="font-weight-bold"><input type="checkbox" name="services[]" class="mx-1"
-                    value="{{$service->id}}" />{{$service->service}}</span>
-        </div>
-        @endforeach
-    </div>
     <!--Property_photos -->
     <div class="row my-2">
         <div class="col-6 form-group">
