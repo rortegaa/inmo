@@ -129,7 +129,9 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        //
+        $property = Property::where('id',$id)->with(['propertyInformation','propertyLocalization','propertyPhotos','propertyType','propertyLegalStatus','propertyStatus','propertyServices'])->first();
+        
+        return view('administrator.PropertyView.show')->with('property',$property);
     }
 
     /**

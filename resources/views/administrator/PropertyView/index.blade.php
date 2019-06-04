@@ -1,61 +1,64 @@
-@extends('layouts.administrator.app') 
-    @section('content')
-        @include('shares.errors')
-        @include('shares.SuccessBootstrapAlert')
-        <h5>Inmobiliarios</h5>
-        <div class="shadow p-3 bg-white rounded">
-        <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Agregar</a>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mapa</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Lista</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div id="map" style="height:500px;"></div>
+@extends('layouts.administrator.app')
+@section('content')
+@include('shares.errors')
+@include('shares.SuccessBootstrapAlert')
+<h5>Inmobiliarios</h5>
+<div class="shadow p-3 bg-white rounded">
+  <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Agregar</a>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+        aria-selected="true">Mapa</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+        aria-selected="false">Lista</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div id="map" style="height:500px;"></div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      @foreach ($property as $item )
+      <div class="container py-3">
+        <div class="card">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="{{$item->propertyPhotos[0]->url}}" class="w-100">
             </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              @foreach ($property as $item )
-              <div class="container py-3">
-                  <div class="card">
-                    <div class="row">
-                      <div class="col-md-4">
-                          <img src="{{$item->propertyPhotos[0]->url}}" class="w-100">
-                      </div>
-                        <div class="col-md-8 px-3 py-3">
-                          <div class="card-block px-3">
-                            <h4 class="card-title">{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}</h4>
-                            <p class="card-text">Price: {{$item->propertyInformation->price}}, Rooms: {{$item->propertyInformation->bedrooms}}, Terreain {{$item->propertyInformation->total_area_lot}} m2</p>
-                            <p class="card-text">Estatus: {{$item->propertyLegalStatus->property_legal_status}} </p>
-                            <a class="btn btn-sm btn-primary"  href='{{url('admin/property')}}/${value.id}/edit'>Edit</a>
-                            <input type="button" value="Delete" class="btn btn-sm btn-danger"  onclick="confirmation_delete(${value.id})">
-                        </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="col-md-8 px-3 py-3">
+              <div class="card-block px-3">
+                <h4 class="card-title">{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}
+                </h4>
+                <p class="card-text">Price: {{$item->propertyInformation->price}}, Rooms:
+                  {{$item->propertyInformation->bedrooms}}, Terreain {{$item->propertyInformation->total_area_lot}} m2
+                </p>
+                <p class="card-text">Estatus: {{$item->propertyLegalStatus->property_legal_status}} </p>
+                <a class="btn btn-sm btn-primary" href='{{url('admin/property')}}/${value.id}/edit'>Edit</a>
+                <input type="button" value="Delete" class="btn btn-sm btn-danger"
+                  onclick="confirmation_delete(${value.id})">
               </div>
-              @endforeach
+            </div>
           </div>
         </div>
-          @endsection
+      </div>
+      @endforeach
+    </div>
+  </div>
+  @endsection
 
 
-<script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>   
-<script>
-  var map;
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>
+    var map;
     var timeout;
     var mouseOverInfoWindow = false;
     var property = @json($property);
     var data = @json($localization);
     var areas_color = {'high':'#34bf56','medium':'#e8b630', 'low':'#ff3030'};
     var areas_colorHover = {'high':'#33c475','medium':'#dca40e', 'low':'#dc2d0e'};
-
     function initMap() {
         //ingreso de cordenadas de cd juarez
         var cdjuarez = {lat: 31.7000, lng: -106.4410}
@@ -140,24 +143,25 @@
                 }
                 });
               });
+
             }
-            function confirmation_delete(id)
-            {
-              Swal.fire({
-                title: '¿Quieres eliminar la casa?',
-                text: "Una vez eliminado, no podra ser recuperado!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Borrar!'
-                }).then((result) => {
-                if (result.value) {
-                    delete_area(id);
-                }
-            })
+    function confirmation_delete(id)
+      {
+        Swal.fire({
+          title: '¿Quieres eliminar la casa?',
+          text: "Una vez eliminado, no podra ser recuperado!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Borrar!'
+          }).then((result) => {
+            if (result.value) {
+              delete_area(id);
             }
-            function delete_area(id){
+          })
+      }
+    function delete_area(id){
              try {       
                 $.ajax({
                     headers: {
@@ -184,8 +188,17 @@
                 console.log(error);
             } 
         }
-        function setColorBorder(level){
-                
+      
+    function setColorBorder(level){
+                if(level <= 5 ){
+                    return areas_color.low;
+                }else if(level > 5 && level < 8){
+                    return areas_color.medium;
+                }else if(level >8){
+                    return areas_color.high;
+                } 
+            }
+    function setColorHover(level){
                 if(level <= 5 ){
                     return areas_color.low;
                 }else if(level > 5 && level < 8){
@@ -193,23 +206,9 @@
                 }else if(level >8){
                     return areas_color.high;
                 }
-                
             }
     
-            function setColorHover(level){
-                
-                if(level <= 5 ){
-                    return areas_color.low;
-                }else if(level > 5 && level < 8){
-                    return areas_color.medium;
-                }else if(level >8){
-                    return areas_color.high;
-                }
-                
-            }
-    
-            function setColor(level){
-    
+    function setColor(level){
                 if(level <= 5 ){
                     return areas_color.low;
                 }else if(level > 5 && level < 8){
@@ -219,5 +218,8 @@
                 }
                 
             } 
-
-</script>
+  
+  
+  
+  
+  </script>
