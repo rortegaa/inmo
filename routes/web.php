@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', function () {
-    return view('layouts.administrator.app');
+    return view('layouts.administrator.admin');
 });
 
 Auth::routes();
