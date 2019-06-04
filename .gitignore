@@ -7,3 +7,10 @@
 Homestead.json
 Homestead.yaml
 .env
+composer.lock
+package.json
+package-lock.json
+public/mix-manifest.json
+public/css/app.css
+public/js/app.js
+

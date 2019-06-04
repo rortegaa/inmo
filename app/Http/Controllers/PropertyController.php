@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Session;
 use Illuminate\Http\Request;
 use App\Property;
@@ -14,7 +12,6 @@ use App\State;
 use App\PropertyPhoto;
 use App\PropertyLocalization;
 use App\GeneralService;
-
 class PropertyController extends Controller
 {
     /**
@@ -28,7 +25,6 @@ class PropertyController extends Controller
         $localization = SecurityAndSocialFactorArea::with('localization')->get();
         return View('administrator.PropertyView.index')->with('property',$property)->with('localization',$localization);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -42,7 +38,6 @@ class PropertyController extends Controller
                                                         ->with('states', State::All())
                                                         ->with('services', GeneralService::All());
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -71,7 +66,6 @@ class PropertyController extends Controller
             'length' => 'required',
             'services' => 'required'
         ]);
-
         
         
         $propertyMainlAttributes =  [
@@ -82,7 +76,6 @@ class PropertyController extends Controller
             'userable_type' => 'User',
             'userable_id' => 1
         ];
-
         $Property = Property::create($propertyMainlAttributes);
         //dd($Property);
         $Property->propertyServices()->attach($attributes['services']);
@@ -100,19 +93,16 @@ class PropertyController extends Controller
             'sale_message' => $attributes['sale_message'],
             'inserted_by' => 'Mario'
         ];
-
         $PropertyPhotosAttributes = [
             'property_id' => $Property->id,
             'images[]' => $attributes['images']
         ];
-
         $PropertyLocalizationAttributes = [
             'property_id' => $Property->id,
             'latitude' => $attributes['latitude'],
             'length' => $attributes['length'],
             'address' => $attributes['address']
         ];
-
         $this->createPropertyInformation($propertyInformationAttributes);
         $this->createPropertyPhotos($PropertyPhotosAttributes);
         $this->createPropertyLocalization($PropertyLocalizationAttributes);
@@ -120,7 +110,6 @@ class PropertyController extends Controller
     
         return redirect()->back();
     }
-
     /**
      * Display the specified resource.
      *
@@ -129,9 +118,10 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        //
+        $property = Property::where('id',$id)->with(['propertyInformation','propertyLocalization','propertyPhotos','propertyType','propertyLegalStatus','propertyStatus','propertyServices'])->first();
+        
+        return view('administrator.PropertyView.show')->with('property',$property);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -177,7 +167,6 @@ class PropertyController extends Controller
             'length' => 'required',
             'services' => 'required'
         ]);
-
         $propertyMainlAttributes =  [
             'property_type_id' => $attributes['property_type_id'],
             'property_status_id' => $attributes['property_status_id'],
@@ -189,7 +178,6 @@ class PropertyController extends Controller
         $Property = Property::find($id);
         $Property->update($propertyMainlAttributes);
         $Property->propertyServices()->sync($attributes['services']);
-
         $propertyInformationAttributes =  [
             'property_id' => $id,
             'bedrooms' => $attributes['bedrooms'],
@@ -220,7 +208,6 @@ class PropertyController extends Controller
         Session::flash('success', "Record added successfully");
         return redirect()->back();
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -240,13 +227,11 @@ class PropertyController extends Controller
         $Property->delete();
         return redirect()->back();
     }
-
     public function createPropertyInformation($propertyInformationAttributes)
     {
         PropertyInformation::create($propertyInformationAttributes);
         return true;
     }
-
     public function createPropertyPhotos($PropertyPhotosAttributes)
     {
         $count = 1;
@@ -265,19 +250,16 @@ class PropertyController extends Controller
         }
         return true;
     }
-
     public function createPropertyLocalization($PropertyLocalizationAttributes)
     {
         PropertyLocalization::create($PropertyLocalizationAttributes);
         return true;
     }
-
     public function updatePropertyInformation($propertyInformationAttributes)
     {
         PropertyInformation::where('property_id', '=', $propertyInformationAttributes['property_id'])->update($propertyInformationAttributes);
         return true;
     }
-
     public function updatePropertyPhotos($PropertyPhotosAttributes)
     {
         $count = 1;
@@ -300,7 +282,6 @@ class PropertyController extends Controller
         }
         return true;
     }
-
     public function updatePropertyLocalization($PropertyLocalizationAttributes)
     {
         PropertyLocalization::where('property_id', '=', $PropertyLocalizationAttributes['property_id'])->update($PropertyLocalizationAttributes);
