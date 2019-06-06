@@ -1,8 +1,46 @@
-@extends('layouts.administrator.app')
+@extends('layouts.administrator.admin')
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
 <h5>Inmobiliarios</h5>
+
+<div class="row">
+    @foreach ($property as $item)
+    <div class="col-md-4">
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h4>{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}</h4>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-8">
+                <img src="{{$item->propertyPhotos[0]->url}}" height="200px" width="325px">
+            </div>
+          </div>
+
+        </div>
+        <div class="box-footer">
+          Price: {{$item->propertyInformation->price}}
+          <br>
+          Rooms: {{$item->propertyInformation->bedrooms}}
+          <br>
+          Terreain {{$item->propertyInformation->total_area_lot}} m2
+          <br>
+          <a class="btn btn-sm btn-primary" href='{{url('admin/property')}}/${value.id}/edit'>Edit</a>
+          <input type="button" value="Delete" class="btn btn-sm btn-danger"
+            onclick="confirmation_delete(${value.id})">
+        </div>
+      </div>
+    </div>
+    @endforeach
+</div>
+
+
+
+<!-- TABPANEEE
 <div class="shadow p-3 bg-white rounded">
   <a type="button" class="btn btn-primary" href="{{route('property.create')}}">Agregar</a>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -17,42 +55,46 @@
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <div id="map" style="height:500px;"></div>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      @foreach ($property as $item )
-      <div class="container py-3">
-        <div class="card">
-          <div class="row">
-            <div class="col-md-4">
-              <img src="{{$item->propertyPhotos[0]->url}}" class="w-100">
-            </div>
-            <div class="col-md-8 px-3 py-3">
-              <div class="card-block px-3">
-                <h4 class="card-title">{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}
-                </h4>
-                <p class="card-text">Price: {{$item->propertyInformation->price}}, Rooms:
-                  {{$item->propertyInformation->bedrooms}}, Terreain {{$item->propertyInformation->total_area_lot}} m2
-                </p>
-                <p class="card-text">Estatus: {{$item->propertyLegalStatus->property_legal_status}} </p>
-                <a class="btn btn-sm btn-primary" href='{{url('admin/property')}}/${value.id}/edit'>Edit</a>
-                <input type="button" value="Delete" class="btn btn-sm btn-danger"
-                  onclick="confirmation_delete(${value.id})">
-              </div>
+  </div>
+
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    @foreach ($property as $item )
+    <div class="container py-3">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="{{$item->propertyPhotos[0]->url}}" class="w-100">
+          </div>
+          <div class="col-md-8 px-3 py-3">
+            <div class="card-block px-3">
+              <h4 class="card-title">{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}
+              </h4>
+              <p class="card-text">Price: {{$item->propertyInformation->price}}, Rooms:
+                {{$item->propertyInformation->bedrooms}}, Terreain {{$item->propertyInformation->total_area_lot}} m2
+              </p>
+              <p class="card-text">Estatus: {{$item->propertyLegalStatus->property_legal_status}} </p>
+              <br>
+              <a class="btn btn-sm btn-primary" href='{{url('admin/property')}}/${value.id}/edit'>Edit</a>
+              <input type="button" value="Delete" class="btn btn-sm btn-danger"
+                onclick="confirmation_delete(${value.id})">
             </div>
           </div>
         </div>
       </div>
-      @endforeach
     </div>
+    @endforeach
   </div>
-  @endsection
+  -->
+</div>
+@endsection
 
 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script>
-    var map;
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!--
+<script>
+  var map;
     var timeout;
     var mouseOverInfoWindow = false;
     var property = @json($property);
@@ -214,8 +256,5 @@
                 }
                 
             } 
-  
-  
-  
-  
-  </script>
+</script> 
+-->
