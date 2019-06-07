@@ -38,7 +38,9 @@
     @endforeach
 </div>
 
-
+<div class="row">
+  <div id="map" style="height:300px"></div>
+</div>
 
 <!-- TABPANEEE
 <div class="shadow p-3 bg-white rounded">
@@ -92,7 +94,6 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<!--
 <script>
   var map;
     var timeout;
@@ -130,7 +131,28 @@
               $.each(property, function(key,value) {
                 var cords = {lat: value.property_localization.latitude, lng: value.property_localization.length };
                 //creacion del marker por cordenada
-                var marcador = new google.maps.Marker({position: cords ,map: map});
+                var iconPng;
+                //Seleccion de icono
+                switch(value.property_type_id){
+                case 1:
+                      iconPng =  '../images/iconsMap/house.png'
+                      break;
+                case 2:
+                      iconPng = "../images/iconsMap/office.png"
+                      break;
+                case 3:
+                      iconPng =  "../images/iconsMap/terrain.png"
+                      break;
+                default:
+                      iconPng =  "../images/iconsMap/house.png";
+                      break;
+                }
+                console.log(iconPng)
+                var marcador = new google.maps.Marker({
+                  position: cords,
+                  map: map, 
+                  icon: iconPng
+                });
                 var img = value.property_photos[0].url
                 //creacion de la informacion  
                 var informacion = new google.maps.InfoWindow({
@@ -257,4 +279,3 @@
                 
             } 
 </script> 
--->
