@@ -3,15 +3,15 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1>Dashboard</h1>
+    <h1>Dashboard</h1>
 @stop
 
 @section('content')
-@yield('content')
+    @yield('content')
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
@@ -19,6 +19,6 @@
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQfZXUMkqhAZPYFpgIxw09MOrkXJzL3k&libraries=drawing&callback=initMap"
     async defer>
-
 </script>
+
 @stop
