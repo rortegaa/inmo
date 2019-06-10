@@ -115,6 +115,9 @@
             <!-- Main content -->
             <section class="content">
 
+                @include('vendor.adminlte.partials.alerts')
+                @include('vendor.adminlte.partials.errors')
+                
                 @yield('content')
 
             </section>

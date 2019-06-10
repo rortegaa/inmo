@@ -25,7 +25,7 @@ class PropertyLegalStatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('administrator.PropertyLegalStatusView.create');   
     }
 
     /**
@@ -34,9 +34,9 @@ class PropertyLegalStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $attribute = request()->validate([
+        $attribute = $request->validate([
             'property_legal_status'=>'required'
         ]);
 
@@ -44,9 +44,9 @@ class PropertyLegalStatusController extends Controller
 
         PropertyLegalStatus::create($attribute);
 
-        Session::flash('success',"Legal status: $attribute[property_legal_status] added successfuly!");
+        Session::flash('success',"Registro  $attribute[property_legal_status]   agregado sastifactoriamente");
 
-        return redirect()->back();
+        return redirect()->route('legal_status.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class PropertyLegalStatusController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -68,7 +68,7 @@ class PropertyLegalStatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('administrator.PropertyLegalStatusView.create');   
     }
 
     /**

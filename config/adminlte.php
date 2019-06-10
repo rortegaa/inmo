@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'yellow-light',
+    'skin' => 'blue',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,19 +108,6 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
@@ -169,6 +156,42 @@ return [
                     'url'  => '#',
                 ],
             ],
+        ],
+        'USUARIOS',[
+            
+            'text' => 'Agregar usuario',
+            'icon' => 'fas fa-user-plus',
+            
+        ],
+        'FILTROS GENERALES',
+        [
+            'text' => 'Estatus legal propiedad',
+            'submenu' => [
+                [
+                    'text' => 'Mostrar estatus legales',
+                    'url'  => 'admin/legal_status',
+                ],
+                [
+                    'text' => 'Crear estatus legales',
+                    'url'  => 'admin/legal_status/create',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Estatus propiedad',
+            'url' => 'admin/property_status'
+        ],
+        [
+            'text' => 'Tipo propiedad',
+            'url' => 'admin/property_types'
+        ],
+        [
+            'text' => 'Estados de Mexico',
+            'url' => 'admin/states'
+        ],
+        [
+            'text' => 'Servicios',
+            'url' => 'admin/services'
         ],
         'LABELS',
         [
