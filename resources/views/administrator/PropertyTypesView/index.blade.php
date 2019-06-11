@@ -1,137 +1,83 @@
-@extends('layouts.administrator.app') 
+@extends('layouts.administrator.admin')
+
+
+@section('title')
+Aminnova Categorias de Puntos de Interes
+@endsection
 
 @section('content')
+<div class="row">
+    <div class="col-md-4">
 
-@include('shares.errors')
+        <div class="info-box pull-right">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
 
-@include('shares.SuccessBootstrapAlert')
-
-<div id="root">
-    <p>
-        <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#collapsePropertyType" role="button" aria-expanded="false" aria-controls="collapsePropertyType">
-            <i class="fas fa-plus-square"></i> Add New
-        </a>
-    </p>
-    <div class="collapse" id="collapsePropertyType">
-        <div class="shadow p-3 mb-5 bg-white rounded">
-
-                <form class="form-inline" method="POST" action=" {{ route('property_types.store') }} ">
-                
-                    @csrf
-                    <div class="form-group">
-                        <label for="state">Add Property Type</label>
-                        <input type="text" id="property_type" name="property_type" class="form-control mx-sm-3" aria-describedby="types" value="{{old('property_type')}}" v-model="clickedTypes" required autofocus>
-                        <button type="submit" class="btn btn-primary my-1">Submit</button>
-                    </div>            
-                </form>
+            <div class="info-box-content">
+                <span class="info-box-text">Total de registros</span>
+                <span class="info-box-number">{{ $types->count() }}</span>
+            </div>
+            <!-- /.info-box-content -->
         </div>
     </div>
+</div>
+<div class="box">
 
-    @if ($types->count() > 0)
-
-    <div class="shadow p-3 mb-5 bg-white rounded" id="root">
-
+    <div class="box-header">
+        <h4 class="box-title"> Categorias de puntos de interes</h4>
+        <a href=" {{ route('type_of_interest_point.create') }} " class="btn bg-maroon  margin pull-right">Nuevo registro</a>
+    </div>
+    <div class="box-body">
         <table id="records" class="table table-striped table-bordered table-hover text-center">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Property Types</th>
-                    <th scope="col">Inserted By</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Insertado por</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
-                   @foreach ($types as $key => $type)
-                   <tr>
-                       <th scope="row">{{ $key + 1 }}</th>
-                       <td> {{ $type->property_type }} </td>
-                       <td> {{ $type->inserted_by }} </td>
-                       <td class="text-center">
-                           <div class="d-flex justify-content-center bd-highlight">                                
-                                    <button id="{{ $type->property_type }}" class="btn btn-outline-primary btn-sm" @click="updateAlert"><i class="fas fa-pen"></i></button>                       
-                                <form id="delete {{ $type->property_type }}" method="POST" action=" {{ route('property_types.destroy',['state'=>$type->property_type]) }}">
-                                    @method('DELETE')
-                                    @csrf
-                                <button class="btn btn-outline-danger btn-sm" @click="onDeleteRecord"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                           </div>
-                       </td>
-                   </tr>
-                   @endforeach
+                @if ($legalStatus->count() > 0)
+                @foreach ($types as $key => $type)
+                <tr>
+                    <th scope="row">{{ $key + 1 }}</th>
+                    <td> {{ $type->property_legal_status }} </td>
+                    <td> {{ $type->inserted_by }} </td>
+                    <td>
+
+                        <a href="" class="btn btn-primary">
+                            <i class="fa fa-edit"></i> Editar
+                        </a>
+
+                    </td>
+                    <td>
+                        <form action="">
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> Borrar
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+                @endforeach
+                @else
+
+                @endif
             </tbody>
         </table>
-   
-   </div>
-  
-    @else
+    </div>
 
 </div>
 
-    @include('shares.emptyView')
 
-@endif
 
 @endsection
 
-@section('scripts_footer')
-    <script>
-     
-        window.onload = function()
-        {
-            const app  = new Vue({
-                el: '#root',
-                data: {                  
-                    clickedTypes:'',
-                    formId: ''
-                },
-                methods: {
-                    onDeleteRecord(event){
-                        event.preventDefault();
-                        this.formId = event.currentTarget.form.id;
-                        
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You won't be able to revert this!",
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
-                            }).then((result) => {
-                            if (result.value) {
-                            document.getElementById(this.formId).submit();
-                            }
-                        });
-                    },
-                    updateAlert(event){
-                        event.preventDefault();
-                       let type = event.currentTarget.id;      
-                       let url = '{{ url('') }}'; 
+@section('js')
 
-                        Swal.fire({
-                        title: 'Update state',
-                        html: `
-                        <form id="update${type}"  method="POST" action="${url}/admin/property_types/${type}">
-                            @method('PUT')
-                            @csrf  
-                            <input type="text" id="property_type" name="property_type" class="swal2-input" value="${type}" required autofocus>   
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" >submit</button>
-                            <input type="button" class="btn btn-secondary btn-lg btn-block" onclick="Javascript:Swal.close()" value="cancel" > </input>
-                        </form>
-                        `,
-                        
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        })
-                }
-                },
-                mounted() {
-                    $('#collapsePropertyType').collapse({
-                    toggle: true
-                    })      
-                    $('#records').DataTable();              
-                },  
-            }) 
-        }
-    </script>
+<script>
+    $('#records').DataTable();   
+</script>
+
 @endsection

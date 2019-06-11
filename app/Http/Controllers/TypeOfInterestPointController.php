@@ -25,7 +25,7 @@ class TypeOfInterestPointController extends Controller
      */
     public function create()
     {
-        //
+        return view('administrator.TypeOfInterestPointView.create');   
     }
 
     /**
@@ -66,7 +66,7 @@ class TypeOfInterestPointController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('administrator.TypeOfInterestPointView.edit');   
     }
 
     /**
