@@ -40,7 +40,7 @@ class PropertyLegalStatusController extends Controller
             'property_legal_status'=>'required'
         ]);
 
-        $attribute['inserted_by'] = 'David Ortega';
+        $attribute['inserted_by'] = auth()->user()->name;
 
         PropertyLegalStatus::create($attribute);
 
@@ -68,7 +68,7 @@ class PropertyLegalStatusController extends Controller
      */
     public function edit(PropertyLegalStatus $legalStatus)
     {
-        return view('administrator.PropertyLegalStatusView.create',['legalStatus' => $legalStatus]);   
+        return view('administrator.PropertyLegalStatusView.edit',['legalStatus' => $legalStatus]);   
     }
 
     /**
@@ -78,19 +78,19 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($status)
+    public function update(Request $request, PropertyLegalStatus $legalStatus)
     {
-        $attribute = request()->validate([
+        $attribute = $request->validate([
             'property_legal_status'=>'required'
         ]);
 
-        $attribute['updated_by'] = 'David Ortega';
+        $attribute['updated_by'] = auth()->user()->name;
 
-        PropertyLegalStatus::where('property_legal_status','=',$status)->update($attribute);
+        $legalStatus->update($attribute);
 
-        Session::flash('success',"Legal status: $attribute[property_legal_status] updated successfuly!");
+        Session::flash('success',"Registro actualizado satisfactoriamente");
 
-        return redirect()->back();
+        return redirect()->route('legal_status.index');
     }
 
     /**

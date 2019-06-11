@@ -179,7 +179,16 @@ return [
         ],
         [
             'text' => 'Estatus propiedad',
-            'url' => 'admin/property_status'
+            'submenu' => [
+                [
+                    'text' => 'Mostrar estatus propiedades',
+                    'url'  => 'admin/property_status',
+                ],
+                [
+                    'text' => 'Crear estatus propiedad',
+                    'url'  => 'admin/property_status/create',
+                ],
+            ],
         ],
         [
             'text' => 'Tipo propiedad',

@@ -15,7 +15,7 @@ class PropertyStatusController extends Controller
      */
     public function index()
     {
-        return view('administrator.PropertyStatusView.index')->with('property_status',PropertyStatus::orderBy('id','desc')->get());
+        return view('administrator.PropertyStatusView.index')->with('propertyStatus',PropertyStatus::all());
     }
 
     /**
@@ -25,7 +25,7 @@ class PropertyStatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('administrator.PropertyStatusView.create');  
     }
 
     /**
@@ -34,17 +34,19 @@ class PropertyStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $attribute = request()->validate([
+        $attribute = $request->validate([
             'property_status'=>'required'
         ]);
 
-        $attribute['inserted_by'] = 'David Ortega';          
-        PropertyStatus::create($attribute);
-        Session::flash('success', "Status: $attribute[property_status] added successfully!");
+        $attribute['inserted_by'] = auth()->user()->name;;   
 
-        return redirect()->back();
+        PropertyStatus::create($attribute);
+
+        Session::flash('success',"Registro agregado sastifactoriamente");
+
+        return redirect()->route('property_status.index');
     }
 
     /**
@@ -64,9 +66,9 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PropertyStatus $status)
     {
-        //
+        return view('administrator.PropertyStatusView.edit',['propertyStatus' => $status]); 
     }
 
     /**
@@ -76,17 +78,19 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($status)
+    public function update(Request $request,PropertyStatus $status)
     {
-        $attribute = request()->validate([
+        $attribute = $request->validate([
             'property_status'=>'required'
         ]);
 
-        $attribute['updated_by'] = 'David Ortega';
-        PropertyStatus::where('property_status','=', $status)->update($attribute);        
-        Session::flash('success', "Status: $attribute[property_status] updated successfully!");
+        $attribute['updated_by'] = auth()->user()->name;;
+        
+        $status->update($attribute);      
 
-        return redirect()->back();
+        Session::flash('success',"Registro actualizado satisfactoriamente");
+
+        return redirect()->route('property_status.index');
     }
 
     /**
@@ -95,11 +99,12 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($property_status)
+    public function destroy(PropertyStatus $status)
     {
-        PropertyStatus::where('property_status','=', $property_status)->delete();
-        Session::flash('success', "Status: $property_status deleted successfully");
+        $status->delete();
 
-        return redirect()->back();
+         Session::flash('success', "Registro eliminado satisfactoriamente");
+
+        return redirect()->route('property_status.index');
     }
 }

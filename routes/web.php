@@ -15,13 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('layouts.administrator.admin');
-});
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin'], function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('layouts.administrator.admin');
+    });
     Route::resource('states', 'StatesController');
     Route::resource('property_status', 'PropertyStatusController');
     Route::resource('property_types', 'PropertyTypesController');

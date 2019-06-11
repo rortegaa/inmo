@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyStatus extends Model
 {
-    protected $fillable = ['property_status'];
+    protected $fillable = ['property_status','inserted_by','updated_by'];
 
     public function property()
     {

@@ -6,20 +6,9 @@ Aminnova Estatus legales
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-md-4">
 
-        <div class="info-box pull-right">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+@include('vendor.adminlte.partials.counterData', ['totalRegisters'=>$legalStatus->count()])
 
-            <div class="info-box-content">
-                <span class="info-box-text">Total de registros</span>
-                <span class="info-box-number">{{ $legalStatus->count() }}</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-    </div>
-</div>
 <div class="box">
 
     <div class="box-header">
@@ -46,7 +35,7 @@ Aminnova Estatus legales
                     <td> {{ $status->inserted_by }} </td>
                     <td>
 
-                        <a href="" class="btn btn-primary">
+                        <a href=" {{ route( 'legal_status.edit', ['id'=>$status->id] ) }}" class="btn btn-primary">
                             <i class="fa fa-edit"></i> Editar
                         </a>
 
