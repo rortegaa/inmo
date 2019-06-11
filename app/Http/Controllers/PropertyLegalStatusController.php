@@ -44,7 +44,7 @@ class PropertyLegalStatusController extends Controller
 
         PropertyLegalStatus::create($attribute);
 
-        Session::flash('success',"Registro  $attribute[property_legal_status]   agregado sastifactoriamente");
+        Session::flash('success',"Registro agregado sastifactoriamente");
 
         return redirect()->route('legal_status.index');
     }
@@ -55,7 +55,7 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PropertyLegalStatus $legalStatus)
     {
         
     }
@@ -66,9 +66,9 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PropertyLegalStatus $legalStatus)
     {
-        return view('administrator.PropertyLegalStatusView.create');   
+        return view('administrator.PropertyLegalStatusView.create',['legalStatus' => $legalStatus]);   
     }
 
     /**
@@ -99,13 +99,13 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($legal_status)
+    public function destroy(PropertyLegalStatus $legalStatus)
     {
-        PropertyLegalStatus::where('property_legal_status','=', $legal_status)->delete();
+        $legalStatus->delete();
         
-        Session::flash('success', "Legal status: $legal_status deleted successfully");
+        Session::flash('success', "Registro eliminado satisfactoriamente");
 
-        return redirect()->back();
+        return redirect()->route('legal_status.index');
 
     }
 }

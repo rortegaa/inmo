@@ -52,8 +52,11 @@ Aminnova Estatus legales
 
                     </td>
                     <td>
-                        <form action="">
-                            <button type="button" class="btn btn-danger">
+                        <form method="POST" action=" {{ route( 'legal_status.destroy', ['id'=>$status->id] ) }} "
+                            onsubmit="return confirm('Deseas eliminar este registro?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="submitDelete" class="btn btn-danger">
                                 <i class="fa fa-trash"></i> Borrar
                             </button>
                         </form>
@@ -77,7 +80,10 @@ Aminnova Estatus legales
 @section('js')
 
 <script>
+
     $('#records').DataTable();   
+
+
 </script>
 
 @endsection

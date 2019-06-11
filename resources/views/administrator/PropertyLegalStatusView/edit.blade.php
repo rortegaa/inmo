@@ -13,19 +13,18 @@ Aminnova Estatus legales
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Editar: Estatus Legales </h3>
+                <h3 class="box-title">Actualizar Estatus Legales </h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action=" {{ route('legal_status.store') }} ">
+            <form id="createForm" class="form-horizontal" method="POST" action=" {{ route('legal_status.store') }} " onsubmit="validate(event);">
                 @csrf
-                @method('PUT')
                 <div class="box-body">
                     <div class="form-group">
                         <label for="property_legal_status" class="col-sm-2 control-label">Estatus legal</label>
 
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="property_legal_status"
+                            <input type="text" class="form-control" id="propertyLegalStatus"
                                 name="property_legal_status" placeholder="Estatus legal" required autofocus>
                         </div>
                     </div>
@@ -33,7 +32,7 @@ Aminnova Estatus legales
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary pull-right">Enviar</button>
+                    <button type="submit" id="createButtonForm" class="btn btn-primary pull-right">Actualizar</button>
                 </div>
                 <!-- /.box-footer -->
             </form>
@@ -44,4 +43,14 @@ Aminnova Estatus legales
     <div class="col-md-1"></div>
 </div>
 
+@endsection
+
+@section('js')
+    <script>
+    
+    function validate(event) {
+        createButtonForm.disabled = true;
+    }
+    
+    </script>
 @endsection
