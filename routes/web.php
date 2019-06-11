@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('legal_status', 'PropertyLegalStatusController');
     Route::resource('property', 'PropertyController');
     Route::resource('services', 'ServicesController');
-    
+    Route::resource('type_of_interest_point', 'TypeOfInterestPointController');
     route::get('security_social_area', 'AreasController@securityAndSocialIndex')->name('security_social.index');
     route::get('security_social_area/create', 'AreasController@securityAndSocialCreate')->name('security_social.create');
     route::get('security_social_area/edit/{id}', 'AreasController@securityAndSocialEdit')->name('security_social.edit');
