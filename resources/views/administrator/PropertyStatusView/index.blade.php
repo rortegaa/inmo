@@ -35,13 +35,13 @@ Aminnova Estatus propiedades
                     <td> {{ $status->inserted_by }} </td>
                     <td>
 
-                        <a href=" {{ route( 'property_status.edit', ['id'=>$status->id] ) }}" class="btn btn-primary">
+                        <a href="{{ route('property_status.edit', ['id'=>$status->id]) }}" class="btn btn-primary">
                             <i class="fa fa-edit"></i> Editar
                         </a>
 
                     </td>
                     <td>
-                        <form method="POST" action=" {{ route( 'property_status.destroy', ['id'=>$status->id] ) }} "
+                        <form method="POST" action="{{ route( 'property_status.destroy', ['id'=>$status->id] ) }}"
                             onsubmit="return confirm('Deseas eliminar este registro?');">
                             @csrf
                             @method('DELETE')

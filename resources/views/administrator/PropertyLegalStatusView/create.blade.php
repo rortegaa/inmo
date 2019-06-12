@@ -8,8 +8,7 @@ Aminnova Estatus legales
 
 
 <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-6 col-md-offset-3">
 
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -17,16 +16,17 @@ Aminnova Estatus legales
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form id="createForm" class="form-horizontal" method="POST" action="{{route('legal_status.store')}}" onsubmit="validate(event);">
+            <form id="createForm" role="form" method="POST" action="{{route('legal_status.store')}}"
+                onsubmit="validate(event);">
                 @csrf
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="property_legal_status" class="col-sm-2 control-label">Estatus legal</label>
+                        <label for="property_legal_status">Estatus legal</label>
 
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="propertyLegalStatus"
-                                name="property_legal_status" placeholder="Estatus legal" required autofocus>
-                        </div>
+
+                        <input type="text" class="form-control" id="propertyLegalStatus" name="property_legal_status"
+                            placeholder="Estatus legal" required autofocus>
+
                     </div>
 
                 </div>
@@ -46,11 +46,10 @@ Aminnova Estatus legales
 @endsection
 
 @section('js')
-    <script>
-    
+<script>
     function validate(event) {
         createButtonForm.disabled = true;
     }
     
-    </script>
+</script>
 @endsection

@@ -66,9 +66,9 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(PropertyStatus $status)
+    public function edit(PropertyStatus $propertyStatus)
     {
-        return view('administrator.PropertyStatusView.edit',['propertyStatus' => $status]); 
+        return view('administrator.PropertyStatusView.edit',['propertyStatus' => $propertyStatus]); 
     }
 
     /**
@@ -78,7 +78,7 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,PropertyStatus $status)
+    public function update(Request $request,PropertyStatus $propertyStatus)
     {
         $attribute = $request->validate([
             'property_status'=>'required'
@@ -86,7 +86,7 @@ class PropertyStatusController extends Controller
 
         $attribute['updated_by'] = auth()->user()->name;;
         
-        $status->update($attribute);      
+        $propertyStatus->update($attribute);      
 
         Session::flash('success',"Registro actualizado satisfactoriamente");
 
@@ -99,11 +99,11 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PropertyStatus $status)
+    public function destroy(PropertyStatus $propertyStatus)
     {
-        $status->delete();
+        $propertyStatus->delete();
 
-         Session::flash('success', "Registro eliminado satisfactoriamente");
+        Session::flash('success', "Registro eliminado satisfactoriamente");
 
         return redirect()->route('property_status.index');
     }

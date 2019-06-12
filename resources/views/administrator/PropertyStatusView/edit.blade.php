@@ -8,26 +8,27 @@ Aminnova Estatus legales
 
 
 <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-6 col-md-offset-3">
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Actualizar {{ $legalStatus->property_legal_status }} </h3>
+                <h3 class="box-title">Actualizar {{ $propertyStatus->property_status }} </h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form id="createForm" class="form-horizontal" method="POST" action="{{route( 'legal_status.update', ['id'=>$legalStatus->id])}}" onsubmit="validate(event);">
+            <form id="createForm" role="form" method="POST"
+                action="{{route( 'legal_status.update', ['id'=>$propertyStatus->id])}}" onsubmit="validate(event);">
                 @csrf
                 @method('PATCH')
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="property_legal_status" class="col-sm-2 control-label">Estatus legal</label>
+                        <label for="propertyStatus">Estatus propiedad</label>
 
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="propertyLegalStatus"
-                                name="property_legal_status" placeholder="Estatus legal" value="{{ $legalStatus->property_legal_status }}" required autofocus>
-                        </div>
+
+                        <input type="text" class="form-control" id="property_status" name="property_legal_status"
+                            placeholder="Estatus propiedad" value="{{ $propertyStatus->property_status }}" required
+                            autofocus>
+
                     </div>
 
                 </div>
@@ -41,17 +42,15 @@ Aminnova Estatus legales
 
 
     </div>
-    <div class="col-md-1"></div>
 </div>
 
 @endsection
 
 @section('js')
-    <script>
-    
+<script>
     function validate(event) {
         createButtonForm.disabled = true;
     }
     
-    </script>
+</script>
 @endsection
