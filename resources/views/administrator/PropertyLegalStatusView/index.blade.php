@@ -1,9 +1,5 @@
-@extends('layouts.administrator.admin')
+@extends('layouts.administrator.app')
 
-
-@section('title')
-Aminnova Estatus legales
-@endsection
 
 @section('content')
 

@@ -6,8 +6,7 @@
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
-.env
-composer.lock
+
 package.json
 package-lock.json
 public/mix-manifest.json

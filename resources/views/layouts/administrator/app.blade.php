@@ -91,12 +91,13 @@
 
 
         <main class="container-fluid py-4">
+
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-md-3 d-none d-md-block bg-dark">
                     @include('layouts.administrator.sidenavbar_admin')
 
                 </div>
-                <div class="col-lg-9">
+                <div class="col-md-9 ml-sm-auto col-lg-9 px-4">
                     @yield('content')
                 </div>
             </div>
