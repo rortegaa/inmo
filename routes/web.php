@@ -21,7 +21,7 @@ Auth::routes();
 Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('layouts.administrator.admin');
+        return view('layouts.administrator.dashboard');
     });
     Route::resource('states', 'StatesController');
     Route::resource('property_status', 'PropertyStatusController');

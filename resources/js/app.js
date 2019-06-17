@@ -29,5 +29,24 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data:{
+
+    },
+    methods: {
+        request(){
+            axios.get('/admin/property_status')
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+        }
+    },
+    mounted() {
+       
+    },
 });

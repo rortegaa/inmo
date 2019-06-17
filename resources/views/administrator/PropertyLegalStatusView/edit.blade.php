@@ -1,43 +1,33 @@
-@extends('layouts.administrator.admin')
-
-@section('title')
-Aminnova Estatus legales
-@endsection
+@extends('layouts.administrator.app')
 
 @section('content')
 
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
+<div class="row justify-content-md-center">
+    <div class="col-md-10">
 
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Actualizar {{ $legalStatus->property_legal_status }} </h3>
+        <div class="card">
+            <div class="card-header">
+                <h5>Actualizar {{$legalStatus->property_legal_status}} </h5>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form id="createForm" role="form" method="POST"
-                action="{{route( 'legal_status.update', ['id'=>$legalStatus->id])}}" onsubmit="validate(event);">
-                @csrf
-                @method('PATCH')
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="property_legal_status">Estatus legal</label>
+            <div class="card-body">
+                <form id="createForm" role="form" method="POST"
+                    action="{{route('legal_status.update', ['id'=>$legalStatus->id])}}" onsubmit="validate(event);">
+                    @csrf
+                    @method('PATCH')
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="propertyStatus">Estatus legal de la propiedad</label>
 
-
-                        <input type="text" class="form-control" id="propertyLegalStatus" name="property_legal_status"
-                            placeholder="Estatus legal" value="{{ $legalStatus->property_legal_status }}" required
-                            autofocus>
-
+                            <input type="text" class="form-control" id="propertyLegalStatus" name="property_legal_status"
+                                placeholder="Estatus legal de la propiedad" value="{{$legalStatus->property_legal_status}}" required
+                                autofocus>
+                        </div>
                     </div>
+                    <button type="submit" id="createButtonForm" class="btn btn-success float-right">Guardar</button>
+                </form>
 
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <button type="submit" id="createButtonForm" class="btn btn-primary pull-right">Actualizar</button>
-                </div>
-                <!-- /.box-footer -->
-            </form>
+            </div>
         </div>
 
 
@@ -46,7 +36,7 @@ Aminnova Estatus legales
 
 @endsection
 
-@section('js')
+@section('scripts_footer')
 <script>
     function validate(event) {
         createButtonForm.disabled = true;

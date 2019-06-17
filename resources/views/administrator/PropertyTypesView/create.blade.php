@@ -8,19 +8,19 @@
 
         <div class="card">
             <div class="card-header ">
-                <h5>Agrega estatus legales de las propiedades </h5>
+                <h5>Agregar tipo de propiedad </h5>
             </div>
             
             <div class="card-body">
-                <form id="createForm" role="form" method="POST" action="{{route('legal_status.store')}}"
+                <form id="createForm" role="form" method="POST" action="{{route('property_types.store')}}"
                     onsubmit="validate(event);">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="property_legal_status">Estatus legal</label>
+                            <label for="propertyType">Tipo de propiedad</label>
 
-                            <input type="text" class="form-control" id="propertyLegalStatus" name="property_legal_status"
-                                placeholder="Estatus legal" required autofocus>
+                            <input type="text" class="form-control" id="propertyType" name="property_type"
+                                placeholder="Tipo de propiedad" required autofocus>
                         </div>
                     </div>
                     <button  type="submit"  id="createButtonForm" class="btn btn-success float-right">Submit</button>

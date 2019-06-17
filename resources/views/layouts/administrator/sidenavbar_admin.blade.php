@@ -1,17 +1,25 @@
-<ul class="list-group">
-  <li class="list-group-item active">Administrator Section</li>
-  <li  class="list-group-item list-group-item-action" data-toggle="collapse" href="#collapseSubList">Security & Social Areas
-
-    <ul class="list-group list-group-flush collapse" id="collapseSubList">
-      <li class="list-group-item"><a href="{{ route('security_social.index') }}" >Security & Social Map</a></li>
-      <li class="list-group-item"><a href="{{ route('security_social.create') }}" >Security & Social Create</a></li>
-    </ul>
-  </li>
- 
-  <a href="{{ route('legal_status.index') }}" class="list-group-item list-group-item-action">Property legal status</a>
-  <a href="{{ route('property_status.index') }}" class="list-group-item list-group-item-action">Property status</a>
-  <a href="{{ route('property_types.index') }}" class="list-group-item list-group-item-action">Property Types</a>
-  <a href="{{ route('states.index') }}" class="list-group-item list-group-item-action">States</a>
-  <a href="{{ route('services.index') }}" class="list-group-item list-group-item-action">Services</a>
-  <a href="{{ route('property.index') }}" class="list-group-item list-group-item-action">Real State</a>
-</ul>
+<div class="card sidebar">
+  <div class="card-header text-center">
+    Menu del Administrador
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" data-toggle="collapse" href="#submenu1">Estatus propiedades
+      <ul class="submenu collapse" id="submenu1">
+        <li> <a href="{{route('property_status.index')}}"> Mostrar </a> </li>
+        <li> <a href="{{route('property_status.create')}}"> Crear</a></li>
+      </ul>
+    </li>
+    <li class="list-group-item" data-toggle="collapse" href="#submenu2">Estatus legales de las propiedades
+      <ul class="submenu collapse" id="submenu2">
+        <li> <a href="{{route('legal_status.index')}}"> Mostrar </a> </li>
+        <li> <a href="{{route('legal_status.create')}}"> Crear</a></li>
+      </ul>
+    </li>
+    <li class="list-group-item" data-toggle="collapse" href="#submenu3">Tipos de propiedades
+      <ul class="submenu collapse" id="submenu3">
+        <li> <a href="{{route('property_types.index')}}"> Mostrar </a> </li>
+        <li> <a href="{{route('property_types.create')}}"> Crear</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
