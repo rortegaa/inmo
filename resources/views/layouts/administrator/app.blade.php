@@ -34,6 +34,23 @@
 
     @yield('custom_styles')
 
+    <style>
+      ul {
+  display: block;
+  list-style-type: disc;
+  margin-top: 1em;
+  margin-bottom: 1 em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 40px;
+}
+
+ul> li{
+
+padding:0.6rem;
+}
+    </style>
+
 </head>
 
 <body>
@@ -90,14 +107,14 @@
         </nav>
 
 
-        <main class="container-fluid py-4">
+        <main id="app" class="container-fluid py-1">
 
             <div class="row">
-                <div class="col-md-3 d-none d-md-block bg-dark">
+                <div class="col-md-3">
                     @include('layouts.administrator.sidenavbar_admin')
 
                 </div>
-                <div class="col-md-9 ml-sm-auto col-lg-9 px-4">
+                <div class="col-md-9 ">
                     @yield('content')
                 </div>
             </div>
@@ -106,6 +123,9 @@
     </div>
 
     @yield('scripts_footer')
+
+    {{-- Axios Js --}}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfQfZXUMkqhAZPYFpgIxw09MOrkXJzL3k&libraries=drawing&callback=initMap"
     async defer>

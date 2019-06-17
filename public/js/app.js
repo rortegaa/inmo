@@ -49277,7 +49277,20 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {},
+  methods: {
+    request: function request() {
+      axios.get('/admin/property_status').then(function (response) {
+        // handle success
+        console.log(response);
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -49427,8 +49440,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\dertu\Documents\GitHub\inmo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\dertu\Documents\GitHub\inmo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\raul_\Documents\GitHub\inmo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\raul_\Documents\GitHub\inmo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
