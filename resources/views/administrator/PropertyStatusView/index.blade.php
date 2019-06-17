@@ -1,29 +1,26 @@
-@extends('layouts.administrator.admin')
-
-
-@section('title')
-Aminnova Estatus propiedades
-@endsection
+@extends('layouts.administrator.app')
 
 @section('content')
 
-@include('vendor.adminlte.partials.counterData', ['totalRegisters'=>$propertyStatus->count()])
 
-<div class="box">
 
-    <div class="box-header">
-        <h4 class="box-title"> Estatus legales de las propiedades</h4>
-        <a href=" {{ route('property_status.create') }} " class="btn bg-maroon  margin pull-right">Nuevo registro</a>
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6"> <h5>Estatus legales de las propiedades</h5></div>
+            <div class="col-md-6">  <a href="{{route('property_status.create')}} " class="btn btn-success float-right">Nuevo registro</a></div>               
+        </div>
     </div>
-    <div class="box-body">
+    <div class="card-body">
         <table id="records" class="table table-striped table-bordered table-hover text-center">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Estatus legal</th>
                     <th scope="col">Insertado por</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,13 +32,13 @@ Aminnova Estatus propiedades
                     <td> {{ $status->inserted_by }} </td>
                     <td>
 
-                        <a href="{{ route('property_status.edit', ['id'=>$status->id]) }}" class="btn btn-primary">
+                        <a href="{{route('property_status.edit', ['id'=>$status->id])}}" class="btn btn-primary">
                             <i class="fa fa-edit"></i> Editar
                         </a>
 
                     </td>
                     <td>
-                        <form method="POST" action="{{ route( 'property_status.destroy', ['id'=>$status->id] ) }}"
+                        <form method="POST" action="{{route( 'property_status.destroy', ['id'=>$status->id] )}}"
                             onsubmit="return confirm('Deseas eliminar este registro?');">
                             @csrf
                             @method('DELETE')
@@ -66,13 +63,12 @@ Aminnova Estatus propiedades
 
 @endsection
 
-@section('js')
+@section('scripts_footer')
 
 <script>
-
-    $('#records').DataTable();   
-
-
+    window.onload = function(){
+          $('#records').DataTable(); 
+    } 
 </script>
 
 @endsection

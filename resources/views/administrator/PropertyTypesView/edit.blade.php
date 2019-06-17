@@ -8,23 +8,23 @@
 
         <div class="card">
             <div class="card-header">
-                <h5>Actualizar {{ $propertyStatus->property_status }} </h5>
+                <h5>Actualizar {{$type->property_type}} </h5>
             </div>
             <div class="card-body">
                 <form id="createForm" role="form" method="POST"
-                    action="{{route('property_status.update', ['id'=>$propertyStatus->id])}}" onsubmit="validate(event);">
+                    action="{{route('legal_status.update', ['id'=>$type->id])}}" onsubmit="validate(event);">
                     @csrf
                     @method('PATCH')
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="propertyStatus">Estatus propiedad</label>
+                            <label for="propertyStatus">Estatus legal de la propiedad</label>
 
-                            <input type="text" class="form-control" id="property_status" name="property_status"
-                                placeholder="Estatus propiedad" value="{{$propertyStatus->property_status}}" required
+                            <input type="text" class="form-control" id="propertyLegalStatus" name="property_legal_status"
+                                placeholder="Estatus legal de la propiedad" value="{{$legalStatus->property_legal_status}}" required
                                 autofocus>
                         </div>
                     </div>
-                    <button type="submit" id="createButtonForm" class="btn btn-success float-right">Submit</button>
+                    <button type="submit" id="createButtonForm" class="btn btn-success float-right">Guardar</button>
                 </form>
 
             </div>
