@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\InterestPoint;
 
 class InterestPointController extends Controller
 {
@@ -13,8 +12,8 @@ class InterestPointController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        return view('administrator.InterestPointView.index')->with('interestPoints',InterestPoint::all());
+    {
+        //
     }
 
     /**
