@@ -6,7 +6,7 @@
 <div class="row justify-content-md-center">
     <div class="col-md-10">
 
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header ">
                 <h5>Agregar tipo de propiedad </h5>
             </div>
@@ -23,7 +23,7 @@
                                 placeholder="Tipo de propiedad" required autofocus>
                         </div>
                     </div>
-                    <button  type="submit"  id="createButtonForm" class="btn btn-success float-right">Submit</button>
+                    <button  type="submit"  id="createButtonForm" class="btn btn-success float-right">Guardar</button>
                 </form>
             </div>
 

@@ -15,7 +15,7 @@ class PropertyTypesController extends Controller
      */
     public function index()
     {
-        return view('administrator.PropertyTypesView.index')->with('types',PropertyType::orderBy('id','desc')->get());
+        return view('administrator.PropertyTypesView.index')->with('types', PropertyType::all());
     }
 
     /**
@@ -25,7 +25,7 @@ class PropertyTypesController extends Controller
      */
     public function create()
     {
-        //
+        return view('administrator.PropertyTypesView.create'); 
     }
 
     /**
@@ -34,17 +34,19 @@ class PropertyTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
+        $attributes = $request->validate([
             'property_type' => 'required'
         ]);
 
-        $attributes['inserted_by'] = 'David Ortega';
-        PropertyType::create($attributes);
-        Session::flash('success',"Property type: $attributes[property_type] added successfully");
+        $attributes['inserted_by'] =  auth()->user()->name;
 
-        return redirect()->back();
+        PropertyType::create($attributes);
+
+        Session::flash('success', "Registro agregado satisfactoriamente");
+
+        return redirect()->route('property_types.index');
     }
 
     /**
@@ -64,9 +66,9 @@ class PropertyTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PropertyType $propertyType)
     {
-        //
+        return view('administrator.PropertyTypesView.edit')->with('type', $propertyType);
     }
 
     /**
@@ -76,17 +78,19 @@ class PropertyTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($type)
+    public function update(Request $request, PropertyType $propertyType)
     {
-        $attribute = request()->validate([
-            'property_type'=>'required'
+        $attribute = $request->validate([
+            'property_type' => 'required'
         ]);
 
-        $attribute['updated_by'] = 'David Ortega';
-        PropertyType::where('property_type','=', $type)->update($attribute);        
-        Session::flash('success', "Property type: $attribute[property_type] updated successfully!");
+        $attribute['updated_by'] = auth()->user()->name;
 
-        return redirect()->back();
+        $propertyType->update($attribute);
+
+        Session::flash('success',"Registro actualizado satisfactoriamente");
+
+        return redirect()->route('property_types.index');
     }
 
     /**
@@ -95,11 +99,12 @@ class PropertyTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($type)
+    public function destroy(PropertyType $propertyType)
     {
-        PropertyType::where('property_type','=', $type)->delete();
-        Session::flash('success', "Property type: $type deleted successfully");
+        $propertyType->delete();
+         
+        Session::flash('success', "Registro eliminado satisfactoriamente");
 
-        return redirect()->back();
+        return redirect()->route('property_types.index');
     }
 }

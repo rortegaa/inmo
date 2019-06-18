@@ -17,18 +17,14 @@
 
 @include('shares.SuccessBootstrapAlert')
 
-    <div id="root" class="row shadow p-3 mb-5 bg-white rounded">
-
-        <div class="col-md-12">
-            <div class="card w-100">
+  
+            <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Areas</h5>
                     <div id="map"></div>
                 </div>
             </div>
-        </div>
-
-    </div>
+   
 
 @endsection
 
@@ -67,9 +63,9 @@
                                 <li><strong>Social Status:</strong> ${element.social_status}</li>
                             </ul><br>
                         <div class="d-flex justify-content-center bd-highlight">        
-                            <a href="${url}/admin/security_social_area/edit/${element.id}" class="btn btn-outline-primary">Update</a> 
+                            <a href="${url}/admin/security_social_area/edit/${element.id}" class="btn btn-outline-primary btn-sm">Update</a> 
                             <form id="${element.id}" action="${url}/admin/security_social_area/delete/${element.id}" onsubmit="javascript:deleteLocalization(event)"> 
-                            <button type="submit" class="btn btn-outline-danger"> Delete </button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm"> Delete </button>
                             </form>
                         </div>
                      </div>

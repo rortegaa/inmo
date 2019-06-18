@@ -3,9 +3,7 @@
 
 @section('content')
 
-
-
-<div class="card">
+<div class="card shadow">
 
     <div class="card-header">
         <div class="row">

@@ -20,23 +20,23 @@
     <div id="root" class="row shadow p-3 mb-5 bg-white rounded">
             <div class="col-lg-4">
                 
-                    <div class="card">
+                    <div class="card shadow">
                     <form  action="{{ route('security_social.store') }}" method="POST">
                         <div class="card-header  text-center ">
-                                Create Area
+                                Crear Area
                         </div>
                         <div class="card-body">
                                         
                                 @csrf
 
                                 <div class="form-group">
-                                    <label for="area_name">Area Name</label>
-                                    <input type="text" class="form-control" name="area_name" id="area_name"   placeholder="Area Name">
+                                    <label for="area_name">Nombre del area</label>
+                                    <input type="text" class="form-control" name="area_name" id="area_name"   placeholder="Nombre del area" required autofocus>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="security">Security level</label>
-                                    <select class="form-control" name="security" id="security">
+                                    <label for="security">Nivel de seguridad (1 - 10)</label>
+                                    <select class="form-control" name="security" id="security" required autofocus>
                                         <option value="">Select Option</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -53,12 +53,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="social_status">Social status</label>
-                                    <input type="text" class="form-control" name="social_status" id="social_status">
+                                    <label for="social_status">Estatus social (1 - 10)</label>
+                                    <input type="text" class="form-control" name="social_status" id="social_status" required autofocus>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">submit</button>
-                                <input type="button" id="reset" class="btn btn-danger" value="clean" disabled/>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <input type="button" id="reset" class="btn btn-danger" value="Limpiar" disabled/>
                         
                         </div>
                         <div id="container_hidden" class="card-footer  text-muted">
@@ -115,7 +115,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Area: ${element.area_name}</h5>
                             <ul class="list-group list-group-flush ">
-                                <li><strong>Security Level:</strong> ${element.security}</li>
+                                <li><strong>Security Level:</strong>  <span class="badge badge-pill badge-primary"> ${element.security}</span></li>
                                 <li><strong>Social Status:</strong> ${element.social_status}</li>
                             </ul>
                     </div>

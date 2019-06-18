@@ -6,7 +6,7 @@
 <div class="row justify-content-md-center">
     <div class="col-md-10">
 
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">
                 <h5>Actualizar {{$legalStatus->property_legal_status}} </h5>
             </div>
@@ -24,7 +24,7 @@
                                 autofocus>
                         </div>
                     </div>
-                    <button type="submit" id="createButtonForm" class="btn btn-success float-right">Guardar</button>
+                    <button type="submit" id="createButtonForm" class="btn btn-success float-right">Actualizar</button>
                 </form>
 
             </div>
