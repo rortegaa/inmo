@@ -38,10 +38,14 @@
     <style>
         .sidebar {
             font-size: 0.9em;
+            color: #fff;
+            background-color: #20b885;
+            border-color: #20b885;
         }
 
         .sidebar:hover {
             cursor: pointer;
+           
         }
 
         .submenu {
@@ -60,6 +64,10 @@
 
         a:hover {
             text-decoration: none;
+        }
+
+        .card-body{
+            background-color: ghostwhite;
         }
     </style>
 

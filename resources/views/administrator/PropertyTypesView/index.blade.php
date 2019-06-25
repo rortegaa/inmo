@@ -31,7 +31,7 @@
                     <td> {{ $type->inserted_by }} </td>
                     <td>
 
-                        <a href="{{route('property_types.edit', ['id'=>$type->id])}}" class="btn btn-primary">
+                        <a href="{{route('property_types.edit', ['id'=>$type->id])}}" class="btn btn-primary btn-sm">
                             <i class="fa fa-edit"></i> Editar
                         </a>
 
@@ -41,7 +41,7 @@
                             onsubmit="return confirm('Deseas eliminar este registro?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" id="submitDelete" class="btn btn-danger">
+                            <button type="submit" id="submitDelete" class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i> Borrar
                             </button>
                         </form>
