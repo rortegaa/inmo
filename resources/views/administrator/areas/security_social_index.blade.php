@@ -1,14 +1,14 @@
-@extends('layouts.administrator.app') 
+@extends('layouts.administrator.app')
 
 @section('custom_styles')
 
-     <style>
-        #map {
-            height: calc(100vh - 100px);
-            width: 99%;
-        }
-      </style>
-    
+<style>
+    #map {
+        height: calc(100vh - 200px);
+        width: 99%;
+    }
+</style>
+
 @endsection
 
 @section('content')
@@ -17,20 +17,31 @@
 
 @include('shares.SuccessBootstrapAlert')
 
-  
-            <div class="card shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Areas</h5>
-                    <div id="map"></div>
-                </div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="card-title">Areas</h5>
             </div>
-   
+            <div class="col-md-6">
+                <a href="" class="btn btn-success">Agregar nueva area</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 py-2">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 
 @section('scripts_footer')
 <script>
-        let url = '{{ url('') }}'; 
+    let url = '{{ url('') }}'; 
         let map;
         let areas_color = {'high':'#34bf56','medium':'#e8b630', 'low':'#ff3030'};
         let areas_colorHover = {'high':'#33c475','medium':'#dca40e', 'low':'#dc2d0e'};
@@ -165,5 +176,5 @@
                 });
             }
     
-    </script>
+</script>
 @endsection
