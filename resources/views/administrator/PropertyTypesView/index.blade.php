@@ -1,10 +1,8 @@
 @extends('layouts.administrator.app')
-
-
 @section('content')
 
+<!--PAgina encargada de mostrar la inforamcion de los tipos de propiedad que han sido ingresados-->
 <div class="card shadow">
-
     <div class="card-header">
         <div class="row">
             <div class="col-md-6"> <h5>Tipos de  propiedades</h5></div>
@@ -37,6 +35,7 @@
 
                     </td>
                     <td>
+                        <!--Forma encargada de eliminar el registro que se a seleccionado-->
                         <form method="POST" action="{{route( 'property_types.destroy', ['id'=>$type->id])}}"
                             onsubmit="return confirm('Deseas eliminar este registro?');">
                             @csrf

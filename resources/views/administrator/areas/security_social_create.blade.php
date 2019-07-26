@@ -17,10 +17,12 @@
 
 @include('shares.SuccessBootstrapAlert')
 
+<!--Pagina encargada de la generacion de nuevaw areas de seguridad-->
     <div id="root" class="row shadow p-3 mb-5 bg-white rounded">
             <div class="col-lg-4">
                 
                     <div class="card shadow">
+                    <!--Forma que obtiene la informacion necesaria para su registro-->
                     <form  action="{{ route('security_social.store') }}" method="POST">
                         <div class="card-header  text-center ">
                                 Crear Area
@@ -77,14 +79,14 @@
 @section('scripts_footer')
     <script>
         let all_overlays = [];
-
+            //Elimina el poligono que se a generado
              function deleteAllShape() {
                 for (var i = 0; i < all_overlays.length; i++) {
                     all_overlays[i].overlay.setMap(null);
                 }
                 all_overlays = [];
             }
-        
+            //Inicializacion del mapa de google.
             function initMap() {
                  let lat = [];
                  let lng = [];
@@ -100,8 +102,9 @@
                     
                 var infoWindow = new google.maps.InfoWindow; 
                 
+
                 var data = @json($localization);
-                            
+               //Recorre los datos de los puntos             
                 data.forEach((element,index) => {
                     let coordinates = [];                   
                     element.localization.forEach(element => {                        
@@ -159,7 +162,7 @@
                         all_overlays.push(event);
                       
                             drawingManager.setDrawingMode(null);                        
-
+                        //Obtiene los puntos marcados dibuja el poligono y muestra los puntos.
                         if (event.type == 'polygon') {
                             reset.disabled = false;
                             drawingManager.setMap(null);  

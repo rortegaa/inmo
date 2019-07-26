@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\State;
 use Session;
 
+//Controlador que se encarga de administrar los estados de la republica
 class StatesController extends Controller
 {
     /**
@@ -13,6 +14,8 @@ class StatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que muestra la vista(Pagina) con todos los estados registrados.
     public function index()
     {
         return view('administrator.StatesView.index')->with('states',State::orderBy('id','desc')->get());
@@ -34,6 +37,8 @@ class StatesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que se encarga de registrar a la base de datos el nuevo estado.
     public function store()
     {
         $attributes = request()->validate([
@@ -76,6 +81,8 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que se encarga de actualizar algun estado seleccionado.
     public function update($state)
     {
         $attributes = request()->validate([
@@ -95,6 +102,8 @@ class StatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que se encarga de eliminar el registro de la base de datos de algun estado seleccionado.
     public function destroy($state)
     {
         State::where('state','=',$state)->delete();

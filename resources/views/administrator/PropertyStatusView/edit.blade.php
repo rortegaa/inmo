@@ -1,8 +1,7 @@
 @extends('layouts.administrator.app')
-
 @section('content')
 
-
+<!--Forma encargada de recivir el registro a editar y actualizar del estado legal de la casa-->
 <div class="row justify-content-md-center">
     <div class="col-md-10">
 
@@ -11,6 +10,7 @@
                 <h5>Actualizar {{ $propertyStatus->property_status }} </h5>
             </div>
             <div class="card-body">
+                <!--Forma encargada de actualizar el registro-->
                 <form id="createForm" role="form" method="POST"
                     action="{{route('property_status.update', ['id'=>$propertyStatus->id])}}" onsubmit="validate(event);">
                     @csrf

@@ -17,7 +17,7 @@
 
 @include('shares.SuccessBootstrapAlert')
 
-  
+<!-- Pagina encargada de cargar las areas ingresadas por el usuario-->
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title">Areas</h5>
@@ -28,6 +28,7 @@
 
 @endsection
 
+
 @section('scripts_footer')
 <script>
         let url = '{{ url('') }}'; 
@@ -35,7 +36,7 @@
         let areas_color = {'high':'#34bf56','medium':'#e8b630', 'low':'#ff3030'};
         let areas_colorHover = {'high':'#33c475','medium':'#dca40e', 'low':'#dc2d0e'};
         /*   let infoWindow; */
-    
+            //Inicializacion del mapa de google.
             function initMap() {
     
                 map = new google.maps.Map(document.getElementById('map'), {
@@ -45,8 +46,10 @@
     
                 let infoWindow = new google.maps.InfoWindow; 
                 
+                //Obtiene los puntos de cada una de las areas.
                 let data = @json($localization);
-                            
+                
+                //Recorre cada uno de los puntos registrados.
                 data.forEach((element,index) => {
                     let coordinates = [];                   
                     element.localization.forEach(element => {                        
@@ -54,6 +57,7 @@
                     });
                     
                     console.log(element);
+                    //Crea la ventanda de informacion
                     let div = `
                     <div class="card text-left">
                     <div class="card-body">
@@ -71,7 +75,7 @@
                      </div>
                     </div>                
                     `;        
-                    
+                    //Genera el area y la ingresa al mapa
                     let area = new google.maps.Polygon({
                         paths: coordinates,
                         id: element.id,
@@ -144,7 +148,7 @@
                 }
                 
             } 
-
+            //Funcion que se encarga de eliminar algun area deseada.
             function deleteLocalization(event)
             {
                 event.preventDefault();

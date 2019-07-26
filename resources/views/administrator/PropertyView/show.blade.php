@@ -2,6 +2,7 @@
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
+<!--Vista encargada de mostrar una informacion resumida del-->
 <div class="shadow p-3 bg-white rounded">
     <div class="row">
         <div class="col-md-2">
@@ -130,7 +131,7 @@
     var marker;
     var property = @json($property);
     var constrImages = ``;
-    console.log(property.property_localization)
+    //Funcion en proceso que genera el mapa y las fotos de la casa en un carrusel (Estilo presentacion)
         $(function() {
             var img = property.property_photos;
             console.log(img);

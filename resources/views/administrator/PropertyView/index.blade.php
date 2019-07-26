@@ -1,17 +1,18 @@
-@extends('layouts.administrator.admin')
+@extends('layouts.administrator.app')
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
+<!--Vista encargada de mostar las propiedades que se encuentran registradas.-->
 <h5>Inmobiliarios</h5>
-
+<a class="btn btn-sm btn-success" href='{{url('admin/property')}}/create'>Registrar</a>
 <div class="row">
     @foreach ($property as $item)
     <div class="col-md-4">
-      <div class="box box-default">
-        <div class="box-header with-border">
+      <div class="box card-default">
+        <div class="card-header with-border">
           <h4>{{$item->propertyType->property_type}} - {{$item->propertyLocalization->address}}</h4>
         </div>
-        <div class="box-body">
+        <div class="card-body">
           <div class="row">
             <div class="col-md-2">
 
@@ -22,7 +23,7 @@
           </div>
 
         </div>
-        <div class="box-footer">
+        <div class="card-footer">
           Price: {{$item->propertyInformation->price}}
           <br>
           Rooms: {{$item->propertyInformation->bedrooms}}
@@ -110,6 +111,7 @@
                 center: cdjuarez,
                 zoom: 16
               });
+              //Generacion de las areas registradas.
               data.forEach((element,index) => {
                     var coordinates = [];                   
                     element.localization.forEach(element => {                        
@@ -128,6 +130,7 @@
         
                     area.setMap(map);  
               });
+              //Colocacion del icono correspondiedte dependiedo del tipo de propiedad que este registrada para cada una
               $.each(property, function(key,value) {
                 var cords = {lat: value.property_localization.latitude, lng: value.property_localization.length };
                 //creacion del marker por cordenada
@@ -147,7 +150,7 @@
                       iconPng =  "../images/iconsMap/house.png";
                       break;
                 }
-                console.log(iconPng)
+                //Colocacion del marcador
                 var marcador = new google.maps.Marker({
                   position: cords,
                   map: map, 
@@ -206,6 +209,7 @@
                 });
               });
             }
+            //Se encarga de mostrar el pop up para la eliminacion de una propiedad
     function confirmation_delete(id)
       {
         Swal.fire({
@@ -222,6 +226,7 @@
             }
           })
       }
+      //Metodo que elimina la propiedad
     function delete_area(id){
              try {       
                 $.ajax({
@@ -248,7 +253,7 @@
                 console.log(error);
             } 
         }
-      
+      //Color para el area 
     function setColorBorder(level){
                 if(level <= 5 ){
                     return areas_color.low;

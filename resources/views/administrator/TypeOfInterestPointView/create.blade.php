@@ -6,7 +6,7 @@ Aminnova Puntos de Interes Categoria
 
 @section('content')
 
-
+<!--PAgina en desarrollo-->
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
@@ -15,8 +15,6 @@ Aminnova Puntos de Interes Categoria
             <div class="box-header with-border">
                 <h3 class="box-title">Agrega Categoria </h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
             <form class="form-horizontal" method="POST" action=" {{ route('type_of_interest_point.store') }} ">
                 @csrf
                 <div class="box-body">
@@ -30,11 +28,10 @@ Aminnova Puntos de Interes Categoria
                     </div>
 
                 </div>
-                <!-- /.box-body -->
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary pull-right">Enviar</button>
                 </div>
-                <!-- /.box-footer -->
+
             </form>
         </div>
 

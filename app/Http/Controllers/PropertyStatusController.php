@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PropertyStatus;
 use Session;
 
+//Controlador que se encarga de los estados de la propiedad. (Venta, Renta, ETC)
 class PropertyStatusController extends Controller
 {
     /**
@@ -13,6 +14,8 @@ class PropertyStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Funcion que retorna la vista(Pagina) principal con los tipos de estado de la propiedad registrados.
     public function index()
     {
         return view('administrator.PropertyStatusView.index')->with('propertyStatus',PropertyStatus::all());
@@ -23,6 +26,8 @@ class PropertyStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Funcion que retorna la vista(pagina) para el registro de nuevos estados de la propiedad.
     public function create()
     {
         return view('administrator.PropertyStatusView.create');  
@@ -34,6 +39,8 @@ class PropertyStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que almacena en la base de datos el nuevo tipo de estado de la propiedad.
     public function store(Request $request)
     {
         $attribute = $request->validate([
@@ -66,6 +73,8 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que muestra la vista(pagina) para editar el tipo de estado de la propiedad que se ha seleccionado.
     public function edit(PropertyStatus $propertyStatus)
     {
         return view('administrator.PropertyStatusView.edit',['propertyStatus' => $propertyStatus]); 
@@ -78,6 +87,8 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Actualiza el registro de la base de datos del estado de la propiedad seleccionado.
     public function update(Request $request,PropertyStatus $propertyStatus)
     {
         $attribute = $request->validate([
@@ -99,6 +110,8 @@ class PropertyStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que se encarga de eliminar el registro de la base de datos del estado de la propiedad seleccionado.
     public function destroy(PropertyStatus $propertyStatus)
     {
         $propertyStatus->delete();

@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<!--Vista encargada de la creacion de un nuevo registro-->
 <div class="row justify-content-md-center">
     <div class="col-md-10">
 
@@ -12,6 +12,7 @@
             </div>
             
             <div class="card-body">
+                <!--Forma que almacena la informacion y la almacena en la base de datos-->
                 <form id="createForm" role="form" method="POST" action="{{route('property_types.store')}}"
                     onsubmit="validate(event);">
                     @csrf

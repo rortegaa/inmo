@@ -1,9 +1,6 @@
 @extends('layouts.administrator.app')
-
 @section('content')
-
-
-
+<!--Pagina que muestra todos los status legal de la propiedad-->
 <div class="card shadow">
 
     <div class="card-header">
@@ -38,6 +35,7 @@
 
                     </td>
                     <td>
+                        <!--Forma encargada de eliminar el registro seleccionado-->
                         <form method="POST" action="{{route( 'property_status.destroy', ['id'=>$status->id] )}}"
                             onsubmit="return confirm('Deseas eliminar este registro?');">
                             @csrf

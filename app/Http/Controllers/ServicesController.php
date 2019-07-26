@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\GeneralService;
 use Session;
 
+
+//Controlador que se encarga de administrar los servicios que puede llegar a tener una propiedad.
 class ServicesController extends Controller
 {
     /**
@@ -13,6 +15,8 @@ class ServicesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Muestra la pagina con todos los servicios registrados.
     public function index()
     {
         return view('administrator.ServicesView.index')->with('services', GeneralService::orderBy('id','desc')->get());
@@ -34,6 +38,8 @@ class ServicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //Se encarga de almacenar el nuevo servicio que se desea registrar a la base de datos.
     public function store()
     {
         $attribute = request()->validate([
@@ -76,6 +82,8 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Se encarga de actualizar el servicio seleccionado.
     public function update($service)
     {
         $attribute = request()->validate([
@@ -95,6 +103,8 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion encargada de eliminar el servicio de la base ded atos que se ha seleccionado.
     public function destroy($service)
     {
         GeneralService::where('service','=', $service)->delete();

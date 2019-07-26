@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TypeOfInterestPoint;
 use Session;
 
+//Controlador encargado de administrar los tipos de puntos de interes.
 class TypeOfInterestPointController extends Controller
 {
     /**
@@ -13,6 +14,8 @@ class TypeOfInterestPointController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que retorna la pagina con los tipos de puntos de interes ya registrados.
     public function index()
     {
         return view('administrator.TypeOfInterestPointView.index')->with('types',TypeOfInterestPoint::orderBy('id','desc')->get());
@@ -23,6 +26,8 @@ class TypeOfInterestPointController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que muestra la pagina para registrar nuevos tipos de puntos de interes.
     public function create()
     {
         return view('administrator.TypeOfInterestPointView.create');   
@@ -34,6 +39,8 @@ class TypeOfInterestPointController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que se encarga de almacenar el tipo de  punto de interes ingresado a la base de datos.
     public function store(Request $request)
     {
         $attributes = request()->validate([
@@ -64,6 +71,8 @@ class TypeOfInterestPointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion encargada de mostrar el tipo de punto de interes a editar.
     public function edit($id)
     {
         return view('administrator.TypeOfInterestPointView.edit');   
@@ -76,6 +85,8 @@ class TypeOfInterestPointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que se encarga de actualizar el registro seleccionado.
     public function update(Request $request, $id)
     {
         $attribute = request()->validate([
@@ -95,6 +106,8 @@ class TypeOfInterestPointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion encargada de eliminar el registro seleccionado de la base de datos.
     public function destroy($type)
     {
         TypeOfInterestPoint::where('type_name','=', $type)->delete();

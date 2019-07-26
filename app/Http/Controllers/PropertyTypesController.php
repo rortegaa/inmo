@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PropertyType;
 use Session;
 
+//Control que se encarga de administrar los tipos de propiedad que existen.
 class PropertyTypesController extends Controller
 {
     /**
@@ -13,6 +14,8 @@ class PropertyTypesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Funcion que muestra la vista(pagina) con todos los tipos de propiedad que existen registrados en la base de datos.
     public function index()
     {
         return view('administrator.PropertyTypesView.index')->with('types', PropertyType::all());
@@ -23,6 +26,8 @@ class PropertyTypesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que muestra la vista(pagina) para la creacion de una nuevo tipo de propiedad.
     public function create()
     {
         return view('administrator.PropertyTypesView.create'); 
@@ -34,6 +39,8 @@ class PropertyTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que almacena en la base de datos el nuevo tipo de propiedad registrado.
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -55,6 +62,7 @@ class PropertyTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         //
@@ -66,6 +74,8 @@ class PropertyTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que manda a llamar la pagina para editar el tipo de propiedad seleccionado.
     public function edit(PropertyType $propertyType)
     {
         return view('administrator.PropertyTypesView.edit')->with('type', $propertyType);
@@ -78,6 +88,8 @@ class PropertyTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //Funcion que actualiza el registro que se a seleccionado con los nuevos datos.
     public function update(Request $request, PropertyType $propertyType)
     {
         $attribute = $request->validate([
@@ -99,6 +111,8 @@ class PropertyTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que se encarga de eliminar el registrod del tipo de propiedad seleccionado de la base de datos
     public function destroy(PropertyType $propertyType)
     {
         $propertyType->delete();

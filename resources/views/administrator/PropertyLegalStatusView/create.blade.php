@@ -1,8 +1,7 @@
 @extends('layouts.administrator.app')
-
 @section('content')
 
-
+<!--Pagina encargada de crear el nuevo registro para un estado legal de la propiedad-->
 <div class="row justify-content-md-center">
     <div class="col-md-10">
 
@@ -12,6 +11,7 @@
             </div>
             
             <div class="card-body">
+                <!--Forma encargada de regitrar en la base de datos la informacion-->
                 <form id="createForm" role="form" method="POST" action="{{route('legal_status.store')}}"
                     onsubmit="validate(event);">
                     @csrf

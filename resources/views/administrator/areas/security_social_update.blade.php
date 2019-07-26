@@ -16,7 +16,7 @@
 @include('shares.errors')
 
 @include('shares.SuccessBootstrapAlert')
-
+<!--Pagina encargada de actualizar el area solicitada por el usuario -->
     <div id="root" class="row shadow p-3 mb-5 bg-white rounded">
             <div class="col-lg-4">
                 
@@ -78,6 +78,7 @@
     <script>
        
         let area;
+        //Inicializacion del mapa de google maps
             function initMap() {
                
                     let map = new google.maps.Map(document.getElementById('map'), {
@@ -95,13 +96,13 @@
                 var element = @json($localization);
               
                             
-               
+               //Se recorren los puntos marcados paa la generacion del area y se almacenan en coordinates
                     let coordinates = [];                   
                     element.localization.forEach(element => {                        
                         coordinates.push({'lat': element.latitude, 'lng': element.length});
                        
                     });
-                    
+                    //Se genera la vista de informacion
                     console.log(element);
                     let div = `
                     <div class="card text-left">
@@ -115,6 +116,7 @@
                     </div>                
                     `;          
                     
+                    //Se ingresa el area en el mapa
                     area = new google.maps.Polygon({
                         paths: coordinates,
                         id: element.id,
@@ -143,7 +145,7 @@
                      
   
              }
-
+             //Genera un nuevo set de cordenadas y las muestra para el usuario
                function getPolygonCoords(){
                 $('#container_hidden').empty();
                 var vertices = area.getPath();

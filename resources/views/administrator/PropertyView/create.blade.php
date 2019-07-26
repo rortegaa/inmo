@@ -1,27 +1,24 @@
-@extends('layouts.administrator.admin')
+@extends('layouts.administrator.app')
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
+<!-- Forma encargada de obtener la informacion para la generacion de una nueva porpiedad-->
 <form method="POST" action="{{ route('property.store') }}" role="form" enctype="multipart/form-data"
     class="shadow p-3 bg-white rounded">
     <h3>Crear</h3>
     {{ csrf_field() }}
     <!--Property Gral -->
-    <div class="row text-center justify-content-center">
+    <div class="row">
         <div class="col-md-2">
 
         </div>
         <div class="col-md-8">
-            <div class="box box-primary" data-widget="box-widget">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Datos Generales:</h3>
-                    <div class="box-tools">
-                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                            title="Collapse"><i class="fa fa-minus"></i></button>
-                    </div>
+            <div class="card mb-2">
+                <div class="card-header text-white text-center bg-primary">
+                    <h3 class="card-title">Datos Generales:</h3>
                 </div>
-                <div class="box-body">
-                    <div class="col-md-6 from-group">
+                <div class="card-body justify-contentenent-center">
+                    <div class="col-md-6 offset-3 from-group mb-2">
                         <label for="property_type_id">Tipo:</label>
                         <select class="form-control select2 select2 hiddem-accesible" id="property_type_id"
                             name="property_type_id" required autofocus>
@@ -31,7 +28,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6 from-group ">
+                    <div class="col-md-6 offset-3 from-group mb-2">
                         <label for="property_status_id">Estado de la propiedad:</label>
                         <select class="form-control" id="property_status_id" name="property_status_id" required
                             autofocus>
@@ -41,7 +38,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6 from-group">
+                    <div class="col-md-6 offset-3 from-group mb-2">
                         <label for="property_legal_status_id">Estado legal:</label>
                         <select class="form-control" id="property_legal_status_id" name="property_legal_status_id"
                             required autofocus>
@@ -51,7 +48,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6 from-group">
+                    <div class="col-md-6 offset-3 from-group mb-2">
                         <label for="country">Estado:</label>
                         <select class="form-control" id="state_id" name="state_id" required autofocus>
                             <option value="">Seleccione opcion</option>
@@ -61,8 +58,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="box-footer">
-                </div>
             </div>
         </div>
     </div>
@@ -71,12 +66,12 @@
         <div class="col-md-2">
 
         </div>
-        <div class="col-md-8 offset-2">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Caracteristicas principales:</h3>
+        <div class="col-md-8">
+            <div class="card mb-2">
+                <div class="card-header text-white text-center bg-secondary">
+                    <h3 class="card-title">Caracteristicas principales:</h3>
                 </div>
-                <div class="box-body">
+                <div class="card-body row">
                     <div class="col-md-3 form-group">
                         <label for="bedrooms">Cuartos:</label>
                         <input name="bedrooms" type="number" class="form-control" id="bedrooms"
@@ -122,8 +117,6 @@
                         <input name="address" type="text" class="form-control" id="address" value="{{old("address")}}"
                             required autofocus>
                     </div>
-                    <div class="box-footer">
-                    </div>
                 </div>
             </div>
         </div>
@@ -133,19 +126,18 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
-            <div class="box box-success">
-                <div class="box-header with-border">
+            <div class="card mb-2">
+                <div class="card-header text-white text-center bg-success ">
                     <h3>Marque los servicios disponibles:</h3>
                 </div>
-                <div class="box-body">
+                <div class="card-body">
                     @foreach ($services as $service)
                     <div class="col-md-1">
-                        <label class="font-weight-bold"><input type="checkbox" name="services[]" class="mx-1"
+                        <label class="font-weight-bold"><input type="checkcard" name="services[]" class="mx-1"
                                 value="{{$service->id}}" />{{$service->service}}</span>
                     </div>
                     @endforeach
                 </div>
-                <div class="box-footer"></div>
             </div>
         </div>
     </div>
@@ -156,14 +148,13 @@
 
         </div>
         <div class="col-md-8">
-            <div class="box box-warning">
-                <div class="box-header with-border">
+            <div class="card mb-2">
+                <div class="card-header text-white text-center bg-info">
                     <h3>Marque la ubicacion:</h3>
                 </div>
-                <div class="box-body">
+                <div class="card-body">
                     <div id="map" style="height:300px"></div>
                 </div>
-                <div class="box-footer"></div>
             </div>
         </div>
     </div>
@@ -173,15 +164,14 @@
 
         </div>
         <div class="col-md-8">
-            <div class="box box-primary">
-                <div class="box-header with-border">
+            <div class="card">
+                <div class="card-header">
                     <h3>Mensaje de venta:</h3>
                 </div>
-                <div class="box-body">
+                <div class="card-body">
                     <textarea class="form-control" rows="4" cols="50" name="sale_message" id="sale_message" required
                         autofocus> {{old("sale_message")}}</textarea>
                 </div>
-                <div class="box-footer"></div>
             </div>
         </div>
     </div>
@@ -190,17 +180,17 @@
         <div class="col-md-2">
         </div>
             <div class="col-md-8">
-                <div class="box box-info">
-                    <div class="box-header with-border">
+                <div class="card card-info">
+                    <div class="card-header with-border">
                         <h3>Agregar fotos:</h3>
                     </div>
-                    <div class="box-body">
+                    <div class="card-body">
                         <div class="col-6 form-group">
                             <label for="images">Fotos de la casa:</label>
                             <input type="file" class="form-control-file" id="images" name="images[]" multiple>
                         </div>
                     </div>
-                    <div class="box-footer text-right">
+                    <div class="card-footer text-right">
                         <button class="btn btn-success" type="submit">Guardar</button>
                     </div>
                 </div>
@@ -216,6 +206,7 @@
 
 
 <script>
+    //Inicializacion del mapa de google
     var marker;
         function initMap() {
             //ingreso de cordenadas de cd juarez
@@ -225,6 +216,7 @@
               center: cdjuarez,
               zoom: 16
             });
+            //Listener para marcar la ubiacionnen el mapa y elinimar la anterior.
             google.maps.event.addListener(map, 'click', function(event) {
                 if (marker && marker.setMap) {
                         marker.setMap(null);
@@ -235,6 +227,7 @@
                 $('#Lng').val(event.latLng.lng())
             });         
         }
+        //Coloca el marcador en el mapa
         function placeMarker(location) {
          marker = new google.maps.Marker({
             position: location, 

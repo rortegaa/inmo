@@ -5,6 +5,7 @@
 Aminnova Categorias de Puntos de Interes
 @endsection
 
+<!-- Pagina en desarrollo -->
 @section('content')
 <div class="row">
     <div class="col-md-4">

@@ -1,8 +1,7 @@
 @extends('layouts.administrator.app')
-
 @section('content')
 
-
+<!--Pagina encargada de recivir el id del tipo de propiedad que se va a editar y actualizar-->
 <div class="row justify-content-md-center">
     <div class="col-md-10">
 
@@ -11,6 +10,7 @@
                 <h5>Actualizar {{$type->property_type}} </h5>
             </div>
             <div class="card-body">
+                <!--Forma que se encarga de actualizar recivir la informacion y actualizar el registro-->
                 <form id="createForm" role="form" method="POST"
                     action="{{route('property_types.update', ['id'=>$type->id])}}" onsubmit="validate(event);">
                     @csrf

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
+//Se encarga de administar los puntos de interes.
 class InterestPointController extends Controller
 {
     /**

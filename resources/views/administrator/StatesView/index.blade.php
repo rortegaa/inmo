@@ -6,6 +6,7 @@
 
 @include('shares.SuccessBootstrapAlert')
 
+<!--Pagina encargada de la creacion, eliminacion y actualizacion de estados -->
 <div id="root">
     <p>
         <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#collapseState" role="button" aria-expanded="false" aria-controls="collapseState">
@@ -14,7 +15,7 @@
     </p>
     <div class="collapse" id="collapseState">
         <div class="shadow p-3 mb-5 bg-white rounded">
-
+                <!--Forma encargada del ingreso de nuevos estados-->
                 <form class="form-inline" method="POST" action=" {{ route('states.store') }} ">
                 
                     @csrf
@@ -85,6 +86,7 @@
                     formId: ''
                 },
                 methods: {
+                    //Metodo encargado de la eliminacion del estado seleccionado
                     onDeleteRecord(event){
                         event.preventDefault();
                         this.formId = event.currentTarget.form.id;
@@ -103,6 +105,7 @@
                             }
                         });
                     },
+                    //Metodo encargado de la actuializacion de los estados
                     updateAlert(event){
                         event.preventDefault();
                        let state = event.currentTarget.id;      

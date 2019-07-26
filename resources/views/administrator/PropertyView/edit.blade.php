@@ -2,6 +2,7 @@
 @section('content')
 @include('shares.errors')
 @include('shares.SuccessBootstrapAlert')
+<!--Forma encargada de recivir el id de la propiedad a modificar y actualizarla -->
 <form method="POST" action="{{ route('property.update',['id'=>$property->id]) }}" role="form"
     enctype="multipart/form-data" class="shadow p-3 bg-white rounded">
     <h3>Editar</h3>
@@ -237,10 +238,12 @@
               center: cdjuarez,
               zoom: 16
             });
+            //Coloca el marcador anterior
             marker = new google.maps.Marker({
                 position: {lat: parseFloat($('#Lat').val()), lng: parseFloat($('#Lng').val())},
                 map: map
             });
+            //Listener encargado de actualizar la posicion del marcador
             google.maps.event.addListener(map, 'click', function(event) {
                 if (marker && marker.setMap) {
                         marker.setMap(null);

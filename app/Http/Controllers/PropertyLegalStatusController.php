@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PropertyLegalStatus;
 use Session;
 
+//Control que se encarga de administrar los estados legales de la propiedad.
 class PropertyLegalStatusController extends Controller
 {
     /**
@@ -13,6 +14,8 @@ class PropertyLegalStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que retorna la vista con todos los estados legales de la propiedad registrados.
     public function index()
     {
         return view('administrator.PropertyLegalStatusView.index')->with('legalStatus', PropertyLegalStatus::all());      
@@ -23,6 +26,8 @@ class PropertyLegalStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Funcion que llama a la vista(Pagina) para la creacion de estatus legales de la propiedad.
     public function create()
     {
         return view('administrator.PropertyLegalStatusView.create');   
@@ -34,6 +39,8 @@ class PropertyLegalStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Funcion que almacena en la base de datos el estado de la propiedad querido.
     public function store(Request $request)
     {
         $attribute = $request->validate([
@@ -66,6 +73,8 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que retorna la Vista(Pagina) para editar el estado legal seleccionado
     public function edit(PropertyLegalStatus $legalStatus)
     {
         return view('administrator.PropertyLegalStatusView.edit',['legalStatus' => $legalStatus]);   
@@ -78,6 +87,8 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que actualiza el estado legal deseado.
     public function update(Request $request, PropertyLegalStatus $legalStatus)
     {
         $attribute = $request->validate([
@@ -99,6 +110,8 @@ class PropertyLegalStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //Funcion que elimina el estado legal de la propiedad seleccionado.
     public function destroy(PropertyLegalStatus $legalStatus)
     {
         $legalStatus->delete();

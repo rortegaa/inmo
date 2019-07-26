@@ -1,8 +1,7 @@
 @extends('layouts.administrator.app')
-
 @section('content')
 
-
+<!--Pagina encargada de registrar un nuevo estatus de la propiedad-->
 <div class="row justify-content-md-center">
     <div class="col-md-10">
 
@@ -12,6 +11,7 @@
             </div>
             
             <div class="card-body">
+                <!--Forma que ingresa el registro a la base de datos.-->
                 <form id="createForm" role="form" method="POST" action="{{route('property_status.store')}}"
                     onsubmit="validate(event);">
                     @csrf

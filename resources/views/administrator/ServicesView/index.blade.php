@@ -6,6 +6,7 @@
 
 @include('shares.SuccessBootstrapAlert')
 
+<!--Pagina encargada de la creacion, actualizacion y eliminacion de servicios-->
 <div id="root">
     <p>
         <a class="btn btn-primary btn-sm " data-toggle="collapse" href="#collapseService" role="button" aria-expanded="false" aria-controls="collapseService">
@@ -14,7 +15,7 @@
     </p>
     <div class="collapse" id="collapseService">
         <div class="shadow p-3 mb-5 bg-white rounded">
-
+                <!--Forma encargada de ingresar un nuevo registro a la base de datos.-->
                 <form class="form-inline" method="POST" action=" {{ route('services.store') }} ">
                 
                     @csrf
@@ -26,8 +27,8 @@
                 </form>
         </div>
     </div>
-
-    @if ($services->count() > 0)
+    <!--Tabla que contiene todos los servicios registrados en la base de datos.-->
+    @if ($services->count() > 0)    
 
     <div class="shadow p-3 mb-5 bg-white rounded" id="root">
 
@@ -85,6 +86,7 @@
                     formId: ''
                 },
                 methods: {
+                    //Metodo encargado de la eliminacion del servicio
                     onDeleteRecord(event){
                         event.preventDefault();
                         this.formId = event.currentTarget.form.id;
@@ -103,6 +105,7 @@
                             }
                         });
                     },
+                    //Metodo para actualizar el servicio
                     updateAlert(event){
                         event.preventDefault();
                        let service = event.currentTarget.id;      

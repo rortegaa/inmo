@@ -4,13 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+//Referencia a la tabla de propiedad en la base de datos.
 class Property extends Model
 {
+    //Atributos que son requeridos en la tabla.
     protected $fillable = [
         'property_type_id','property_status_id',
         'property_legal_status_id','state_id','userable_type','userable_id'
     ];
 
+    //Relaciones de de las tablas...
     public function propertyInformation()
     {
         return $this->hasOne(PropertyInformation::class);
